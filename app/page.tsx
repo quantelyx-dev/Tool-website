@@ -5,6 +5,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tools - Your All-in-One Utility Suite',
+  description:
+    'Streamline your workflow with our curated collection of development, design, and productivity utilities. Fast, secure, and always at your fingertips.',
+};
 
 export default function Home() {
   const faqs = [
@@ -33,6 +40,7 @@ export default function Home() {
       a: 'We aim to add at least 2-3 new tools every month based on user requests and industry trends.',
     },
   ];
+
   return (
     <main className='flex-1'>
       {/* Hero Section */}
