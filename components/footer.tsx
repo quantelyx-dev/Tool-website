@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FacebookIcon, TwitterIcon, InstagramIcon } from '@/components/icons';
+import { currentCalendarYear } from '@/lib/datetime';
 
 export function Footer() {
   return (
@@ -67,7 +68,7 @@ export function Footer() {
 
         {/* Copyright Section */}
         <p className='text-center pb-5 text-xs text-zinc-500 dark:text-zinc-400 font-medium'>
-          © {new Date().getFullYear()} Tools Inc. All rights reserved.
+          © {currentCalendarYear()} Tools Inc. All rights reserved.
         </p>
       </div>
     </footer>

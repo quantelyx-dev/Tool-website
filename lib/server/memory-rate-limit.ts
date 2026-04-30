@@ -4,6 +4,8 @@
  * replace with Redis / Upstash or similar.
  */
 
+import { nowMillis } from '@/lib/datetime';
+
 const buckets = new Map<string, number[]>();
 
 function pruneAndSortTimestamps(key: string, cutoffMs: number): number[] {
@@ -19,7 +21,7 @@ export function peekSlidingWindow(
   limit: number,
   windowMs: number,
 ): { ok: true } | { ok: false; retryAfterSeconds: number } {
-  const now = Date.now();
+  const now = nowMillis();
   const cutoff = now - windowMs;
   let retryAfterSeconds = 0;
 
@@ -47,7 +49,7 @@ export function recordSlidingWindowEvent(
   keys: readonly string[],
   windowMs: number,
 ): void {
-  const now = Date.now();
+  const now = nowMillis();
   const cutoff = now - windowMs;
 
   for (const key of keys) {
