@@ -58,3 +58,29 @@ export function cardItemVariants(reducedMotion: boolean | null): Variants {
     },
   };
 }
+
+/** Panel that appears after an action (e.g. chart results). */
+export function revealedPanelVariants(reducedMotion: boolean | null): Variants {
+  if (reducedMotion) {
+    return {
+      hidden: { opacity: 1 },
+      visible: { opacity: 1 },
+      exit: { opacity: 1 },
+    };
+  }
+  return {
+    hidden: { opacity: 0, y: 28, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.5, ease: easeOut },
+    },
+    exit: {
+      opacity: 0,
+      y: 14,
+      scale: 0.99,
+      transition: { duration: 0.28, ease: easeOut },
+    },
+  };
+}
