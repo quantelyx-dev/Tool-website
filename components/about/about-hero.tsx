@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { fadeUpVariants } from '@/components/about/about-motion';
+import { fadeUpVariants } from '@/lib/motion-variants';
 
 type AboutHeroProps = {
   className?: string;

@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 import {
   cardItemVariants,
   staggerContainerVariants,
-} from '@/components/about/about-motion';
+} from '@/lib/motion-variants';
 
 type AboutPillarsProps = {
   className?: string;

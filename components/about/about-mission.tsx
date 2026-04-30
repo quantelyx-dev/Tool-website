@@ -7,7 +7,7 @@ import { ABOUT_MISSION, ABOUT_STORY } from '@/lib/about-data';
 import {
   fadeUpVariants,
   staggerContainerVariants,
-} from '@/components/about/about-motion';
+} from '@/lib/motion-variants';
 
 type AboutMissionProps = {
   className?: string;

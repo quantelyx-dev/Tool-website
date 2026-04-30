@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { fadeUpVariants } from '@/components/about/about-motion';
+import { fadeUpVariants } from '@/lib/motion-variants';
 
 type AboutCtaProps = {
   className?: string;
