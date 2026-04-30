@@ -19,7 +19,7 @@ export function Navbar() {
             Home
           </Link>
           <Link
-            href='#about'
+            href='/about'
             className='text-sm font-medium hover:text-indigo-600 transition-colors'>
             About Us
           </Link>

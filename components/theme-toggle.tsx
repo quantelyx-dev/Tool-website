@@ -11,7 +11,7 @@ export function ThemeToggle() {
     <Button
       variant='ghost'
       size='icon'
-      className='rounded-full'
+      className='rounded-full cursor-pointer'
       aria-label='Toggle theme'
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}>
       <Sun className='size-5 block dark:hidden' />

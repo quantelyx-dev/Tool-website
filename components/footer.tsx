@@ -20,6 +20,11 @@ export function Footer() {
           {/* Navigation Links */}
           <nav className='flex flex-wrap justify-center gap-x-8 gap-y-4'>
             <Link
+              href='/about'
+              className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
+              About
+            </Link>
+            <Link
               href='#'
               className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
               Privacy Policy
