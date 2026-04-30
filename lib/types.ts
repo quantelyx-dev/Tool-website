@@ -5,3 +5,14 @@ export type RequestToolEmailProps = {
   toolName: string;
   message: string;
 };
+
+export type ToolEntry = {
+  name: string;
+  description: string;
+  link: string;
+};
+
+export type ToolGroup = {
+  type: string;
+  tools: readonly ToolEntry[];
+};

@@ -9,7 +9,7 @@ import {
   Section,
   Text,
 } from '@react-email/components';
-import type { RequestToolEmailProps } from '@/emails/request-a-tool/types';
+import type { RequestToolEmailProps } from '@/lib/types';
 
 const main = {
   backgroundColor: '#f4f4f5',
