@@ -1,10 +1,5 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Loader2Icon, SendIcon } from 'lucide-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -25,23 +20,45 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  requestToolFormSchema,
-  type RequestToolFormValues,
-} from '@/lib/schemas/request-tool-schema';
-import { cn } from '@/lib/utils';
+  ApiError,
+  submitRequestToolForm,
+  type RequestToolApiFailureBody,
+} from '@/lib/api';
 import {
   fadeUpVariants,
   staggerContainerVariants,
 } from '@/lib/motion-variants';
+import {
+  requestToolFormSchema,
+  type RequestToolFormValues,
+} from '@/lib/schemas/request-tool-schema';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Loader2Icon, SendIcon } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 type RequestToolFormProps = {
   className?: string;
 };
 
+const REQUEST_TOOL_RATE_LIMIT_TOAST = {
+  title: 'Daily request limit reached',
+  description:
+    'Thank you for sharing your ideas with us. You have already sent the maximum of two tool requests allowed within a 24-hour period. To help our team review every message thoughtfully, we ask that you wait until a full day has passed since your earliest submission before trying again. We appreciate your understanding.',
+} as const;
+
 export function RequestToolForm({ className }: RequestToolFormProps) {
   const reducedMotion = useReducedMotion();
   const [sent, setSent] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    return () => abortRef.current?.abort();
+  }, []);
 
   const form = useForm<RequestToolFormValues>({
     resolver: zodResolver(requestToolFormSchema),
@@ -54,13 +71,91 @@ export function RequestToolForm({ className }: RequestToolFormProps) {
     mode: 'onBlur',
   });
 
-  async function onSubmit(values: RequestToolFormValues) {
-    setIsPending(true);
-    await new Promise(r => setTimeout(r, 650));
-    setIsPending(false);
-    setSent(true);
-    void values;
-  }
+  const onSubmit = useCallback(
+    async (values: RequestToolFormValues) => {
+      abortRef.current?.abort();
+
+      const controller = new AbortController();
+      abortRef.current = controller;
+
+      form.clearErrors();
+      setIsPending(true);
+
+      try {
+        await submitRequestToolForm(values, {
+          signal: controller.signal,
+        });
+
+        setSent(true);
+      } catch (err) {
+        const aborted =
+          (err instanceof DOMException || err instanceof Error) &&
+          err.name === 'AbortError';
+
+        if (aborted) {
+          return;
+        }
+
+        if (err instanceof ApiError) {
+          const body = err.body as Partial<RequestToolApiFailureBody> | null;
+
+          if (err.status === 429 || body?.code === 'rate_limit') {
+            toast.error(REQUEST_TOOL_RATE_LIMIT_TOAST.title, {
+              description: REQUEST_TOOL_RATE_LIMIT_TOAST.description,
+              duration: 16_000,
+            });
+
+            return;
+          }
+
+          let mappedField = false;
+
+          if (body?.fieldErrors) {
+            for (const key of [
+              'name',
+              'email',
+              'toolName',
+              'message',
+            ] as const) {
+              const msgs = body.fieldErrors[key];
+
+              if (msgs?.[0]) {
+                form.setError(key, {
+                  message: msgs[0],
+                });
+
+                mappedField = true;
+              }
+            }
+          }
+
+          if (!mappedField) {
+            form.setError('root', {
+              message:
+                typeof body?.error === 'string'
+                  ? body.error
+                  : 'Something went wrong. Please try again.',
+            });
+          }
+        } else {
+          form.setError('root', {
+            message: 'Something went wrong. Please try again.',
+          });
+        }
+      } finally {
+        setIsPending(false);
+      }
+    },
+    [form],
+  );
+
+  const handleSubmit = useCallback(
+    (e: React.SubmitEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      void form.handleSubmit(onSubmit)(e);
+    },
+    [form, onSubmit],
+  );
 
   function handleSendAnother() {
     setSent(false);
@@ -96,7 +191,7 @@ export function RequestToolForm({ className }: RequestToolFormProps) {
           ) : (
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={handleSubmit}
                 className={cn('flex flex-col gap-6')}
                 noValidate>
                 <motion.div
@@ -204,6 +299,13 @@ export function RequestToolForm({ className }: RequestToolFormProps) {
                   </motion.div>
 
                   <motion.div variants={fadeUpVariants(reducedMotion)}>
+                    {form.formState.errors.root ? (
+                      <p
+                        role='alert'
+                        className={cn('text-destructive text-sm font-medium')}>
+                        {form.formState.errors.root.message}
+                      </p>
+                    ) : null}
                     <Button
                       type='submit'
                       className={cn('w-full gap-2 sm:w-auto sm:min-w-[160px]')}
