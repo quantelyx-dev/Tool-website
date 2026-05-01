@@ -4,22 +4,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 import { cardItemVariants } from '@/lib/motion-variants';
-import type { SunMoonRisingFormValues } from '@/lib/schemas/sun-moon-rising-schema';
 import { cn } from '@/lib/utils';
-
-export type ChartSignRowStatus = 'awaiting-submit' | 'pending-result';
-
-export function getChartSignRowStatus(
-  snapshot: SunMoonRisingFormValues | null,
-): ChartSignRowStatus {
-  return snapshot ? 'pending-result' : 'awaiting-submit';
-}
 
 export type ChartSignRowProps = {
   icon: ReactNode;
   label: string;
   hint: string;
-  status: ChartSignRowStatus;
+  primary: ReactNode;
   className?: string;
 };
 
@@ -27,19 +18,10 @@ export function ChartSignRow({
   icon,
   label,
   hint,
-  status,
+  primary,
   className,
 }: ChartSignRowProps) {
   const reducedMotion = useReducedMotion();
-
-  const resolved =
-    status === 'pending-result' ? (
-      <span className='font-medium text-muted-foreground'>
-        Awaiting astronomy
-      </span>
-    ) : (
-      <span className='font-medium text-muted-foreground tabular-nums'>—</span>
-    );
 
   return (
     <motion.li
@@ -53,9 +35,13 @@ export function ChartSignRow({
           {icon}
         </span>
         <div className='min-w-0 flex-1 space-y-1'>
-          <div className='flex flex-wrap items-center justify-between gap-2'>
+          <div className='flex flex-wrap items-start justify-between gap-2'>
             <p className='font-medium leading-none'>{label}</p>
-            <div className='text-sm'>{resolved}</div>
+            <div className='text-right text-sm'>
+              <p className='font-semibold text-foreground tabular-nums'>
+                {primary}
+              </p>
+            </div>
           </div>
           <p className='text-xs text-muted-foreground'>{hint}</p>
         </div>

@@ -41,7 +41,7 @@ export function SunMoonRisingToolContent({
               'mb-3 text-xs font-semibold uppercase tracking-[0.22em]',
               'text-indigo-600 dark:text-indigo-400 sm:text-sm',
             )}>
-            Birth chart · UI preview
+            Birth chart
           </p>
           <h1
             className={cn(
@@ -55,13 +55,13 @@ export function SunMoonRisingToolContent({
               'mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground',
               'sm:text-lg',
             )}>
-            Enter your birth name, date, time, and city. We will use your chart
-            snapshot for{' '}
-            <span className='font-medium text-foreground'>astronomia</span>,{' '}
-            <span className='font-medium text-foreground'>Luxon</span>, and{' '}
-            <span className='font-medium text-foreground'>tz-lookup</span>{' '}
-            in the next step—today is layout, validation, and an empty results
-            panel only.
+            Enter your birth name, date, civil time (24-hour), and city. We
+            geocode with OpenStreetMap, resolve timezone with{' '}
+            <span className='font-medium text-foreground'>tz-lookup</span>, then
+            compute tropical positions with{' '}
+            <span className='font-medium text-foreground'>Luxon</span> and{' '}
+            <span className='font-medium text-foreground'>astronomia</span>.
+            Results animate in after a short calculation step.
           </p>
         </motion.div>
       </motion.section>

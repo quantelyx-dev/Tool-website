@@ -3,24 +3,22 @@
 import { motion } from 'framer-motion';
 import { MoonIcon, SparklesIcon, SunIcon } from 'lucide-react';
 
-import {
-  ChartSignRow,
-  getChartSignRowStatus,
-} from '@/components/sun-moon-rising/chart-sign-row';
+import { ChartSignRow } from '@/components/sun-moon-rising/chart-sign-row';
+import type { SunMoonRisingChartSuccess } from '@/lib/sun-moon-rising/api';
 import { staggerContainerVariants } from '@/lib/motion-variants';
-import type { SunMoonRisingFormValues } from '@/lib/schemas/sun-moon-rising-schema';
 
 type ChartSignRowsListProps = {
-  snapshot: SunMoonRisingFormValues;
+  chart: Pick<
+    SunMoonRisingChartSuccess,
+    'sunSign' | 'moonSign' | 'risingSign' | 'ephemeris'
+  >;
   reducedMotion: boolean | null;
 };
 
 export function ChartSignRowsList({
-  snapshot,
+  chart,
   reducedMotion,
 }: ChartSignRowsListProps) {
-  const status = getChartSignRowStatus(snapshot);
-
   return (
     <motion.ul
       className='space-y-3'
@@ -31,19 +29,19 @@ export function ChartSignRowsList({
         icon={<SunIcon className='size-5' />}
         label='Sun sign'
         hint='Core vitality & ego expression'
-        status={status}
+        primary={chart.sunSign}
       />
       <ChartSignRow
         icon={<MoonIcon className='size-5' />}
         label='Moon sign'
         hint='Emotional terrain & instincts'
-        status={status}
+        primary={chart.moonSign}
       />
       <ChartSignRow
         icon={<SparklesIcon className='size-5' />}
         label='Rising sign'
         hint='Ascendant & first impressions'
-        status={status}
+        primary={chart.risingSign}
       />
     </motion.ul>
   );

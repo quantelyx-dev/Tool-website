@@ -2,13 +2,24 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
+import { ApiError } from '@/lib/http';
 import { BirthDetailsCard } from '@/components/sun-moon-rising/birth-details-card';
+import { ChartCalculationLoading } from '@/components/sun-moon-rising/chart-calculation-loading';
 import { ChartResultsCard } from '@/components/sun-moon-rising/chart-results-card';
 import { todayIsoDate } from '@/lib/datetime';
-import { calculatorSwapMotionProps } from '@/lib/sun-moon-rising/calculator-motion';
+import {
+  calculatorLoadingMotionProps,
+  calculatorSwapMotionProps,
+} from '@/lib/sun-moon-rising/calculator-motion';
+import {
+  submitSunMoonRisingChart,
+  type SunMoonRisingChartFailureBody,
+  type SunMoonRisingChartSuccess,
+} from '@/lib/sun-moon-rising/api';
 import { SUN_MOON_RISING_EMPTY_VALUES } from '@/lib/sun-moon-rising/form-defaults';
 import {
   sunMoonRisingFormSchema,
@@ -20,14 +31,29 @@ type SunMoonRisingCalculatorFormProps = {
   className?: string;
 };
 
+type CalculatorPhase =
+  | { step: 'form' }
+  | { step: 'loading'; values: SunMoonRisingFormValues }
+  | {
+      step: 'result';
+      values: SunMoonRisingFormValues;
+      chart: SunMoonRisingChartSuccess;
+    };
+
+const FORM_FIELD_KEYS = [
+  'name',
+  'dateOfBirth',
+  'timeOfBirth',
+  'birthCity',
+] as const satisfies readonly (keyof SunMoonRisingFormValues)[];
+
 export function SunMoonRisingCalculatorForm({
   className,
 }: SunMoonRisingCalculatorFormProps) {
   const reducedMotion = useReducedMotion();
   const formSectionRef = useRef<HTMLDivElement>(null);
-  const [snapshot, setSnapshot] = useState<SunMoonRisingFormValues | null>(
-    null,
-  );
+  const abortRef = useRef<AbortController | null>(null);
+  const [phase, setPhase] = useState<CalculatorPhase>({ step: 'form' });
 
   const form = useForm<SunMoonRisingFormValues>({
     resolver: zodResolver(sunMoonRisingFormSchema),
@@ -35,12 +61,13 @@ export function SunMoonRisingCalculatorForm({
     mode: 'onBlur',
   });
 
-  const handleCalculate = useCallback((values: SunMoonRisingFormValues) => {
-    setSnapshot(values);
+  useEffect(() => {
+    return () => abortRef.current?.abort();
   }, []);
 
-  const resetForm = useCallback(() => {
-    setSnapshot(null);
+  const resetFlow = useCallback(() => {
+    abortRef.current?.abort();
+    setPhase({ step: 'form' });
     form.reset(SUN_MOON_RISING_EMPTY_VALUES);
     requestAnimationFrame(() => {
       formSectionRef.current?.scrollIntoView({
@@ -50,19 +77,85 @@ export function SunMoonRisingCalculatorForm({
     });
   }, [form]);
 
+  const handleCalculate = useCallback(
+    async (values: SunMoonRisingFormValues) => {
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+
+      form.clearErrors();
+      setPhase({ step: 'loading', values });
+
+      try {
+        const chart = await submitSunMoonRisingChart(values, {
+          signal: controller.signal,
+        });
+        setPhase({ step: 'result', values, chart });
+      } catch (err) {
+        const aborted =
+          (err instanceof DOMException || err instanceof Error) &&
+          err.name === 'AbortError';
+
+        if (aborted) {
+          return;
+        }
+
+        setPhase({ step: 'form' });
+
+        if (err instanceof ApiError) {
+          const body = err.body as SunMoonRisingChartFailureBody | null;
+          let mappedField = false;
+
+          if (body?.fieldErrors) {
+            for (const key of FORM_FIELD_KEYS) {
+              const msgs = body.fieldErrors[key];
+
+              if (msgs?.[0]) {
+                form.setError(key, { message: msgs[0] });
+                mappedField = true;
+              }
+            }
+          }
+
+          toast.error(body?.error ?? 'Could not calculate your chart.', {
+            description: mappedField
+              ? 'Please review the highlighted fields.'
+              : body?.detail,
+          });
+
+          return;
+        }
+
+        toast.error('Something went wrong', {
+          description: 'Try again in a moment.',
+        });
+      }
+    },
+    [form],
+  );
+
   const swapMotion = calculatorSwapMotionProps(reducedMotion);
+  const loadingMotion = calculatorLoadingMotionProps(reducedMotion);
 
   return (
     <div
       ref={formSectionRef}
       className={cn('flex w-full flex-col items-center', className)}>
       <AnimatePresence mode='wait'>
-        {!snapshot ? (
+        {phase.step === 'form' ? (
           <motion.div key='birth-form' {...swapMotion}>
             <BirthDetailsCard
               form={form}
               todayIsoMax={todayIsoDate()}
               onSubmit={handleCalculate}
+            />
+          </motion.div>
+        ) : phase.step === 'loading' ? (
+          <motion.div key='chart-loading' {...loadingMotion}>
+            <ChartCalculationLoading
+              previewName={
+                phase.values.name.trim() ? phase.values.name.trim() : undefined
+              }
             />
           </motion.div>
         ) : (
@@ -72,9 +165,10 @@ export function SunMoonRisingCalculatorForm({
             aria-labelledby='your-chart-heading'
             {...swapMotion}>
             <ChartResultsCard
-              snapshot={snapshot}
+              snapshot={phase.values}
+              chart={phase.chart}
               reducedMotion={reducedMotion}
-              onReset={resetForm}
+              onReset={resetFlow}
             />
           </motion.div>
         )}

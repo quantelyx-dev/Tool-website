@@ -74,13 +74,58 @@ export function revealedPanelVariants(reducedMotion: boolean | null): Variants {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.5, ease: easeOut },
+      transition: { duration: 0.52, ease: easeOut },
     },
     exit: {
       opacity: 0,
-      y: 14,
+      y: 16,
+      scale: 0.985,
+      transition: { duration: 0.32, ease: easeOut },
+    },
+  };
+}
+
+/** Brief transitional panel (e.g. calculation in flight). */
+export function loadingPanelVariants(reducedMotion: boolean | null): Variants {
+  if (reducedMotion) {
+    return {
+      hidden: { opacity: 1 },
+      visible: { opacity: 1 },
+      exit: { opacity: 1 },
+    };
+  }
+  return {
+    hidden: { opacity: 0, y: 18, scale: 0.985 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.38, ease: easeOut },
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
       scale: 0.99,
-      transition: { duration: 0.28, ease: easeOut },
+      transition: { duration: 0.26, ease: easeOut },
+    },
+  };
+}
+
+/** Skeleton row shimmer inside loading panels. */
+export function loadingShimmerVariants(reducedMotion: boolean | null): Variants {
+  if (reducedMotion) {
+    return {
+      pulse: { opacity: 0.72 },
+    };
+  }
+  return {
+    pulse: {
+      opacity: [0.38, 0.82, 0.38],
+      transition: {
+        duration: 1.55,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      },
     },
   };
 }

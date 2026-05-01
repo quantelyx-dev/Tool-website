@@ -12,16 +12,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import type { SunMoonRisingChartSuccess } from '@/lib/sun-moon-rising/api';
 import type { SunMoonRisingFormValues } from '@/lib/schemas/sun-moon-rising-schema';
 
 type ChartResultsCardProps = {
   snapshot: SunMoonRisingFormValues;
+  chart: SunMoonRisingChartSuccess;
   reducedMotion: boolean | null;
   onReset: () => void;
 };
 
 export function ChartResultsCard({
   snapshot,
+  chart,
   reducedMotion,
   onReset,
 }: ChartResultsCardProps) {
@@ -34,8 +37,8 @@ export function ChartResultsCard({
               Your chart
             </CardTitle>
             <CardDescription>
-              Sun, Moon, and Rising appear here once astronomical calculations are
-              connected.
+              Sun, Moon, and Rising appear here once astronomical calculations
+              are connected.
             </CardDescription>
           </div>
           <Button
@@ -50,14 +53,8 @@ export function ChartResultsCard({
         </div>
       </CardHeader>
       <CardContent className='space-y-6 pt-6'>
-        <ChartResultSummary
-          snapshot={snapshot}
-          reducedMotion={reducedMotion}
-        />
-        <ChartSignRowsList
-          snapshot={snapshot}
-          reducedMotion={reducedMotion}
-        />
+        <ChartResultSummary snapshot={snapshot} reducedMotion={reducedMotion} />
+        <ChartSignRowsList chart={chart} reducedMotion={reducedMotion} />
       </CardContent>
     </Card>
   );

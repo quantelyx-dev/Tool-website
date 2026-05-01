@@ -1,6 +1,6 @@
 'use client';
 
-import { SparklesIcon } from 'lucide-react';
+import { Loader2Icon, SparklesIcon } from 'lucide-react';
 import type { UseFormReturn } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -35,14 +35,16 @@ export function BirthDetailsCard({
   todayIsoMax,
   onSubmit,
 }: BirthDetailsCardProps) {
+  const { isSubmitting } = form.formState;
+
   return (
     <Card className='shadow-sm'>
       <CardHeader className='space-y-1 border-b border-border/80 pb-6'>
         <CardTitle className='text-xl'>Birth details</CardTitle>
         <CardDescription>
-          Enter your details as they appear on your birth record. Calculation
-          logic will plug in next; this step validates input and previews your
-          chart layout.
+          Enter your details as they appear on your birth record. We validate
+          input here, then compute signs on the server from location and
+          timezone.
         </CardDescription>
       </CardHeader>
       <CardContent className='pt-6'>
@@ -131,9 +133,13 @@ export function BirthDetailsCard({
               )}
             />
 
-            <Button type='submit'>
-              <SparklesIcon className='size-4' />
-              Calculate signs
+            <Button type='submit' disabled={isSubmitting}>
+              {isSubmitting ? (
+                <Loader2Icon className='size-4 animate-spin' aria-hidden />
+              ) : (
+                <SparklesIcon className='size-4' aria-hidden />
+              )}
+              {isSubmitting ? 'Working…' : 'Calculate signs'}
             </Button>
           </form>
         </Form>
