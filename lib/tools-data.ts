@@ -10,6 +10,12 @@ export const TOOL_GROUPS = [
           'Discover your Sun, Moon, and Rising signs based on your birth details.',
         link: '/tools/sun-moon-rising-calculator',
       },
+      {
+        name: 'Daily compound interest calculator',
+        description:
+          'Project balances with daily compounding, currencies, contributions, reinvestment, and exports.',
+        link: '/tools/daily-compound-interest-calculator',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
