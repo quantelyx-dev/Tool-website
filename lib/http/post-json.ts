@@ -1,8 +1,5 @@
-import type { RequestToolFormValues } from '@/lib/schemas/request-tool-schema';
-
 export class ApiError extends Error {
   readonly status: number;
-
   readonly body: unknown;
 
   constructor(status: number, body: unknown, message?: string) {
@@ -12,17 +9,6 @@ export class ApiError extends Error {
     this.body = body;
   }
 }
-
-export type RequestToolApiSuccess = { ok: true };
-
-export type RequestToolApiFailureBody = {
-  ok: false;
-  error: string;
-  /** Present when status is 429 (daily submission cap). */
-  code?: 'rate_limit';
-  retryAfterSeconds?: number;
-  fieldErrors?: Record<string, string[] | undefined>;
-};
 
 async function readJsonBody(res: Response): Promise<unknown> {
   const text = await res.text();
@@ -38,7 +24,6 @@ export type PostJsonOptions = Omit<RequestInit, 'body' | 'method'>;
 
 /**
  * POST helper using native fetch. Relative URLs resolve against the current origin in the browser.
- * Pass {@link PostJsonOptions.signal} from an {@link AbortController} to cancel in-flight requests.
  */
 export async function postJson<TResponse>(
   url: string,
@@ -74,17 +59,4 @@ export async function postJson<TResponse>(
   }
 
   return payload as TResponse;
-}
-
-export type SubmitRequestToolFormOptions = {
-  signal?: AbortSignal;
-};
-
-export function submitRequestToolForm(
-  values: RequestToolFormValues,
-  options?: SubmitRequestToolFormOptions,
-) {
-  return postJson<RequestToolApiSuccess>('/api/request-tool', values, {
-    signal: options?.signal,
-  });
 }
