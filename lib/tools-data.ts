@@ -16,6 +16,12 @@ export const TOOL_GROUPS = [
           'Project balances with daily compounding, currencies, contributions, reinvestment, and exports.',
         link: '/tools/daily-compound-interest-calculator',
       },
+      {
+        name: 'Indiana Child support calculator',
+        description:
+          'Capture parental incomes and parenting-time shares per child; worksheet math arrives in a later phase.',
+        link: '/tools/indiana-child-support-calculator',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
