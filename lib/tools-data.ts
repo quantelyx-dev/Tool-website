@@ -24,6 +24,17 @@ export const TOOL_GROUPS = [
       },
     ],
   },
+  {
+    type: 'data',
+    tools: [
+      {
+        name: 'Random username generator',
+        description:
+          'Pull batches of plausible usernames from a cached pool backed by randomuser.me, with quick copy for spreadsheets and fixtures.',
+        link: '/tools/generate-random-usernames',
+      },
+    ],
+  },
 ] as const satisfies readonly ToolGroup[];
 
 export type ToolCategoryType = (typeof TOOL_GROUPS)[number]['type'];
