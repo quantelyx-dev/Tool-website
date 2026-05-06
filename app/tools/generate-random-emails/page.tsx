@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { GenerateRandomEmailsBreadcrumb } from '@/components/generate-random-emails/generate-random-emails-breadcrumb';
+import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { GenerateRandomEmailsToolContent } from '@/components/generate-random-emails/generate-random-emails-tool-content';
 import { cn } from '@/lib/utils';
 
@@ -14,7 +14,7 @@ export default function GenerateRandomEmailsPage() {
   return (
     <main className={cn('flex-1')}>
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
-        <GenerateRandomEmailsBreadcrumb />
+        <PageBreadcrumb items={[{ label: 'Random emails' }]} />
         <GenerateRandomEmailsToolContent />
       </div>
     </main>
