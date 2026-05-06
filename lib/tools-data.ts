@@ -33,6 +33,12 @@ export const TOOL_GROUPS = [
           'Pull batches of plausible usernames from a cached pool backed by randomuser.me, with quick copy for spreadsheets and fixtures.',
         link: '/tools/generate-random-usernames',
       },
+      {
+        name: 'Random email generator',
+        description:
+          'Pull batches of plausible email addresses from the same cached identity pool as usernames, with quick copy for spreadsheets and fixtures.',
+        link: '/tools/generate-random-emails',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
