@@ -1,6 +1,7 @@
 'use client';
 
 import { countries } from 'countries-list';
+import type { CountryCode } from 'libphonenumber-js';
 
 import {
   Select,
@@ -12,14 +13,14 @@ import {
 import { cn } from '@/lib/utils';
 
 type PhoneCountrySelectProps = {
-  value: string;
-  onValueChange: (value: string) => void;
+  value: CountryCode;
+  onValueChange: (value: CountryCode) => void;
   disabled?: boolean;
   className?: string;
 };
 
 type CountryOption = {
-  iso2: string;
+  iso2: CountryCode;
   name: string;
   callingCode: string;
 };
@@ -28,13 +29,13 @@ const COUNTRY_SELECT_ID = 'random-phone-country';
 
 const COUNTRY_OPTIONS: CountryOption[] = Object.entries(countries)
   .map(([iso2, country]) => ({
-    iso2,
+    iso2: iso2 as CountryCode,
     name: country.name,
     callingCode: country.phone[0] ? `+${country.phone[0]}` : 'N/A',
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export const PHONE_COUNTRY_DEFAULT = 'US';
+export const PHONE_COUNTRY_DEFAULT: CountryCode = 'US';
 
 export function PhoneCountrySelect({
   value,

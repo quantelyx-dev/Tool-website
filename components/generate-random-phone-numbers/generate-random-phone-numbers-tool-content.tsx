@@ -1,8 +1,9 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Loader2, Phone, RefreshCw, WandSparkles } from 'lucide-react';
-import { useCallback, useRef, useState } from 'react';
+import type { CountryCode } from 'libphonenumber-js';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   PHONE_COUNTRY_DEFAULT,
@@ -21,6 +22,11 @@ import {
   staggerContainerVariants,
 } from '@/lib/motion-variants';
 import { cn } from '@/lib/utils';
+import { generateRandomPhoneNumber } from '@/lib/generate-random-phone-numbers/generate';
+import {
+  type CopyField,
+  GeneratedPhoneResultCard,
+} from './generate-random-phone-result';
 
 type GenerateRandomPhoneNumbersToolContentProps = {
   className?: string;
@@ -31,12 +37,32 @@ export function GenerateRandomPhoneNumbersToolContent({
 }: GenerateRandomPhoneNumbersToolContentProps) {
   const reducedMotion = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
-  const [country, setCountry] = useState(PHONE_COUNTRY_DEFAULT);
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const copyResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const [country, setCountry] = useState<CountryCode>(PHONE_COUNTRY_DEFAULT);
   const [loading, setLoading] = useState(false);
+  const [generated, setGenerated] = useState<ReturnType<
+    typeof generateRandomPhoneNumber
+  > | null>(null);
+  const [copiedField, setCopiedField] = useState<CopyField | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const reset = useCallback(() => {
     setCountry(PHONE_COUNTRY_DEFAULT);
     setLoading(false);
+    setGenerated(null);
+    setCopiedField(null);
+    setError(null);
     requestAnimationFrame(() => {
       panelRef.current?.scrollIntoView({
         behavior: 'smooth',
@@ -47,8 +73,44 @@ export function GenerateRandomPhoneNumbersToolContent({
 
   const generatePlaceholder = useCallback(async () => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 500));
-    setLoading(false);
+    setGenerated(null);
+    setCopiedField(null);
+    setError(null);
+
+    try {
+      const result = generateRandomPhoneNumber(country);
+      await new Promise(resolve => setTimeout(resolve, 420));
+      setGenerated(result);
+      setLoading(false);
+
+      requestAnimationFrame(() => {
+        resultsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      });
+    } catch (err: unknown) {
+      console.error('Phone generation error:', err);
+      setError(
+        err instanceof Error ? err.message : 'Failed to generate phone number',
+      );
+      setLoading(false);
+    }
+  }, [country]);
+
+  const handleCopy = useCallback((field: CopyField, value: string) => {
+    try {
+      navigator.clipboard.writeText(value);
+      setCopiedField(field);
+      if (copyResetTimeoutRef.current) {
+        clearTimeout(copyResetTimeoutRef.current);
+      }
+      copyResetTimeoutRef.current = setTimeout(() => {
+        setCopiedField(null);
+      }, 1400);
+    } catch {
+      // ignore
+    }
   }, []);
 
   return (
@@ -115,12 +177,13 @@ export function GenerateRandomPhoneNumbersToolContent({
                     <Phone className={cn('size-5')} aria-hidden />
                   </span>
                   <div className={cn('min-w-0 space-y-1 text-left')}>
-                    <CardTitle className={cn('text-base font-semibold leading-snug')}>
-                      Options
+                    <CardTitle
+                      className={cn('text-base font-semibold leading-snug')}>
+                      Phone number generator
                     </CardTitle>
                     <CardDescription className={cn('text-sm leading-relaxed')}>
-                      Choose the target country. Number count and formats will be
-                      added in the next step.
+                      Choose the target country. Number count and formats will
+                      be added in the next step.
                     </CardDescription>
                   </div>
                 </div>
@@ -130,7 +193,10 @@ export function GenerateRandomPhoneNumbersToolContent({
                   className={cn(
                     'flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between xl:gap-8',
                   )}>
-                  <div className={cn('flex min-w-0 flex-1 flex-col gap-4 sm:gap-6')}>
+                  <div
+                    className={cn(
+                      'flex min-w-0 flex-1 flex-col gap-4 sm:gap-6',
+                    )}>
                     <PhoneCountrySelect
                       value={country}
                       onValueChange={setCountry}
@@ -159,7 +225,10 @@ export function GenerateRandomPhoneNumbersToolContent({
                         </>
                       ) : (
                         <>
-                          <WandSparkles className={cn('size-4 shrink-0')} aria-hidden />
+                          <WandSparkles
+                            className={cn('size-4 shrink-0')}
+                            aria-hidden
+                          />
                           Generate
                         </>
                       )}
@@ -173,25 +242,36 @@ export function GenerateRandomPhoneNumbersToolContent({
                         'inline-flex w-full gap-2 sm:w-auto sm:min-w-36',
                       )}
                       size='lg'>
-                      <RefreshCw className={cn('size-4 shrink-0')} aria-hidden />
+                      <RefreshCw
+                        className={cn('size-4 shrink-0')}
+                        aria-hidden
+                      />
                       Reset
                     </Button>
                   </div>
                 </div>
               </CardContent>
             </Card>
-
-            <Card className={cn('shadow-xs ring-1 ring-foreground/10')}>
-              <CardHeader>
-                <CardTitle className={cn('text-base font-semibold sm:text-lg')}>
-                  Preview
-                </CardTitle>
-                <CardDescription>
-                  Selected country: {country}. Results panel will be wired in the
-                  next step.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            {/* Results / Preview */}
+            <motion.div
+              ref={resultsRef}
+              variants={fadeUpVariants(reducedMotion)}
+              className={cn('mx-auto max-w-3xl')}>
+              <AnimatePresence initial={false}>
+                {generated ? (
+                  <GeneratedPhoneResultCard
+                    key={generated.e164}
+                    generated={generated}
+                    reducedMotion={reducedMotion}
+                    copiedField={copiedField}
+                    onCopy={handleCopy}
+                  />
+                ) : null}
+              </AnimatePresence>
+              {error ? (
+                <p className={cn('mt-3 text-sm text-destructive')}>{error}</p>
+              ) : null}
+            </motion.div>
           </div>
         </motion.div>
       </motion.section>
