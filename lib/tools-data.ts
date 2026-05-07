@@ -63,6 +63,12 @@ export const TOOL_GROUPS = [
           'Generate structurally valid fake U.S. Social Security Numbers in single or bulk mode for fixtures and demos.',
         link: '/tools/generate-random-ssn',
       },
+      {
+        name: 'Random UUIDv7 generator',
+        description:
+          'Generate sortable UUIDv7 identifiers in single or bulk mode for fixtures, imports, and test data.',
+        link: '/tools/generate-random-uuids',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
