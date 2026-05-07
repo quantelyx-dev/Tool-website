@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { AboutBreadcrumb } from '@/components/about/about-breadcrumb';
 import { AboutContent } from '@/components/about/about-content';
+import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <main className={cn('flex-1')}>
       <div className={cn('container mx-auto max-w-5xl', 'px-4 pb-20 sm:px-6')}>
-        <AboutBreadcrumb />
+        <PageBreadcrumb items={[{ label: 'About' }]} />
         <AboutContent />
       </div>
     </main>

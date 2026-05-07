@@ -45,6 +45,12 @@ export const TOOL_GROUPS = [
           'Pull first names, last names, or full names from the cached identity pool, with format selection and quick copy for spreadsheets and fixtures.',
         link: '/tools/generate-random-names',
       },
+      {
+        name: 'Random phone number generator',
+        description:
+          'Generate plausible phone numbers per selected country using libphonenumber formatting; fictional ranges where reserved (e.g. NANP 555-01XX, UK drama band).',
+        link: '/tools/generate-random-phone-numbers',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];

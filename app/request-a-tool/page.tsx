@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { RequestToolBreadcrumb } from '@/components/request-tool/request-tool-breadcrumb';
 import { RequestToolContent } from '@/components/request-tool/request-tool-content';
+import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function RequestAToolPage() {
   return (
     <main className={cn('flex-1')}>
       <div className={cn('container mx-auto max-w-5xl', 'px-4 pb-20 sm:px-6')}>
-        <RequestToolBreadcrumb />
+        <PageBreadcrumb items={[{ label: 'Request a tool' }]} />
         <RequestToolContent />
       </div>
     </main>
