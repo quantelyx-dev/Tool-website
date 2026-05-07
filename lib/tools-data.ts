@@ -57,6 +57,12 @@ export const TOOL_GROUPS = [
           'Generate plausible credit card numbers per selected issuer, with quick copy for spreadsheets and fixtures.',
         link: '/tools/generate-random-credit-cards',
       },
+      {
+        name: 'Random SSN generator',
+        description:
+          'Generate structurally valid fake U.S. Social Security Numbers in single or bulk mode for fixtures and demos.',
+        link: '/tools/generate-random-ssn',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
