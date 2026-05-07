@@ -205,7 +205,7 @@ export function GenerateRandomPhoneNumbersToolContent({
                   </div>
                   <div
                     className={cn(
-                      'flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-end xl:shrink-0',
+                      'flex flex-col gap-3 sm:flex-row sm:flex-wrap xl:shrink-0',
                     )}>
                     <Button
                       type='button'

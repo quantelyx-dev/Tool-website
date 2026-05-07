@@ -51,6 +51,12 @@ export const TOOL_GROUPS = [
           'Generate plausible phone numbers per selected country using libphonenumber formatting; fictional ranges where reserved (e.g. NANP 555-01XX, UK drama band).',
         link: '/tools/generate-random-phone-numbers',
       },
+      {
+        name: 'Random credit card generator',
+        description:
+          'Generate plausible credit card numbers per selected issuer, with quick copy for spreadsheets and fixtures.',
+        link: '/tools/generate-random-credit-cards',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
