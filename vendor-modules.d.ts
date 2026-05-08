@@ -68,3 +68,22 @@ declare module 'node-geocoder' {
   function createGeocoder(options: NodeGeocoderOptions): NodeGeocoderInstance;
   export default createGeocoder;
 }
+declare module 'zxcvbn' {
+  export type ZXCVBNFeedback = {
+    warning: string;
+    suggestions: string[];
+  };
+
+  export type ZXCVBNResult = {
+    score: number;
+    feedback: ZXCVBNFeedback;
+    crack_times_display: {
+      online_throttling_100_per_hour: string;
+      online_no_throttling_10_per_second: string;
+      offline_slow_hashing_1e4_per_second: string;
+      offline_fast_hashing_1e10_per_second: string;
+    };
+  };
+
+  export default function zxcvbn(password: string): ZXCVBNResult;
+}

@@ -69,6 +69,12 @@ export const TOOL_GROUPS = [
           'Generate sortable UUIDv7 identifiers in single or bulk mode for fixtures, imports, and test data.',
         link: '/tools/generate-random-uuids',
       },
+      {
+        name: 'Random password generator',
+        description:
+          'Generate random passwords with configurable length and character sets, with zxcvbn-based strength estimates.',
+        link: '/tools/generate-random-passwords',
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];

@@ -1,58 +1,59 @@
 'use client';
-
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
-import { Fingerprint, Loader2, RefreshCw, WandSparkles } from 'lucide-react';
-
-import type { GeneratedUuid } from '@/lib/generate-random-uuids/generate';
+import { KeyRound, Loader2, RefreshCw, WandSparkles } from 'lucide-react';
+import type { GeneratedPassword } from '@/lib/generate-random-passwords/generate';
 import { fadeUpVariants } from '@/lib/motion-variants';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { GenerateRandomUuidsResultCard } from './generate-random-uuids-result-card';
-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { GenerateRandomPasswordsResultCard } from './generate-random-passwords-result-card';
+import { PasswordCharacterOptions } from './password-character-options';
 type GenerationMode = 'single' | 'bulk';
-type BulkCount = '10' | '50' | '100' | '200';
-
-type RandomUuidFormProps = {
+type BulkCount = '10' | '20' | '50' | '100';
+type RandomPasswordFormProps = {
   reducedMotion: boolean | null;
   panelRef: React.RefObject<HTMLDivElement | null>;
   resultsRef: React.RefObject<HTMLDivElement | null>;
   mode: GenerationMode;
   bulkCount: BulkCount;
+  length: number;
+  includeUppercase: boolean;
+  includeLowercase: boolean;
+  includeNumbers: boolean;
+  includeSymbols: boolean;
   loading: boolean;
-  values: GeneratedUuid[];
+  values: GeneratedPassword[];
   formError: string | null;
   error: string | null;
   copyState: 'idle' | 'copied' | 'failed';
   bulkCountValues: BulkCount[];
   onModeChange: (value: GenerationMode) => void;
   onBulkCountChange: (value: BulkCount) => void;
+  onLengthChange: (value: number) => void;
+  onIncludeUppercaseChange: (value: boolean) => void;
+  onIncludeLowercaseChange: (value: boolean) => void;
+  onIncludeNumbersChange: (value: boolean) => void;
+  onIncludeSymbolsChange: (value: boolean) => void;
   onGenerate: () => void;
   onReset: () => void;
-  onCopySingleJson: () => void;
+  onCopySinglePassword: () => void;
   onExportCsv: () => void;
   className?: string;
 };
-
-export function RandomUuidForm({
+export function RandomPasswordForm({
   reducedMotion,
   panelRef,
   resultsRef,
   mode,
   bulkCount,
+  length,
+  includeUppercase,
+  includeLowercase,
+  includeNumbers,
+  includeSymbols,
   loading,
   values,
   formError,
@@ -61,12 +62,17 @@ export function RandomUuidForm({
   bulkCountValues,
   onModeChange,
   onBulkCountChange,
+  onLengthChange,
+  onIncludeUppercaseChange,
+  onIncludeLowercaseChange,
+  onIncludeNumbersChange,
+  onIncludeSymbolsChange,
   onGenerate,
   onReset,
-  onCopySingleJson,
+  onCopySinglePassword,
   onExportCsv,
   className,
-}: RandomUuidFormProps) {
+}: RandomPasswordFormProps) {
   return (
     <motion.div
       ref={panelRef}
@@ -74,52 +80,29 @@ export function RandomUuidForm({
       variants={fadeUpVariants(reducedMotion)}>
       <div className={cn('mx-auto max-w-3xl space-y-8 sm:space-y-10')}>
         <Card className={cn('py-0 shadow-xs ring-1 ring-foreground/10')}>
-          <CardHeader
-            className={cn(
-              'space-y-2 border-b border-border/80 px-4 py-3 [.border-b]:pb-3',
-            )}>
+          <CardHeader className={cn('space-y-2 border-b border-border/80 px-4 py-3 [.border-b]:pb-3')}>
             <div className={cn('flex items-start gap-3.5 sm:items-center')}>
-              <span
-                className={cn(
-                  'mt-0.5 inline-flex size-10 shrink-0 items-center justify-center rounded-xl',
-                  'bg-blue-500/10 text-blue-700 ring-1 ring-blue-500/15 dark:text-blue-300',
-                )}>
-                <Fingerprint className={cn('size-5')} aria-hidden />
+              <span className={cn('mt-0.5 inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/15 dark:text-amber-300')}>
+                <KeyRound className={cn('size-5')} aria-hidden />
               </span>
               <div className={cn('min-w-0 space-y-1 text-left')}>
                 <CardTitle className={cn('text-base font-semibold leading-snug')}>
-                  UUID generator
+                  Password generator
                 </CardTitle>
                 <CardDescription className={cn('text-sm leading-relaxed')}>
-                  Choose generation mode and create UUIDv7 values.
+                  Set length, character rules, and mode before generating.
                 </CardDescription>
               </div>
             </div>
           </CardHeader>
-
-          <CardContent className={cn('space-y-6 px-4 pb-6 pt-0')}>
+          <CardContent className={cn('space-y-6 px-4 pb-6 pt-4')}>
             <LayoutGroup>
               <motion.div
                 layout
-                transition={{
-                  type: 'spring',
-                  stiffness: 210,
-                  damping: 24,
-                  mass: 0.7,
-                }}
-                className={cn('relative flex flex-col gap-4 sm:flex-row sm:gap-5')}>
-                <motion.div
-                  layout
-                  transition={{
-                    type: 'spring',
-                    stiffness: 210,
-                    damping: 24,
-                    mass: 0.7,
-                  }}
-                  className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}>
-                  <label className={cn('text-sm font-medium text-foreground')}>
-                    Mode
-                  </label>
+                transition={{ type: 'spring', stiffness: 210, damping: 24, mass: 0.7 }}
+                className={cn('grid gap-4 sm:grid-cols-2')}>
+                <div className={cn('space-y-2')}>
+                  <Label>Mode</Label>
                   <Select
                     value={mode}
                     onValueChange={value => onModeChange(value as GenerationMode)}
@@ -132,29 +115,18 @@ export function RandomUuidForm({
                       <SelectItem value='bulk'>Bulk</SelectItem>
                     </SelectContent>
                   </Select>
-                  {formError ? (
-                    <p className={cn('text-sm text-destructive')}>{formError}</p>
-                  ) : null}
-                </motion.div>
-
+                </div>
                 <AnimatePresence initial={false} mode='popLayout'>
                   {mode === 'bulk' ? (
                     <motion.div
                       key='bulk-count'
                       layout
-                      className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}
                       initial={{ opacity: 0, y: 10, scale: 0.985 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.99 }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 210,
-                        damping: 24,
-                        mass: 0.7,
-                      }}>
-                      <label className={cn('text-sm font-medium text-foreground')}>
-                        Count
-                      </label>
+                      transition={{ type: 'spring', stiffness: 210, damping: 24, mass: 0.7 }}
+                      className={cn('space-y-2')}>
+                      <Label>Count</Label>
                       <Select
                         value={bulkCount}
                         onValueChange={value => onBulkCountChange(value as BulkCount)}
@@ -175,11 +147,34 @@ export function RandomUuidForm({
                 </AnimatePresence>
               </motion.div>
             </LayoutGroup>
-
-            <div
-              className={cn(
-                'flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-end',
-              )}>
+            <div className={cn('space-y-3')}>
+              <div className={cn('flex items-center justify-between text-sm')}>
+                <Label>Password length</Label>
+                <span className={cn('font-mono text-muted-foreground')}>{length}</span>
+              </div>
+              <Slider
+                value={[length]}
+                onValueChange={value => onLengthChange(value[0] ?? 16)}
+                min={8}
+                max={64}
+                step={1}
+                disabled={loading}
+              />
+              <p className={cn('text-xs text-muted-foreground')}>Range: 8 to 64 characters.</p>
+            </div>
+            <PasswordCharacterOptions
+              includeUppercase={includeUppercase}
+              includeLowercase={includeLowercase}
+              includeNumbers={includeNumbers}
+              includeSymbols={includeSymbols}
+              loading={loading}
+              onIncludeUppercaseChange={onIncludeUppercaseChange}
+              onIncludeLowercaseChange={onIncludeLowercaseChange}
+              onIncludeNumbersChange={onIncludeNumbersChange}
+              onIncludeSymbolsChange={onIncludeSymbolsChange}
+            />
+            {formError ? <p className={cn('text-sm text-destructive')}>{formError}</p> : null}
+            <div className={cn('flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-end')}>
               <Button
                 type='button'
                 onClick={onGenerate}
@@ -209,30 +204,26 @@ export function RandomUuidForm({
                 Reset
               </Button>
             </div>
-
             {error ? (
               <p
-                className={cn(
-                  'rounded-lg border border-destructive/25 bg-destructive/5 px-4 py-3 text-sm leading-relaxed text-destructive',
-                )}
+                className={cn('rounded-lg border border-destructive/25 bg-destructive/5 px-4 py-3 text-sm leading-relaxed text-destructive')}
                 role='alert'>
                 {error}
               </p>
             ) : null}
           </CardContent>
         </Card>
-
         <motion.div
           ref={resultsRef}
           variants={fadeUpVariants(reducedMotion)}
           className={cn('mx-auto max-w-3xl')}>
           <AnimatePresence initial={false}>
             {values.length > 0 ? (
-              <GenerateRandomUuidsResultCard
+              <GenerateRandomPasswordsResultCard
                 mode={mode}
                 values={values}
                 reducedMotion={reducedMotion}
-                onCopySingleJson={onCopySingleJson}
+                onCopySinglePassword={onCopySinglePassword}
                 onExportCsv={onExportCsv}
                 copyState={copyState}
               />
