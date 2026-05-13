@@ -15,3 +15,4 @@ Make custom hooks if we are calling api in the component.
 A component should have no more than 250 lines of code. If a component is becoming large then create sub-components.
 Always prioritize using functions which are already defined. Don't define duplicate functions if there are already defined.
 Always prioritize defining types in the same file. If they to be used somewhere else then move them to a custom file and reuse them.
+Always run lint and build after each feature implementation or fix.
