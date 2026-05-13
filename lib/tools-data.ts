@@ -64,6 +64,12 @@ export const TOOL_GROUPS = [
         link: '/tools/generate-random-ssn',
       },
       {
+        name: 'Address Generator - Generate Fictional Addresses',
+        description:
+          'Generate fictional mailing addresses in single or bulk mode, with quick copy for one result and CSV export for batches.',
+        link: '/tools/generate-random-addresses',
+      },
+      {
         name: 'Random UUIDv7 generator',
         description:
           'Generate sortable UUIDv7 identifiers in single or bulk mode for fixtures, imports, and test data.',
