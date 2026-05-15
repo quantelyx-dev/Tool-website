@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { CreditCard, Loader2, RefreshCw, WandSparkles } from 'lucide-react';
 
 import {
@@ -17,6 +17,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { GeneratorModeFields } from '@/components/generate-random/shared/generator-mode-fields';
+import type {
+  CopyState,
+  GenerationMode,
+  StandardBulkCount,
+} from '@/components/generate-random/shared/generator-types';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -26,27 +33,24 @@ import {
 } from '@/components/ui/select';
 import { GenerateRandomCreditCardsResultCard } from './generate-random-credit-cards-result-card';
 
-type GenerationMode = 'single' | 'bulk';
-type BulkCount = '10' | '50' | '100' | '200';
-
 type RandomCreditCardFormProps = {
   reducedMotion: boolean | null;
   panelRef: React.RefObject<HTMLDivElement | null>;
   resultsRef: React.RefObject<HTMLDivElement | null>;
   issuer: SupportedCardIssuer;
   mode: GenerationMode;
-  bulkCount: BulkCount;
+  bulkCount: StandardBulkCount;
   loading: boolean;
   cards: GeneratedFakeCreditCard[];
   formError: string | null;
   error: string | null;
-  copyState: 'idle' | 'copied' | 'failed';
+  copyState: CopyState;
   resultKey: string;
   issuerOptions: SupportedCardIssuer[];
-  bulkCountValues: BulkCount[];
+  bulkCountValues: StandardBulkCount[];
   onIssuerChange: (value: SupportedCardIssuer) => void;
   onModeChange: (value: GenerationMode) => void;
-  onBulkCountChange: (value: BulkCount) => void;
+  onBulkCountChange: (value: StandardBulkCount) => void;
   onGenerate: () => void;
   onReset: () => void;
   onCopySingleJson: () => void;
@@ -98,7 +102,8 @@ export function RandomCreditCardForm({
                 <CreditCard className={cn('size-5')} aria-hidden />
               </span>
               <div className={cn('min-w-0 space-y-1 text-left')}>
-                <CardTitle className={cn('text-base font-semibold leading-snug')}>
+                <CardTitle
+                  className={cn('text-base font-semibold leading-snug')}>
                   Card generator
                 </CardTitle>
                 <CardDescription className={cn('text-sm leading-relaxed')}>
@@ -110,16 +115,15 @@ export function RandomCreditCardForm({
           </CardHeader>
 
           <CardContent className={cn('space-y-6 px-4 pb-6 pt-0')}>
-            <LayoutGroup>
-              <motion.div
-                layout
-                transition={{
-                  type: 'spring',
-                  stiffness: 210,
-                  damping: 24,
-                  mass: 0.7,
-                }}
-                className={cn('relative flex flex-col gap-4 sm:flex-row sm:gap-5')}>
+            <GeneratorModeFields
+              mode={mode}
+              bulkCount={bulkCount}
+              bulkCountValues={bulkCountValues}
+              loading={loading}
+              onModeChange={onModeChange}
+              onBulkCountChange={onBulkCountChange}
+              formError={formError}
+              leadingField={
                 <motion.div
                   layout
                   transition={{
@@ -129,12 +133,14 @@ export function RandomCreditCardForm({
                     mass: 0.7,
                   }}
                   className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}>
-                  <label className={cn('text-sm font-medium text-foreground')}>
+                  <Label className={cn('text-sm font-medium text-foreground')}>
                     Issuer
-                  </label>
+                  </Label>
                   <Select
                     value={issuer}
-                    onValueChange={value => onIssuerChange(value as SupportedCardIssuer)}
+                    onValueChange={value =>
+                      onIssuerChange(value as SupportedCardIssuer)
+                    }
                     disabled={loading}>
                     <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
                       <SelectValue placeholder='Select issuer' />
@@ -147,75 +153,9 @@ export function RandomCreditCardForm({
                       ))}
                     </SelectContent>
                   </Select>
-                  {formError ? (
-                    <p className={cn('text-sm text-destructive')}>{formError}</p>
-                  ) : null}
                 </motion.div>
-
-                <motion.div
-                  layout
-                  transition={{
-                    type: 'spring',
-                    stiffness: 210,
-                    damping: 24,
-                    mass: 0.7,
-                  }}
-                  className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}>
-                  <label className={cn('text-sm font-medium text-foreground')}>
-                    Mode
-                  </label>
-                  <Select
-                    value={mode}
-                    onValueChange={value => onModeChange(value as GenerationMode)}
-                    disabled={loading}>
-                    <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
-                      <SelectValue placeholder='Select mode' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='single'>Single</SelectItem>
-                      <SelectItem value='bulk'>Bulk</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </motion.div>
-
-                <AnimatePresence initial={false} mode='popLayout'>
-                  {mode === 'bulk' ? (
-                    <motion.div
-                      key='bulk-count'
-                      layout
-                      className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}
-                      initial={{ opacity: 0, y: 10, scale: 0.985 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.99 }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 210,
-                        damping: 24,
-                        mass: 0.7,
-                      }}>
-                      <label className={cn('text-sm font-medium text-foreground')}>
-                        Count
-                      </label>
-                      <Select
-                        value={bulkCount}
-                        onValueChange={value => onBulkCountChange(value as BulkCount)}
-                        disabled={loading}>
-                        <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
-                          <SelectValue placeholder='Select count' />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {bulkCountValues.map(value => (
-                            <SelectItem key={value} value={value}>
-                              {value}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </motion.div>
-            </LayoutGroup>
+              }
+            />
 
             <div
               className={cn(
@@ -229,12 +169,18 @@ export function RandomCreditCardForm({
                 size='lg'>
                 {loading ? (
                   <>
-                    <Loader2 className={cn('size-4 shrink-0 animate-spin')} aria-hidden />
+                    <Loader2
+                      className={cn('size-4 shrink-0 animate-spin')}
+                      aria-hidden
+                    />
                     Generating...
                   </>
                 ) : (
                   <>
-                    <WandSparkles className={cn('size-4 shrink-0')} aria-hidden />
+                    <WandSparkles
+                      className={cn('size-4 shrink-0')}
+                      aria-hidden
+                    />
                     Generate
                   </>
                 )}

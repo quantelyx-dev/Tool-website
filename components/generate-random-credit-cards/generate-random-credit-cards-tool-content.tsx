@@ -19,6 +19,11 @@ import {
   creditCardformSchema,
   ISSUER_OPTIONS,
 } from '@/lib/schemas/credit-cards-schema';
+import type {
+  CopyState,
+  GenerationMode,
+  StandardBulkCount,
+} from '@/components/generate-random/shared/generator-types';
 import { RandomCreditCardForm } from './random-credit-card-form';
 import { exportCreditCardsToCsv } from '@/lib/generate-random-credit-cards/export-csv';
 
@@ -26,10 +31,7 @@ type GenerateRandomCreditCardsToolContentProps = {
   className?: string;
 };
 
-type GenerationMode = 'single' | 'bulk';
-type BulkCount = '10' | '50' | '100' | '200';
-
-const bulkCountValues: BulkCount[] = ['10', '50', '100', '200'];
+const bulkCountValues: StandardBulkCount[] = ['10', '50', '100', '200'];
 const COPY_FEEDBACK_MS = 1500;
 
 export function GenerateRandomCreditCardsToolContent({
@@ -40,14 +42,12 @@ export function GenerateRandomCreditCardsToolContent({
   const resultsRef = useRef<HTMLDivElement>(null);
   const [issuer, setIssuer] = useState<SupportedCardIssuer>('Visa');
   const [mode, setMode] = useState<GenerationMode>('single');
-  const [bulkCount, setBulkCount] = useState<BulkCount>('10');
+  const [bulkCount, setBulkCount] = useState<StandardBulkCount>('10');
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState<GeneratedFakeCreditCard[]>([]);
   const [formError, setFormError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>(
-    'idle',
-  );
+  const [copyState, setCopyState] = useState<CopyState>('idle');
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const resultKey = useMemo(() => {
