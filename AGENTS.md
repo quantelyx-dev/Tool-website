@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-## Coding Rules
+## Frontend Coding rules
 
 1. When using tailwindcss always use `cn` utility for merging classnames.
 2. Add terniary operators only for if else case. If there are more than 2 conditions always use a cleaner if-else approach.
@@ -17,3 +17,5 @@ This version has breaking changes — APIs, conventions, and file structure may 
 7. Always prioritize defining types in the same file. If they to be used somewhere else then move them to a custom file and reuse them.
 8. Always run lint and build after each feature implementation or fix.
 9. Whenever your creating a new component always implement proper accessibility for it as well.
+
+## Backend Coding rules
