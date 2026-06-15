@@ -15,13 +15,16 @@ import {
   passwordFormSchema,
   PASSWORD_BULK_COUNT_OPTIONS,
 } from '@/lib/schemas/password-schema';
+import type {
+  CopyState,
+  GenerationMode,
+  PasswordBulkCount,
+} from '@/components/generate-random/shared/generator-types';
 import { cn } from '@/lib/utils';
 import { RandomPasswordForm } from './random-password-form';
 type GenerateRandomPasswordsToolContentProps = {
   className?: string;
 };
-type GenerationMode = 'single' | 'bulk';
-type BulkCount = (typeof PASSWORD_BULK_COUNT_OPTIONS)[number];
 const COPY_FEEDBACK_MS = 1500;
 export function GenerateRandomPasswordsToolContent({
   className,
@@ -30,7 +33,7 @@ export function GenerateRandomPasswordsToolContent({
   const panelRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<GenerationMode>('single');
-  const [bulkCount, setBulkCount] = useState<BulkCount>('10');
+  const [bulkCount, setBulkCount] = useState<PasswordBulkCount>('10');
   const [length, setLength] = useState(16);
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
@@ -40,7 +43,7 @@ export function GenerateRandomPasswordsToolContent({
   const [values, setValues] = useState<GeneratedPassword[]>([]);
   const [formError, setFormError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [copyState, setCopyState] = useState<CopyState>('idle');
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const clearCopyFeedbackTimer = useCallback(() => {
     if (copyResetRef.current !== null) {

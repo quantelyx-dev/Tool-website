@@ -1,24 +1,28 @@
 'use client';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { KeyRound, Loader2, RefreshCw, WandSparkles } from 'lucide-react';
 import type { GeneratedPassword } from '@/lib/generate-random-passwords/generate';
 import { fadeUpVariants } from '@/lib/motion-variants';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GeneratorModeFields } from '@/components/generate-random/shared/generator-mode-fields';
+import type {
+  CopyState,
+  GenerationMode,
+  PasswordBulkCount,
+} from '@/components/generate-random/shared/generator-types';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { GenerateRandomPasswordsResultCard } from './generate-random-passwords-result-card';
 import { PasswordCharacterOptions } from './password-character-options';
-type GenerationMode = 'single' | 'bulk';
-type BulkCount = '10' | '20' | '50' | '100';
+
 type RandomPasswordFormProps = {
   reducedMotion: boolean | null;
   panelRef: React.RefObject<HTMLDivElement | null>;
   resultsRef: React.RefObject<HTMLDivElement | null>;
   mode: GenerationMode;
-  bulkCount: BulkCount;
+  bulkCount: PasswordBulkCount;
   length: number;
   includeUppercase: boolean;
   includeLowercase: boolean;
@@ -28,10 +32,10 @@ type RandomPasswordFormProps = {
   values: GeneratedPassword[];
   formError: string | null;
   error: string | null;
-  copyState: 'idle' | 'copied' | 'failed';
-  bulkCountValues: BulkCount[];
+  copyState: CopyState;
+  bulkCountValues: PasswordBulkCount[];
   onModeChange: (value: GenerationMode) => void;
-  onBulkCountChange: (value: BulkCount) => void;
+  onBulkCountChange: (value: PasswordBulkCount) => void;
   onLengthChange: (value: number) => void;
   onIncludeUppercaseChange: (value: boolean) => void;
   onIncludeLowercaseChange: (value: boolean) => void;
@@ -96,57 +100,15 @@ export function RandomPasswordForm({
             </div>
           </CardHeader>
           <CardContent className={cn('space-y-6 px-4 pb-6 pt-4')}>
-            <LayoutGroup>
-              <motion.div
-                layout
-                transition={{ type: 'spring', stiffness: 210, damping: 24, mass: 0.7 }}
-                className={cn('grid gap-4 sm:grid-cols-2')}>
-                <div className={cn('space-y-2')}>
-                  <Label>Mode</Label>
-                  <Select
-                    value={mode}
-                    onValueChange={value => onModeChange(value as GenerationMode)}
-                    disabled={loading}>
-                    <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
-                      <SelectValue placeholder='Select mode' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='single'>Single</SelectItem>
-                      <SelectItem value='bulk'>Bulk</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <AnimatePresence initial={false} mode='popLayout'>
-                  {mode === 'bulk' ? (
-                    <motion.div
-                      key='bulk-count'
-                      layout
-                      initial={{ opacity: 0, y: 10, scale: 0.985 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.99 }}
-                      transition={{ type: 'spring', stiffness: 210, damping: 24, mass: 0.7 }}
-                      className={cn('space-y-2')}>
-                      <Label>Count</Label>
-                      <Select
-                        value={bulkCount}
-                        onValueChange={value => onBulkCountChange(value as BulkCount)}
-                        disabled={loading}>
-                        <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
-                          <SelectValue placeholder='Select count' />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {bulkCountValues.map(value => (
-                            <SelectItem key={value} value={value}>
-                              {value}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </motion.div>
-            </LayoutGroup>
+            <GeneratorModeFields
+              mode={mode}
+              bulkCount={bulkCount}
+              bulkCountValues={bulkCountValues}
+              loading={loading}
+              onModeChange={onModeChange}
+              onBulkCountChange={onBulkCountChange}
+              className={cn('grid gap-4 sm:grid-cols-2')}
+            />
             <div className={cn('space-y-3')}>
               <div className={cn('flex items-center justify-between text-sm')}>
                 <Label>Password length</Label>

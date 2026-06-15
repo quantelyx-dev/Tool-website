@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Fingerprint, Loader2, RefreshCw, WandSparkles } from 'lucide-react';
 
 import type { GeneratedUuid } from '@/lib/generate-random-uuids/generate';
@@ -14,32 +14,28 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { GeneratorModeFields } from '@/components/generate-random/shared/generator-mode-fields';
+import type {
+  CopyState,
+  GenerationMode,
+  StandardBulkCount,
+} from '@/components/generate-random/shared/generator-types';
 import { GenerateRandomUuidsResultCard } from './generate-random-uuids-result-card';
-
-type GenerationMode = 'single' | 'bulk';
-type BulkCount = '10' | '50' | '100' | '200';
 
 type RandomUuidFormProps = {
   reducedMotion: boolean | null;
   panelRef: React.RefObject<HTMLDivElement | null>;
   resultsRef: React.RefObject<HTMLDivElement | null>;
   mode: GenerationMode;
-  bulkCount: BulkCount;
+  bulkCount: StandardBulkCount;
   loading: boolean;
   values: GeneratedUuid[];
   formError: string | null;
   error: string | null;
-  copyState: 'idle' | 'copied' | 'failed';
-  bulkCountValues: BulkCount[];
+  copyState: CopyState;
+  bulkCountValues: StandardBulkCount[];
   onModeChange: (value: GenerationMode) => void;
-  onBulkCountChange: (value: BulkCount) => void;
+  onBulkCountChange: (value: StandardBulkCount) => void;
   onGenerate: () => void;
   onReset: () => void;
   onCopySingleJson: () => void;
@@ -98,83 +94,15 @@ export function RandomUuidForm({
           </CardHeader>
 
           <CardContent className={cn('space-y-6 px-4 pb-6 pt-0')}>
-            <LayoutGroup>
-              <motion.div
-                layout
-                transition={{
-                  type: 'spring',
-                  stiffness: 210,
-                  damping: 24,
-                  mass: 0.7,
-                }}
-                className={cn('relative flex flex-col gap-4 sm:flex-row sm:gap-5')}>
-                <motion.div
-                  layout
-                  transition={{
-                    type: 'spring',
-                    stiffness: 210,
-                    damping: 24,
-                    mass: 0.7,
-                  }}
-                  className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}>
-                  <label className={cn('text-sm font-medium text-foreground')}>
-                    Mode
-                  </label>
-                  <Select
-                    value={mode}
-                    onValueChange={value => onModeChange(value as GenerationMode)}
-                    disabled={loading}>
-                    <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
-                      <SelectValue placeholder='Select mode' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='single'>Single</SelectItem>
-                      <SelectItem value='bulk'>Bulk</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {formError ? (
-                    <p className={cn('text-sm text-destructive')}>{formError}</p>
-                  ) : null}
-                </motion.div>
-
-                <AnimatePresence initial={false} mode='popLayout'>
-                  {mode === 'bulk' ? (
-                    <motion.div
-                      key='bulk-count'
-                      layout
-                      className={cn('flex flex-col gap-2 sm:min-w-0 sm:flex-1')}
-                      initial={{ opacity: 0, y: 10, scale: 0.985 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.99 }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 210,
-                        damping: 24,
-                        mass: 0.7,
-                      }}>
-                      <label className={cn('text-sm font-medium text-foreground')}>
-                        Count
-                      </label>
-                      <Select
-                        value={bulkCount}
-                        onValueChange={value => onBulkCountChange(value as BulkCount)}
-                        disabled={loading}>
-                        <SelectTrigger className={cn('h-11 w-full sm:h-10')}>
-                          <SelectValue placeholder='Select count' />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {bulkCountValues.map(value => (
-                            <SelectItem key={value} value={value}>
-                              {value}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </motion.div>
-            </LayoutGroup>
+            <GeneratorModeFields
+              mode={mode}
+              bulkCount={bulkCount}
+              bulkCountValues={bulkCountValues}
+              loading={loading}
+              onModeChange={onModeChange}
+              onBulkCountChange={onBulkCountChange}
+              formError={formError}
+            />
 
             <div
               className={cn(

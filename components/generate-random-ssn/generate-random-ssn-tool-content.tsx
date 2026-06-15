@@ -18,14 +18,16 @@ import {
   SSN_BULK_COUNT_OPTIONS,
 } from '@/lib/schemas/ssn-schema';
 import { cn } from '@/lib/utils';
+import type {
+  CopyState,
+  GenerationMode,
+  StandardBulkCount,
+} from '@/components/generate-random/shared/generator-types';
 import { RandomSsnForm } from './random-ssn-form';
 
 type GenerateRandomSsnToolContentProps = {
   className?: string;
 };
-
-type GenerationMode = 'single' | 'bulk';
-type BulkCount = (typeof SSN_BULK_COUNT_OPTIONS)[number];
 
 const COPY_FEEDBACK_MS = 1500;
 
@@ -36,14 +38,12 @@ export function GenerateRandomSsnToolContent({
   const panelRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<GenerationMode>('single');
-  const [bulkCount, setBulkCount] = useState<BulkCount>('10');
+  const [bulkCount, setBulkCount] = useState<StandardBulkCount>('10');
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState<GeneratedFakeSsn[]>([]);
   const [formError, setFormError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>(
-    'idle',
-  );
+  const [copyState, setCopyState] = useState<CopyState>('idle');
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const resultKey = useMemo(() => {

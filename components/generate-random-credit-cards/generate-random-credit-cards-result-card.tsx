@@ -7,6 +7,10 @@ import type { GeneratedFakeCreditCard } from '@/lib/generate-random-credit-cards
 import { revealedPanelVariants } from '@/lib/motion-variants';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import type {
+  CopyState,
+  GenerationMode,
+} from '@/components/generate-random/shared/generator-types';
 import {
   Card,
   CardContent,
@@ -15,15 +19,13 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-type GenerationMode = 'single' | 'bulk';
-
 type Props = {
   mode: GenerationMode;
   cards: GeneratedFakeCreditCard[];
   reducedMotion: boolean | null;
   onCopySingleJson: () => void;
   onExportCsv: () => void;
-  copyState: 'idle' | 'copied' | 'failed';
+  copyState: CopyState;
   className?: string;
 };
 

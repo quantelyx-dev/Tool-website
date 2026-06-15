@@ -8,8 +8,10 @@ import { revealedPanelVariants } from '@/lib/motion-variants';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
-type GenerationMode = 'single' | 'bulk';
+import type {
+  CopyState,
+  GenerationMode,
+} from '@/components/generate-random/shared/generator-types';
 
 type Props = {
   mode: GenerationMode;
@@ -17,11 +19,11 @@ type Props = {
   reducedMotion: boolean | null;
   onCopySinglePassword: () => void;
   onExportCsv: () => void;
-  copyState: 'idle' | 'copied' | 'failed';
+  copyState: CopyState;
   className?: string;
 };
 
-function copyLabel(copyState: 'idle' | 'copied' | 'failed'): string {
+function copyLabel(copyState: CopyState): string {
   if (copyState === 'copied') {
     return 'Copied';
   }
@@ -49,7 +51,7 @@ function strengthClasses(score: number): string {
   return 'bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-300';
 }
 
-function CopyIcon({ state }: { state: 'idle' | 'copied' | 'failed' }) {
+function CopyIcon({ state }: { state: CopyState }) {
   if (state === 'copied') {
     return <Check className={cn('mr-2 size-4')} aria-hidden />;
   }
