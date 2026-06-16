@@ -26,6 +26,11 @@ export function Footer() {
               About
             </Link>
             <Link
+              href='/contact'
+              className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
+              Contact
+            </Link>
+            <Link
               href='/privacy-policy'
               className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
               Privacy Policy
