@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Fake SSN Generator — Random Social Security Numbers for Testing',
+  title: 'Fake SSN Generator — Random SSN for Testing',
   description:
     'Generate structurally valid fake U.S. Social Security Numbers for testing. All SSNs are fictional, follow IRS formatting rules, and safe for demos.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'test social security number',
   ],
   openGraph: {
-    title: `Fake SSN Generator — Random Social Security Numbers for Testing | ${siteDomain}`,
+    title: `Fake SSN Generator — Random SSN for Testing | ${siteDomain}`,
     description:
       'Generate structurally valid fake U.S. Social Security Numbers for development and testing. Fictional, safe for non-production use.',
     url: '/tools/generate-random-ssn',
   },
   twitter: {
-    title: `Fake SSN Generator — Random Social Security Numbers for Testing | ${siteDomain}`,
+    title: `Fake SSN Generator — Random SSN for Testing | ${siteDomain}`,
     description:
       'Generate structurally valid fake U.S. Social Security Numbers for development and testing.',
   },

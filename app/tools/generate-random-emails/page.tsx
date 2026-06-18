@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Random Email Generator — Bulk Fake Emails for Testing',
+  title: 'Random Email Generator — Fake Bulk Emails',
   description:
     'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases, staging environments, and UI mockups — free, no sign-up required.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'fake emails for testing',
   ],
   openGraph: {
-    title: `Random Email Generator — Bulk Fake Emails for Testing | ${siteDomain}`,
+    title: `Random Email Generator — Fake Bulk Emails | ${siteDomain}`,
     description:
       'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases, staging environments, and UI mockups.',
     url: '/tools/generate-random-emails',
   },
   twitter: {
-    title: `Random Email Generator — Bulk Fake Emails for Testing | ${siteDomain}`,
+    title: `Random Email Generator — Fake Bulk Emails | ${siteDomain}`,
     description:
       'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases and UI mockups.',
   },

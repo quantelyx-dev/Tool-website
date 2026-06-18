@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Indiana Child Support Calculator — Income Shares Estimator',
+  title: 'Indiana Child Support Calculator',
   description:
     "Estimate Indiana child support using the income shares model. Enter both parents' gross incomes and parenting time per child to get a preliminary support figure quickly.",
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'IN child support guidelines',
   ],
   openGraph: {
-    title: `Indiana Child Support Calculator — Income Shares Estimator | ${siteDomain}`,
+    title: `Indiana Child Support Calculator | ${siteDomain}`,
     description:
       "Estimate Indiana child support using the income shares model. Enter both parents' gross incomes and parenting time for a quick preliminary figure.",
     url: '/tools/indiana-child-support-calculator',
   },
   twitter: {
-    title: `Indiana Child Support Calculator — Income Shares Estimator | ${siteDomain}`,
+    title: `Indiana Child Support Calculator | ${siteDomain}`,
     description:
       "Estimate Indiana child support using the income shares model. Enter gross incomes and parenting time.",
   },

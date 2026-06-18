@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Fake Address Generator — Generate Fictional Mailing Addresses',
+  title: 'Fake Address Generator — Mailing Addresses',
   description:
     'Generate realistic fictional mailing addresses in single or bulk mode. Export as CSV to seed test databases, validate shipping forms, and build demo checkouts.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'test addresses for development',
   ],
   openGraph: {
-    title: `Fake Address Generator — Generate Fictional Mailing Addresses | ${siteDomain}`,
+    title: `Fake Address Generator — Mailing Addresses | ${siteDomain}`,
     description:
       'Generate realistic fictional mailing addresses in single or bulk mode. Export as CSV to seed databases and validate shipping forms.',
     url: '/tools/generate-random-addresses',
   },
   twitter: {
-    title: `Fake Address Generator — Generate Fictional Mailing Addresses | ${siteDomain}`,
+    title: `Fake Address Generator — Mailing Addresses | ${siteDomain}`,
     description:
       'Generate realistic fictional mailing addresses in bulk. Export as CSV for test databases and shipping forms.',
   },

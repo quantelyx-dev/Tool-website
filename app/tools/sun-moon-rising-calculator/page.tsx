@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Sun, Moon & Rising Sign Calculator — Find Your Big Three',
+  title: 'Sun, Moon & Rising Calculator — Big Three',
   description:
     "Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your complete astrological big three — free.",
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'birth chart calculator',
   ],
   openGraph: {
-    title: `Sun, Moon & Rising Sign Calculator — Find Your Big Three | ${siteDomain}`,
+    title: `Sun, Moon & Rising Calculator — Big Three | ${siteDomain}`,
     description:
       "Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your astrological big three.",
     url: '/tools/sun-moon-rising-calculator',
   },
   twitter: {
-    title: `Sun, Moon & Rising Sign Calculator — Find Your Big Three | ${siteDomain}`,
+    title: `Sun, Moon & Rising Calculator — Big Three | ${siteDomain}`,
     description:
       "Find your Sun sign, Moon sign, and Rising sign. Enter your birth details to reveal your astrological big three.",
   },
