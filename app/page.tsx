@@ -13,7 +13,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: `${siteDomain} — Free Online Tools & Calculators`,
   description:
-    'Discover free online tools for developers and everyday users. Generate fake data, calculate compound interest, explore astrology, and more — no sign-up, no ads, runs in your browser.',
+    'Discover free online tools for developers and everyday users. Generate fake data, calculate compound interest, explore astrology, and more — no sign-up, no ads.',
   keywords: [
     'free online tools',
     'developer utilities',

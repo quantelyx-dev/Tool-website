@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Fake Address Generator — Generate Fictional Mailing Addresses',
   description:
-    'Generate realistic fictional U.S. mailing addresses in single or bulk mode. Export batches as CSV to seed test databases, validate shipping forms, and build demo checkout flows.',
+    'Generate realistic fictional mailing addresses in single or bulk mode. Export as CSV to seed test databases, validate shipping forms, and build demo checkouts.',
   keywords: [
     'fake address generator',
     'random address generator',

@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = {
   title: 'Random credit card generator - Tools',
   description:
-    'Generate random fake credit card details by issuer in single or bulk mode.',
+    'Generate fake credit card numbers by issuer — Visa, Mastercard, Amex, and more — in single or bulk mode. Safe fictional data for testing and demos.',
 };
 
 export default function GenerateRandomCreditCardsPage() {

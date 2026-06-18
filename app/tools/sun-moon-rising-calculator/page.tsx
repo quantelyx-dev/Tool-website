@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Sun, Moon & Rising Sign Calculator — Find Your Big Three',
   description:
-    "Find your Sun sign, Moon sign, and Rising (Ascendant) sign instantly. Enter your birth date, time, and location to reveal your complete astrological big three — free, no sign-up needed.",
+    "Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your complete astrological big three — free.",
   keywords: [
     'sun moon rising calculator',
     'big three astrology calculator',

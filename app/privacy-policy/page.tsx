@@ -7,7 +7,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    `Read the ${siteDomain} Privacy Policy. All tool calculations run in your browser — we never store, sell, or share the data you enter. Your privacy is built into how we work.`,
+    `Read the ${siteDomain} Privacy Policy. Our tools run in your browser — we never store, sell, or share your data. Your privacy is our default.`,
   keywords: ['privacy policy', 'data privacy', 'toolcalcs privacy', 'no data collection'],
   openGraph: {
     title: `Privacy Policy | ${siteDomain}`,

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteDomain}`,
   },
   description:
-    'Free online tools and calculators for developers, designers, and everyday tasks. Generate test data, calculate finances, explore astrology — fast, private, and no sign-up needed.',
+    'Free online tools and calculators for developers and everyday tasks. Generate test data, calculate finances, and explore astrology — fast, private, no sign-up.',
   keywords: ['online tools', 'free calculators', 'developer tools', 'test data generator', 'toolcalcs'],
   openGraph: {
     siteName: siteDomain,

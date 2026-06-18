@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Random Username Generator — Bulk Fake Usernames for Testing',
   description:
-    'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases, populating staging environments, and building demo user lists — completely free.',
+    'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases, populating staging environments, and building demo user lists.',
   keywords: [
     'random username generator',
     'fake username generator',
