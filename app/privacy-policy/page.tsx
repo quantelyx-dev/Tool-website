@@ -2,11 +2,24 @@ import type { Metadata } from 'next';
 import { PrivacyPolicyContent } from '@/components/privacy-policy/privacy-policy-content';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { cn } from '@/lib/utils';
+import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — toolcalcs.net',
+  title: 'Privacy Policy',
   description:
-    'Learn how toolcalcs.net collects, uses, and protects your data. All tool calculations run entirely in your browser — we never store your inputs.',
+    `Read the ${siteDomain} Privacy Policy. All tool calculations run in your browser — we never store, sell, or share the data you enter. Your privacy is built into how we work.`,
+  keywords: ['privacy policy', 'data privacy', 'toolcalcs privacy', 'no data collection'],
+  openGraph: {
+    title: `Privacy Policy | ${siteDomain}`,
+    description:
+      'All tool calculations run in your browser — we never store, sell, or share the data you enter.',
+    url: '/privacy-policy',
+  },
+  twitter: {
+    title: `Privacy Policy | ${siteDomain}`,
+    description:
+      'All tool calculations run in your browser — we never store, sell, or share the data you enter.',
+  },
 };
 
 export default function PrivacyPolicyPage() {

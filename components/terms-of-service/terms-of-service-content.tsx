@@ -16,6 +16,7 @@ import {
   Mail,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { siteDomain } from "@/lib/site-config";
 
 function Section({
   icon: Icon,
@@ -69,16 +70,16 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
       <div className="mb-8 border-b border-border pb-4">
         <p className="mb-1 text-[22px] font-medium">Terms of service</p>
         <p className="m-0 text-[13px] text-muted-foreground">
-          toolcalcs.net · Last updated: June 2026
+          {siteDomain} · Last updated: June 2026
         </p>
       </div>
 
       <Section icon={Info} title="Agreement to terms">
         <p className="mb-3 text-muted-foreground">
-          By accessing or using toolcalcs.net, you agree to be bound by these
+          By accessing or using {siteDomain}, you agree to be bound by these
           Terms of Service. If you do not agree to these terms, please do not
-          use our website. These terms apply to all visitors and users of
-          toolcalcs.net.
+          use our website. These terms apply to all visitors and users of{' '}
+          {siteDomain}.
         </p>
       </Section>
 
@@ -86,7 +87,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
 
       <Section icon={Wrench} title="Use of our tools">
         <p className="mb-3 text-muted-foreground">
-          toolcalcs.net provides free online tools including calculators,
+          {siteDomain} provides free online tools including calculators,
           generators, and utilities. By using these tools, you agree to the
           following:
         </p>
@@ -143,7 +144,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
           </li>
         </ul>
         <InfoCard>
-          toolcalcs.net is not a law firm, financial advisor, or professional
+          {siteDomain} is not a law firm, financial advisor, or professional
           services provider. Nothing on this website constitutes legal,
           financial, or professional advice.
         </InfoCard>
@@ -174,9 +175,9 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
 
       <Section icon={Copyright} title="Intellectual property">
         <p className="mb-3 text-muted-foreground">
-          All content on toolcalcs.net — including but not limited to tool
-          designs, code, graphics, text, and layouts — is the property of
-          toolcalcs.net and is protected by applicable intellectual property
+          All content on {siteDomain} — including but not limited to tool
+          designs, code, graphics, text, and layouts — is the property of{' '}
+          {siteDomain} and is protected by applicable intellectual property
           laws.
         </p>
         <ul className="mb-3 list-disc pl-5 text-muted-foreground">
@@ -198,7 +199,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
 
       <Section icon={Megaphone} title="Advertising">
         <p className="mb-3 text-muted-foreground">
-          toolcalcs.net displays advertisements served by Google AdSense and
+          {siteDomain} displays advertisements served by Google AdSense and
           potentially other ad networks. By using our site:
         </p>
         <ul className="mb-3 list-disc pl-5 text-muted-foreground">
@@ -222,7 +223,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
       <Section icon={LinkIcon} title="Third-party links">
         <p className="mb-3 text-muted-foreground">
           Our website may contain links to third-party websites. These links are
-          provided for convenience only. toolcalcs.net has no control over the
+          provided for convenience only. {siteDomain} has no control over the
           content of those sites and accepts no responsibility for them or for
           any loss or damage that may arise from your use of them.
         </p>
@@ -232,7 +233,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
 
       <Section icon={Ban} title="Disclaimer of warranties">
         <p className="mb-3 text-muted-foreground">
-          toolcalcs.net is provided on an &quot;as is&quot; and &quot;as
+          {siteDomain} is provided on an &quot;as is&quot; and &quot;as
           available&quot; basis without any warranties of any kind, either
           express or implied, including but not limited to:
         </p>
@@ -254,7 +255,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
 
       <Section icon={ShieldOff} title="Limitation of liability">
         <p className="mb-3 text-muted-foreground">
-          To the fullest extent permitted by law, toolcalcs.net and its owners
+          To the fullest extent permitted by law, {siteDomain} and its owners
           shall not be liable for any direct, indirect, incidental, special, or
           consequential damages arising from:
         </p>
@@ -301,7 +302,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
         <p className="mb-3 text-muted-foreground">
           We reserve the right to update these Terms of Service at any time.
           Changes will be posted on this page with an updated date. Continued
-          use of toolcalcs.net after changes are posted constitutes your
+          use of {siteDomain} after changes are posted constitutes your
           acceptance of the revised terms.
         </p>
       </Section>
@@ -329,7 +330,7 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
             <Link href="mailto:quantelyx.ai@gmail.com" className={linkCn}>
               quantelyx.ai@gmail.com
             </Link>{" "}
-            or use the Contact page on toolcalcs.net
+            or use the Contact page on {siteDomain}
           </p>
         </div>
       </div>

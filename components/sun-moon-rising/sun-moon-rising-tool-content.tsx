@@ -55,13 +55,19 @@ export function SunMoonRisingToolContent({
               'mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground',
               'sm:text-lg',
             )}>
-            Enter your birth name, date, civil time (24-hour), and city. We
-            geocode with OpenStreetMap, resolve timezone with{' '}
-            <span className='font-medium text-foreground'>tz-lookup</span>, then
-            compute tropical positions with{' '}
-            <span className='font-medium text-foreground'>Luxon</span> and{' '}
-            <span className='font-medium text-foreground'>astronomia</span>.
-            Results animate in after a short calculation step.
+            Your{' '}
+            <span className='font-medium text-foreground'>Sun sign</span>{' '}
+            shapes your core identity and drive.{' '}
+            Your{' '}
+            <span className='font-medium text-foreground'>Moon sign</span>{' '}
+            governs your emotions and inner world. Your{' '}
+            <span className='font-medium text-foreground'>Rising sign</span>{' '}
+            (Ascendant) defines the first impression you make — and is unique
+            to the exact minute and place you were born. Together, these three
+            placements form your astrological{' '}
+            <span className='font-medium text-foreground'>Big Three</span>.
+            Enter your birth date, time, and city below to discover all three
+            instantly.
           </p>
         </motion.div>
       </motion.section>

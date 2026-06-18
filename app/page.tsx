@@ -8,11 +8,31 @@ import {
 } from '@/components/ui/accordion';
 import { faqs } from '@/lib/home-data';
 import type { Metadata } from 'next';
+import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Tools - Your All-in-One Utility Suite',
+  title: `${siteDomain} — Free Online Tools & Calculators`,
   description:
-    'Streamline your workflow with our curated collection of development, design, and productivity utilities. Fast, secure, and always at your fingertips.',
+    'Discover free online tools for developers and everyday users. Generate fake data, calculate compound interest, explore astrology, and more — no sign-up, no ads, runs in your browser.',
+  keywords: [
+    'free online tools',
+    'developer utilities',
+    'test data generator',
+    'online calculators',
+    'fake data generator',
+    'toolcalcs',
+  ],
+  openGraph: {
+    title: `${siteDomain} — Free Online Tools & Calculators`,
+    description:
+      'Free online tools for developers and everyday users. Generate test data, calculate finances, and more — no sign-up required.',
+    url: '/',
+  },
+  twitter: {
+    title: `${siteDomain} — Free Online Tools & Calculators`,
+    description:
+      'Free online tools for developers and everyday users. Generate test data, calculate finances, and more — no sign-up required.',
+  },
 };
 
 export default function Home() {
