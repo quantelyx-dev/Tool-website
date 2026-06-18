@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/tooltip';
 import { useToolsStore } from '@/lib/stores/tools-store';
 import { cn } from '@/lib/utils';
+import { trackSearch } from '@/lib/analytics';
 
 const SEARCH_DEBOUNCE_MS = 320;
 
@@ -23,6 +24,9 @@ export function SearchBar({ className }: { className?: string }) {
   useEffect(() => {
     const handle = window.setTimeout(() => {
       setDebouncedSearch(searchInput);
+      if (searchInput.trim().length >= 2) {
+        trackSearch(searchInput.trim());
+      }
     }, SEARCH_DEBOUNCE_MS);
     return () => window.clearTimeout(handle);
   }, [searchInput, setDebouncedSearch]);
