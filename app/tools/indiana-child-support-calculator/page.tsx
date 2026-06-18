@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Indiana Child Support Calculator — Income Shares Estimator',
   description:
-    "Estimate Indiana child support using the state's income shares model. Enter both parents' gross incomes and parenting time per child to get a preliminary support figure quickly.",
+    "Estimate Indiana child support using the income shares model. Enter both parents' gross incomes and parenting time per child to get a preliminary support figure quickly.",
   keywords: [
     'Indiana child support calculator',
     'Indiana child support estimator',

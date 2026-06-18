@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Random Email Generator — Bulk Fake Emails for Testing',
   description:
-    'Generate up to 1,000 realistic fake email addresses instantly. Perfect for populating test databases, staging environments, and UI mockups — free, no sign-up required.',
+    'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases, staging environments, and UI mockups — free, no sign-up required.',
   keywords: [
     'random email generator',
     'fake email generator',

@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Random Password Generator — Strong & Secure Passwords',
   description:
-    'Create strong, random passwords with customizable length and character sets. Every password is scored with zxcvbn strength analysis so you know exactly how secure it is before you use it.',
+    'Create strong, random passwords with customizable length and character sets. Every password is zxcvbn-scored so you know how secure it is before use.',
   keywords: [
     'random password generator',
     'strong password generator',

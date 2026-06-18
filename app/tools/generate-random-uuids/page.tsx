@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'UUIDv7 Generator — Generate Sortable UUIDs Online Free',
   description:
-    'Instantly generate time-ordered UUIDv7 identifiers in single or bulk mode. Better than UUIDv4 for database primary keys — chronologically sortable, globally unique, and copy-ready.',
+    'Generate time-ordered UUIDv7 identifiers in bulk. Chronologically sortable and globally unique — a better choice than UUIDv4 for database primary keys.',
   keywords: [
     'UUIDv7 generator',
     'UUID generator online',

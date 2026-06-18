@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Fake SSN Generator — Random Social Security Numbers for Testing',
   description:
-    'Generate structurally valid fake U.S. Social Security Numbers for app development and testing. All SSNs are fictional, follow IRS formatting rules, and are safe for non-production use.',
+    'Generate structurally valid fake U.S. Social Security Numbers for testing. All SSNs are fictional, follow IRS formatting rules, and safe for demos.',
   keywords: [
     'fake SSN generator',
     'random SSN generator',

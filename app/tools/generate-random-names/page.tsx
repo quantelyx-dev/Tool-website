@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Random Name Generator — First, Last & Full Names in Bulk',
   description:
-    'Generate realistic first names, last names, or full names in bulk. Perfect for seeding user databases, creating fictional personas, and building demo datasets — free and instant.',
+    'Generate realistic first names, last names, or full names in bulk. Ideal for seeding user databases, creating fictional personas, and building demo datasets.',
   keywords: [
     'random name generator',
     'fake name generator',

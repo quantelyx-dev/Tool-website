@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Daily Compound Interest Calculator — Visualize Investment Growth',
   description:
-    'Calculate your investment\'s future value with daily compounding. Factor in regular contributions, reinvestment, and multiple currencies to see exactly how your money grows over time.',
+    "Calculate your investment's future value with daily compounding. Factor in regular contributions and multiple currencies to see exactly how your money grows.",
   keywords: [
     'daily compound interest calculator',
     'compound interest calculator',

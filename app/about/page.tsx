@@ -7,7 +7,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    `Learn the story behind ${siteDomain} — a free, privacy-first suite of online tools built for developers, designers, and curious minds. No ads, no sign-up, just useful tools.`,
+    `Learn the story behind ${siteDomain} — a free, privacy-first toolkit for developers and curious minds. No ads, no tracking, no sign-up required.`,
   keywords: ['about toolcalcs', 'free online tools', 'developer utilities', 'privacy-first tools'],
   openGraph: {
     title: `About Us | ${siteDomain}`,

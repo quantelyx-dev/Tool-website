@@ -10,7 +10,7 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Random Phone Number Generator — Fake Numbers by Country',
   description:
-    'Generate properly formatted fake phone numbers for 50+ countries. Uses libphonenumber to produce structurally valid numbers safe for UI testing, form validation, and demo data.',
+    'Generate fake phone numbers for 50+ countries. Uses libphonenumber to produce structurally valid numbers safe for UI testing, form validation, and demos.',
   keywords: [
     'random phone number generator',
     'fake phone number generator',
