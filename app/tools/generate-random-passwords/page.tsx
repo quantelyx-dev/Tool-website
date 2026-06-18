@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Random Password Generator — Strong & Secure Passwords',
+  title: 'Random Password Generator — Strong Passwords',
   description:
     'Create strong, random passwords with customizable length and character sets. Every password is zxcvbn-scored so you know how secure it is before use.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'free password generator',
   ],
   openGraph: {
-    title: `Random Password Generator — Strong & Secure Passwords | ${siteDomain}`,
+    title: `Random Password Generator — Strong Passwords | ${siteDomain}`,
     description:
       'Create strong, random passwords with customizable length and character sets. Every password is scored with zxcvbn strength analysis.',
     url: '/tools/generate-random-passwords',
   },
   twitter: {
-    title: `Random Password Generator — Strong & Secure Passwords | ${siteDomain}`,
+    title: `Random Password Generator — Strong Passwords | ${siteDomain}`,
     description:
       'Create strong, random passwords with customizable length and character sets. Strength scored with zxcvbn.',
   },

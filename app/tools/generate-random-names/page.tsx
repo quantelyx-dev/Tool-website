@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Random Name Generator — First, Last & Full Names in Bulk',
+  title: 'Random Name Generator — First & Last Names',
   description:
     'Generate realistic first names, last names, or full names in bulk. Ideal for seeding user databases, creating fictional personas, and building demo datasets.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'first and last name generator',
   ],
   openGraph: {
-    title: `Random Name Generator — First, Last & Full Names in Bulk | ${siteDomain}`,
+    title: `Random Name Generator — First & Last Names | ${siteDomain}`,
     description:
       'Generate realistic first names, last names, or full names in bulk. Perfect for seeding user databases and creating fictional personas.',
     url: '/tools/generate-random-names',
   },
   twitter: {
-    title: `Random Name Generator — First, Last & Full Names in Bulk | ${siteDomain}`,
+    title: `Random Name Generator — First & Last Names | ${siteDomain}`,
     description:
       'Generate realistic first names, last names, or full names in bulk. Free and instant.',
   },

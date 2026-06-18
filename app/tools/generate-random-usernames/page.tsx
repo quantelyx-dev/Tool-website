@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Random Username Generator — Bulk Fake Usernames for Testing',
+  title: 'Random Username Generator — Fake Usernames',
   description:
     'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases, populating staging environments, and building demo user lists.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'dummy usernames',
   ],
   openGraph: {
-    title: `Random Username Generator — Bulk Fake Usernames for Testing | ${siteDomain}`,
+    title: `Random Username Generator — Fake Usernames | ${siteDomain}`,
     description:
       'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases and building demo user lists.',
     url: '/tools/generate-random-usernames',
   },
   twitter: {
-    title: `Random Username Generator — Bulk Fake Usernames for Testing | ${siteDomain}`,
+    title: `Random Username Generator — Fake Usernames | ${siteDomain}`,
     description:
       'Generate hundreds of realistic, unique usernames in seconds. Ideal for test databases and demo user lists.',
   },

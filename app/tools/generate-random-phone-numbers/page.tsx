@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Random Phone Number Generator — Fake Numbers by Country',
+  title: 'Random Phone Number Generator by Country',
   description:
     'Generate fake phone numbers for 50+ countries. Uses libphonenumber to produce structurally valid numbers safe for UI testing, form validation, and demos.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'test phone numbers',
   ],
   openGraph: {
-    title: `Random Phone Number Generator — Fake Numbers by Country | ${siteDomain}`,
+    title: `Random Phone Number Generator by Country | ${siteDomain}`,
     description:
       'Generate properly formatted fake phone numbers for 50+ countries. Structurally valid numbers safe for UI testing and demo data.',
     url: '/tools/generate-random-phone-numbers',
   },
   twitter: {
-    title: `Random Phone Number Generator — Fake Numbers by Country | ${siteDomain}`,
+    title: `Random Phone Number Generator by Country | ${siteDomain}`,
     description:
       'Generate properly formatted fake phone numbers for 50+ countries. Safe for testing and demos.',
   },

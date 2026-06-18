@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'UUIDv7 Generator — Generate Sortable UUIDs Online Free',
+  title: 'UUIDv7 Generator — Sortable UUIDs Online',
   description:
     'Generate time-ordered UUIDv7 identifiers in bulk. Chronologically sortable and globally unique — a better choice than UUIDv4 for database primary keys.',
   keywords: [
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'bulk UUID generator',
   ],
   openGraph: {
-    title: `UUIDv7 Generator — Generate Sortable UUIDs Online Free | ${siteDomain}`,
+    title: `UUIDv7 Generator — Sortable UUIDs Online | ${siteDomain}`,
     description:
       'Generate time-ordered UUIDv7 identifiers in bulk. Chronologically sortable, globally unique, and better than UUIDv4 for database keys.',
     url: '/tools/generate-random-uuids',
   },
   twitter: {
-    title: `UUIDv7 Generator — Generate Sortable UUIDs Online Free | ${siteDomain}`,
+    title: `UUIDv7 Generator — Sortable UUIDs Online | ${siteDomain}`,
     description:
       'Generate time-ordered UUIDv7 identifiers. Sortable, unique, and better than UUIDv4 for database primary keys.',
   },
