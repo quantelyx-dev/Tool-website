@@ -1,48 +1,49 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
-import { toast } from 'sonner';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { toast } from "sonner";
 
-import { DailyCompoundCalculatorFields } from '@/components/daily-compound-interest/daily-compound-calculator-fields';
-import { DailyCompoundExportCard } from '@/components/daily-compound-interest/daily-compound-export-card';
-import { DailyCompoundGrowthChart } from '@/components/daily-compound-interest/daily-compound-growth-chart';
-import { DailyCompoundResultsCard } from '@/components/daily-compound-interest/daily-compound-results-card';
+import { DailyCompoundCalculatorFields } from "@/components/daily-compound-interest/daily-compound-calculator-fields";
+import { DailyCompoundExportCard } from "@/components/daily-compound-interest/daily-compound-export-card";
+import { DailyCompoundGrowthChart } from "@/components/daily-compound-interest/daily-compound-growth-chart";
+import { DailyCompoundResultsCard } from "@/components/daily-compound-interest/daily-compound-results-card";
 import {
   submitDailyCompoundCalculation,
   type DailyCompoundCalculationFailureBody,
   type DailyCompoundSavedRun,
-} from '@/lib/daily-compound-interest/api';
-import { growthChartMotionProps } from '@/lib/daily-compound-interest/calculator-motion';
-import { DAILY_COMPOUND_EMPTY_VALUES } from '@/lib/daily-compound-interest/form-defaults';
+} from "@/lib/daily-compound-interest/api";
+import { growthChartMotionProps } from "@/lib/daily-compound-interest/calculator-motion";
+import { DAILY_COMPOUND_EMPTY_VALUES } from "@/lib/daily-compound-interest/form-defaults";
 import {
   exchangeRateQuoteForTarget,
   useExchangeRatesSnippet,
-} from '@/lib/daily-compound-interest/use-exchange-rates-snippet';
-import { ApiError } from '@/lib/http';
+} from "@/lib/daily-compound-interest/use-exchange-rates-snippet";
+import { ApiError } from "@/lib/http";
 import {
   dailyCompoundCalculatorFormSchema,
   type DailyCompoundFormValues,
-} from '@/lib/schemas/daily-compound-schema';
-import { cn } from '@/lib/utils';
+} from "@/lib/schemas/daily-compound-schema";
+import { cn } from "@/lib/utils";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 type DailyCompoundCalculatorFormProps = {
   className?: string;
 };
 
 const FORM_FIELD_KEYS = [
-  'principal',
-  'currency',
-  'annualRatePercent',
-  'rateBasis',
-  'timelineYears',
-  'timelineMonths',
-  'timelineExtraDays',
-  'contributionAmount',
-  'contributionFrequency',
-  'reinvestInterest',
+  "principal",
+  "currency",
+  "annualRatePercent",
+  "rateBasis",
+  "timelineYears",
+  "timelineMonths",
+  "timelineExtraDays",
+  "contributionAmount",
+  "contributionFrequency",
+  "reinvestInterest",
 ] as const satisfies readonly (keyof DailyCompoundFormValues)[];
 
 const PRINCIPAL_FOCUS_AFTER_SCROLL_MS = 420;
@@ -51,6 +52,7 @@ export function DailyCompoundCalculatorForm({
   className,
 }: DailyCompoundCalculatorFormProps) {
   const reducedMotion = useReducedMotion();
+  const { onUse, onResult, onReset } = useAnalytics("daily-compound-interest");
   const abortRef = useRef<AbortController | null>(null);
   const principalAnchorRef = useRef<HTMLDivElement>(null);
   const scrollPrincipalAfterGrowthExitRef = useRef(false);
@@ -61,12 +63,12 @@ export function DailyCompoundCalculatorForm({
   const form = useForm<DailyCompoundFormValues>({
     resolver: zodResolver(dailyCompoundCalculatorFormSchema),
     defaultValues: DAILY_COMPOUND_EMPTY_VALUES,
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const isSubmitting = form.formState.isSubmitting;
 
-  const currency = useWatch({ control: form.control, name: 'currency' });
+  const currency = useWatch({ control: form.control, name: "currency" });
   const fxSnapshot = useExchangeRatesSnippet();
   const fxRow = useMemo(
     () => exchangeRateQuoteForTarget(fxSnapshot, currency),
@@ -85,8 +87,8 @@ export function DailyCompoundCalculatorForm({
       requestAnimationFrame(() => {
         if (scrollPrincipalTokenRef.current !== token) return;
         anchor?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
+          behavior: "smooth",
+          block: "start",
         });
 
         window.setTimeout(() => {
@@ -107,6 +109,7 @@ export function DailyCompoundCalculatorForm({
   }, [scrollPrincipalSmooth]);
 
   const handleReset = useCallback(() => {
+    onReset();
     abortRef.current?.abort();
     abortRef.current = null;
 
@@ -123,10 +126,14 @@ export function DailyCompoundCalculatorForm({
       scrollPrincipalAfterGrowthExitRef.current = false;
       scrollPrincipalSmooth();
     }
-  }, [form, savedRun, scrollPrincipalSmooth]);
+  }, [form, savedRun, scrollPrincipalSmooth, onReset]);
 
   const handleCalculate = useCallback(
     async (values: DailyCompoundFormValues) => {
+      onUse({
+        currency: values.currency,
+        timeline_years: values.timelineYears,
+      });
       abortRef.current?.abort();
       const controller = new AbortController();
       abortRef.current = controller;
@@ -138,13 +145,14 @@ export function DailyCompoundCalculatorForm({
           signal: controller.signal,
         });
         setSavedRun({ inputs: values, result });
-        toast.success('Projection ready', {
+        onResult({ simulation_days: result.projection.simulationDays });
+        toast.success("Projection ready", {
           description: `${result.projection.simulationDays.toLocaleString()} simulated days.`,
         });
       } catch (err) {
         const aborted =
           (err instanceof DOMException || err instanceof Error) &&
-          err.name === 'AbortError';
+          err.name === "AbortError";
         if (aborted) return;
 
         if (err instanceof ApiError) {
@@ -161,27 +169,27 @@ export function DailyCompoundCalculatorForm({
             }
           }
 
-          toast.error(body?.error ?? 'Could not run projection.', {
+          toast.error(body?.error ?? "Could not run projection.", {
             description: mappedField
-              ? 'Please review the highlighted fields.'
+              ? "Please review the highlighted fields."
               : undefined,
           });
           return;
         }
 
-        toast.error('Something went wrong', {
-          description: 'Try again in a moment.',
+        toast.error("Something went wrong", {
+          description: "Try again in a moment.",
         });
       }
     },
-    [form],
+    [form, onUse, onResult],
   );
 
   const growthMotion = growthChartMotionProps(reducedMotion);
 
   return (
-    <div className={cn('flex w-full flex-col gap-8', className)}>
-      <div className='flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:gap-10'>
+    <div className={cn("flex w-full flex-col gap-8", className)}>
+      <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
         <DailyCompoundCalculatorFields
           principalAnchorRef={principalAnchorRef}
           form={form}
@@ -191,7 +199,7 @@ export function DailyCompoundCalculatorForm({
           fxSnippet={fxRow}
         />
 
-        <aside className='w-full shrink-0 space-y-6 lg:sticky lg:top-24 lg:max-w-[22rem]'>
+        <aside className="w-full shrink-0 space-y-6 lg:sticky lg:top-24 lg:max-w-88">
           <DailyCompoundResultsCard
             isSubmitting={isSubmitting}
             currency={savedRun?.result.currency}
@@ -201,9 +209,12 @@ export function DailyCompoundCalculatorForm({
         </aside>
       </div>
 
-      <AnimatePresence mode='wait' onExitComplete={handleGrowthChartExitComplete}>
+      <AnimatePresence
+        mode="wait"
+        onExitComplete={handleGrowthChartExitComplete}
+      >
         {savedRun ? (
-          <motion.div key='daily-compound-growth-chart' {...growthMotion}>
+          <motion.div key="daily-compound-growth-chart" {...growthMotion}>
             <DailyCompoundGrowthChart
               currency={savedRun.result.currency}
               monthlySeries={savedRun.result.monthlySeries}
