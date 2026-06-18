@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/navbar';
@@ -7,6 +8,8 @@ import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { siteUrl, siteDomain } from '@/lib/site-config';
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -68,6 +71,7 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
       </body>
+      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }

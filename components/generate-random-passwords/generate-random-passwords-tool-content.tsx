@@ -1,27 +1,28 @@
-'use client';
-import { motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useRef, useState } from 'react';
+"use client";
+import { motion, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   generatePassword,
   generatePasswords,
   type GeneratedPassword,
-} from '@/lib/generate-random-passwords/generate';
-import { exportPasswordsToCsv } from '@/lib/generate-random-passwords/export-csv';
+} from "@/lib/generate-random-passwords/generate";
+import { exportPasswordsToCsv } from "@/lib/generate-random-passwords/export-csv";
 import {
   fadeUpVariants,
   staggerContainerVariants,
-} from '@/lib/motion-variants';
+} from "@/lib/motion-variants";
 import {
   passwordFormSchema,
   PASSWORD_BULK_COUNT_OPTIONS,
-} from '@/lib/schemas/password-schema';
+} from "@/lib/schemas/password-schema";
 import type {
   CopyState,
   GenerationMode,
   PasswordBulkCount,
-} from '@/components/generate-random/shared/generator-types';
-import { cn } from '@/lib/utils';
-import { RandomPasswordForm } from './random-password-form';
+} from "@/components/generate-random/shared/generator-types";
+import { cn } from "@/lib/utils";
+import { useAnalytics } from "@/hooks/use-analytics";
+import { RandomPasswordForm } from "./random-password-form";
 type GenerateRandomPasswordsToolContentProps = {
   className?: string;
 };
@@ -30,10 +31,12 @@ export function GenerateRandomPasswordsToolContent({
   className,
 }: GenerateRandomPasswordsToolContentProps) {
   const reducedMotion = useReducedMotion();
+  const { onUse, onResult, onCopy, onDownload, onReset } =
+    useAnalytics("random-passwords");
   const panelRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
-  const [mode, setMode] = useState<GenerationMode>('single');
-  const [bulkCount, setBulkCount] = useState<PasswordBulkCount>('10');
+  const [mode, setMode] = useState<GenerationMode>("single");
+  const [bulkCount, setBulkCount] = useState<PasswordBulkCount>("10");
   const [length, setLength] = useState(16);
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
@@ -43,7 +46,7 @@ export function GenerateRandomPasswordsToolContent({
   const [values, setValues] = useState<GeneratedPassword[]>([]);
   const [formError, setFormError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [copyState, setCopyState] = useState<CopyState>('idle');
+  const [copyState, setCopyState] = useState<CopyState>("idle");
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const clearCopyFeedbackTimer = useCallback(() => {
     if (copyResetRef.current !== null) {
@@ -55,8 +58,9 @@ export function GenerateRandomPasswordsToolContent({
     return clearCopyFeedbackTimer;
   }, [clearCopyFeedbackTimer]);
   const reset = useCallback(() => {
-    setMode('single');
-    setBulkCount('10');
+    onReset();
+    setMode("single");
+    setBulkCount("10");
     setLength(16);
     setIncludeUppercase(true);
     setIncludeLowercase(true);
@@ -66,23 +70,24 @@ export function GenerateRandomPasswordsToolContent({
     setFormError(null);
     setError(null);
     clearCopyFeedbackTimer();
-    setCopyState('idle');
+    setCopyState("idle");
     setLoading(false);
     requestAnimationFrame(() => {
       panelRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+        behavior: "smooth",
+        block: "start",
       });
     });
-  }, [clearCopyFeedbackTimer]);
+  }, [clearCopyFeedbackTimer, onReset]);
   const handleGenerate = useCallback(async () => {
+    onUse({ mode, length });
     setFormError(null);
     setError(null);
     clearCopyFeedbackTimer();
-    setCopyState('idle');
+    setCopyState("idle");
     const parsed = passwordFormSchema.safeParse({
       mode,
-      bulkCount: mode === 'bulk' ? bulkCount : undefined,
+      bulkCount: mode === "bulk" ? bulkCount : undefined,
       length,
       includeUppercase,
       includeLowercase,
@@ -91,13 +96,13 @@ export function GenerateRandomPasswordsToolContent({
     });
     if (!parsed.success) {
       const issue = parsed.error.issues[0];
-      setFormError(issue?.message ?? 'Please complete all required fields.');
+      setFormError(issue?.message ?? "Please complete all required fields.");
       return;
     }
     setLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 300));
-      if (parsed.data.mode === 'single') {
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      if (parsed.data.mode === "single") {
         setValues([
           generatePassword({
             length: parsed.data.length,
@@ -108,7 +113,7 @@ export function GenerateRandomPasswordsToolContent({
           }),
         ]);
       } else {
-        const count = Number.parseInt(parsed.data.bulkCount ?? '10', 10);
+        const count = Number.parseInt(parsed.data.bulkCount ?? "10", 10);
         setValues(
           generatePasswords(count, {
             length: parsed.data.length,
@@ -119,15 +124,22 @@ export function GenerateRandomPasswordsToolContent({
           }),
         );
       }
+      onResult({
+        mode,
+        count:
+          mode === "single"
+            ? 1
+            : Number.parseInt(parsed.data.bulkCount ?? "10", 10),
+      });
       requestAnimationFrame(() => {
         resultsRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
+          behavior: "smooth",
+          block: "start",
         });
       });
     } catch (err: unknown) {
       setError(
-        err instanceof Error ? err.message : 'Failed to generate passwords.',
+        err instanceof Error ? err.message : "Failed to generate passwords.",
       );
     } finally {
       setLoading(false);
@@ -141,68 +153,77 @@ export function GenerateRandomPasswordsToolContent({
     includeNumbers,
     includeSymbols,
     clearCopyFeedbackTimer,
+    onUse,
+    onResult,
   ]);
   const handleCopySinglePassword = useCallback(() => {
     if (values.length !== 1) {
       return;
     }
+    onCopy("password");
     clearCopyFeedbackTimer();
     try {
-      navigator.clipboard.writeText(values[0]?.password ?? '');
-      setCopyState('copied');
+      navigator.clipboard.writeText(values[0]?.password ?? "");
+      setCopyState("copied");
     } catch {
-      setCopyState('failed');
+      setCopyState("failed");
     }
     copyResetRef.current = setTimeout(() => {
-      setCopyState('idle');
+      setCopyState("idle");
       copyResetRef.current = null;
     }, COPY_FEEDBACK_MS);
-  }, [values, clearCopyFeedbackTimer]);
+  }, [values, clearCopyFeedbackTimer, onCopy]);
   const handleExportCsv = useCallback(() => {
     if (values.length === 0) {
       return;
     }
+    onDownload("csv");
     exportPasswordsToCsv(values);
-  }, [values]);
+  }, [values, onDownload]);
   return (
-    <div className={cn('flex flex-col', className)}>
+    <div className={cn("flex flex-col", className)}>
       <motion.section
-        className={cn('flex flex-col')}
-        initial='hidden'
-        animate='visible'
-        variants={staggerContainerVariants(reducedMotion, 0.1)}>
+        className={cn("flex flex-col")}
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainerVariants(reducedMotion, 0.1)}
+      >
         <motion.header
           className={cn(
-            'relative mx-auto max-w-3xl px-3 pt-2 text-center sm:px-4 sm:pt-4',
+            "relative mx-auto max-w-3xl px-3 pt-2 text-center sm:px-4 sm:pt-4",
           )}
-          variants={fadeUpVariants(reducedMotion)}>
+          variants={fadeUpVariants(reducedMotion)}
+        >
           <div
             aria-hidden
             className={cn(
-              'pointer-events-none absolute inset-0 -z-10 mx-auto max-w-xl overflow-hidden rounded-3xl',
-              'bg-[radial-gradient(ellipse_72%_56%_at_50%_-30%,rgba(217,119,6,0.16),transparent)]',
-              'dark:bg-[radial-gradient(ellipse_72%_56%_at_50%_-30%,rgba(251,191,36,0.15),transparent)]',
+              "pointer-events-none absolute inset-0 -z-10 mx-auto max-w-xl overflow-hidden rounded-3xl",
+              "bg-[radial-gradient(ellipse_72%_56%_at_50%_-30%,rgba(217,119,6,0.16),transparent)]",
+              "dark:bg-[radial-gradient(ellipse_72%_56%_at_50%_-30%,rgba(251,191,36,0.15),transparent)]",
             )}
           />
           <p
             className={cn(
-              'mb-3 text-xs font-semibold uppercase tracking-[0.2em]',
-              'text-amber-700 dark:text-amber-400 sm:text-sm',
-            )}>
+              "mb-3 text-xs font-semibold uppercase tracking-[0.2em]",
+              "text-amber-700 dark:text-amber-400 sm:text-sm",
+            )}
+          >
             Security utilities
           </p>
           <h1
             className={cn(
-              'font-heading text-balance text-3xl font-semibold tracking-tight text-foreground',
-              'sm:text-4xl lg:text-[2.25rem]',
-            )}>
+              "font-heading text-balance text-3xl font-semibold tracking-tight text-foreground",
+              "sm:text-4xl lg:text-[2.25rem]",
+            )}
+          >
             Random password generator
           </h1>
           <p
             className={cn(
-              'mx-auto mt-5 max-w-2xl px-1 text-pretty text-base leading-relaxed text-muted-foreground',
-              'sm:mt-6 sm:px-0 sm:text-lg',
-            )}>
+              "mx-auto mt-5 max-w-2xl px-1 text-pretty text-base leading-relaxed text-muted-foreground",
+              "sm:mt-6 sm:px-0 sm:text-lg",
+            )}
+          >
             Generate random passwords with configurable length and character
             sets, then estimate strength with zxcvbn.
           </p>
