@@ -2,11 +2,24 @@ import type { Metadata } from 'next';
 import { AboutContent } from '@/components/about/about-content';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { cn } from '@/lib/utils';
+import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'About — Tools',
+  title: 'About Us',
   description:
-    'Learn about Tools: an all-in-one web suite for developer, design, and productivity utilities—fast, accessible, and privacy-minded.',
+    `Learn the story behind ${siteDomain} — a free, privacy-first suite of online tools built for developers, designers, and curious minds. No ads, no sign-up, just useful tools.`,
+  keywords: ['about toolcalcs', 'free online tools', 'developer utilities', 'privacy-first tools'],
+  openGraph: {
+    title: `About Us | ${siteDomain}`,
+    description:
+      `Learn the story behind ${siteDomain} — a free, privacy-first suite of online tools built for developers, designers, and curious minds.`,
+    url: '/about',
+  },
+  twitter: {
+    title: `About Us | ${siteDomain}`,
+    description:
+      `Learn the story behind ${siteDomain} — a free, privacy-first suite of online tools built for developers, designers, and curious minds.`,
+  },
 };
 
 export default function AboutPage() {

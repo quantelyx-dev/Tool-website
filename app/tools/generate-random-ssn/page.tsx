@@ -2,20 +2,44 @@ import type { Metadata } from 'next';
 
 import { GenerateRandomSsnToolContent } from '@/components/generate-random-ssn/generate-random-ssn-tool-content';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
+import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ssnFaqs } from '@/lib/tool-faqs';
 import { cn } from '@/lib/utils';
+import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Random SSN generator - Tools',
+  title: 'Fake SSN Generator — Random Social Security Numbers for Testing',
   description:
-    'Generate random fake SSNs in single or bulk mode for fixtures and demos.',
+    'Generate structurally valid fake U.S. Social Security Numbers for app development and testing. All SSNs are fictional, follow IRS formatting rules, and are safe for non-production use.',
+  keywords: [
+    'fake SSN generator',
+    'random SSN generator',
+    'fake social security number',
+    'SSN for testing',
+    'dummy SSN generator',
+    'test social security number',
+  ],
+  openGraph: {
+    title: `Fake SSN Generator — Random Social Security Numbers for Testing | ${siteDomain}`,
+    description:
+      'Generate structurally valid fake U.S. Social Security Numbers for development and testing. Fictional, safe for non-production use.',
+    url: '/tools/generate-random-ssn',
+  },
+  twitter: {
+    title: `Fake SSN Generator — Random Social Security Numbers for Testing | ${siteDomain}`,
+    description:
+      'Generate structurally valid fake U.S. Social Security Numbers for development and testing.',
+  },
 };
+
 
 export default function GenerateRandomSsnPage() {
   return (
     <main className={cn('flex-1')}>
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
-        <PageBreadcrumb items={[{ label: 'Random SSN' }]} />
+        <PageBreadcrumb items={[{ label: 'Fake SSN generator' }]} />
         <GenerateRandomSsnToolContent />
+        <ToolFaqSection faqs={ssnFaqs} />
       </div>
     </main>
   );

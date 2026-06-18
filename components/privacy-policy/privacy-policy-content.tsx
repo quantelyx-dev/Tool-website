@@ -13,6 +13,7 @@ import {
   Mail,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { siteDomain } from "@/lib/site-config";
 
 function Section({
   icon: Icon,
@@ -55,13 +56,13 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
       <div className="mb-8 border-b border-border pb-4">
         <p className="mb-1 text-[22px] font-medium">Privacy policy</p>
         <p className="m-0 text-[13px] text-muted-foreground">
-          toolcalcs.net · Last updated: June 2026
+          {siteDomain} · Last updated: June 2026
         </p>
       </div>
 
       <Section icon={Info} title="Overview">
         <p className="mb-3 text-muted-foreground">
-          Welcome to toolcalcs.net. We are committed to protecting your privacy.
+          Welcome to {siteDomain}. We are committed to protecting your privacy.
           This Privacy Policy explains how we collect, use, and safeguard your
           information when you visit our website. By using our site, you agree
           to the terms described below.
@@ -100,7 +101,7 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
 
       <Section icon={Wrench} title="How our tools work">
         <p className="mb-3 text-muted-foreground">
-          All calculations, generations, and exports performed on toolcalcs.net
+          All calculations, generations, and exports performed on {siteDomain}
           happen entirely in your browser. We do not store, transmit, or log any
           data you enter into our tools including:
         </p>
@@ -229,7 +230,7 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
 
       <Section icon={Users} title="Children's privacy">
         <p className="mb-3 text-muted-foreground">
-          toolcalcs.net is not directed at children under the age of 13. We do
+          {siteDomain} is not directed at children under the age of 13. We do
           not knowingly collect personal information from children. If you
           believe a child has provided us with personal information, please
           contact us immediately.
@@ -280,7 +281,7 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
             <Link href="mailto:quantelyx.ai@gmail.com" className={linkCn}>
               quantelyx.ai@gmail.com
             </Link>{" "}
-            or use the Contact page on toolcalcs.net
+            or use the Contact page on {siteDomain}
           </p>
         </div>
       </div>

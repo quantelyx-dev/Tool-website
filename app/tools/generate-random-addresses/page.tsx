@@ -2,20 +2,44 @@ import type { Metadata } from 'next';
 
 import { GenerateRandomAddressesToolContent } from '@/components/generate-random-addresses/generate-random-addresses-tool-content';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
+import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { addressFaqs } from '@/lib/tool-faqs';
 import { cn } from '@/lib/utils';
+import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Address Generator - Generate Fictional Addresses - Tools',
+  title: 'Fake Address Generator — Generate Fictional Mailing Addresses',
   description:
-    'Generate fictional mailing addresses in single or bulk mode for fixtures and demos.',
+    'Generate realistic fictional U.S. mailing addresses in single or bulk mode. Export batches as CSV to seed test databases, validate shipping forms, and build demo checkout flows.',
+  keywords: [
+    'fake address generator',
+    'random address generator',
+    'fictional address generator',
+    'fake mailing address',
+    'dummy address generator',
+    'test addresses for development',
+  ],
+  openGraph: {
+    title: `Fake Address Generator — Generate Fictional Mailing Addresses | ${siteDomain}`,
+    description:
+      'Generate realistic fictional mailing addresses in single or bulk mode. Export as CSV to seed databases and validate shipping forms.',
+    url: '/tools/generate-random-addresses',
+  },
+  twitter: {
+    title: `Fake Address Generator — Generate Fictional Mailing Addresses | ${siteDomain}`,
+    description:
+      'Generate realistic fictional mailing addresses in bulk. Export as CSV for test databases and shipping forms.',
+  },
 };
+
 
 export default function GenerateRandomAddressesPage() {
   return (
     <main className={cn('flex-1')}>
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
-        <PageBreadcrumb items={[{ label: 'Address Generator' }]} />
+        <PageBreadcrumb items={[{ label: 'Fake address generator' }]} />
         <GenerateRandomAddressesToolContent />
+        <ToolFaqSection faqs={addressFaqs} />
       </div>
     </main>
   );
