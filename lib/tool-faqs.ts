@@ -250,3 +250,30 @@ export const sunMoonRisingFaqs = [
     a: "If you don't know your exact birth time, you can still find your Sun sign (accurate for anyone born on that date) and your Moon sign (accurate if you were born early or late in the day, since it changes every ~2.5 days). For the Rising sign, try searching your birth certificate, hospital records, or asking a family member. Without a birth time, it's conventional to use solar charts — which set the Rising sign equal to the Sun sign — as a rough approximation.",
   },
 ];
+
+export const cronExpressionFaqs = [
+  {
+    q: "What is a cron expression?",
+    a: "A cron expression is a compact string that defines when a scheduled job should run. It uses five or six space-separated fields representing time units — such as minute, hour, day of month, month, and day of week. Cron is used by Linux crontab, GitHub Actions, Kubernetes CronJobs, AWS EventBridge, and many other schedulers to automate recurring tasks like backups, reports, and data syncs.",
+  },
+  {
+    q: "What is the difference between 5-field and 6-field cron?",
+    a: "Standard Unix cron uses five fields: minute, hour, day of month, month, and day of week. Some systems — including Node.js cron libraries, Spring, and Quartz-style schedulers — add a sixth seconds field at the beginning. A 5-field expression like `0 9 * * *` runs daily at 9:00 AM. The 6-field equivalent `0 0 9 * * *` means the same schedule with an explicit seconds value of 0. Always check which format your target system expects.",
+  },
+  {
+    q: "What do *, */5, and ranges mean in cron?",
+    a: "The asterisk (*) means every value in that field — for example, * in the hour field means every hour. A step expression like */5 in the minute field means every 5 minutes (0, 5, 10, 15…). A range like 9-17 in the hour field means from 9 through 17 inclusive. You can also combine specific values with commas, such as 1,15 in the day-of-month field to run on the 1st and 15th.",
+  },
+  {
+    q: "Which timezone are the next run times shown in?",
+    a: "Next run times are calculated in the timezone you select in the form — defaulting to your browser's local timezone when available. Cron expressions themselves do not include timezone information; the scheduler that runs the job interprets the expression in its configured timezone. When deploying to production, always confirm the timezone setting on your cron daemon, CI platform, or cloud scheduler matches your intent.",
+  },
+  {
+    q: "Can I use this for Linux crontab, GitHub Actions, or Kubernetes CronJob?",
+    a: "Yes. Standard 5-field expressions generated here work with Linux crontab, GitHub Actions schedule syntax, Kubernetes CronJob spec, and most POSIX-compatible schedulers. GitHub Actions uses UTC by default — set the workflow timezone explicitly if needed. Kubernetes CronJobs run in the controller's timezone unless you configure otherwise. For systems that require 6 fields, switch to the 6-field format in this tool.",
+  },
+  {
+    q: "Are my schedules sent to a server?",
+    a: "No. All cron expression generation happens entirely in your browser. Your schedule choices are never sent to our servers, logged, or stored. The next-run preview is also computed locally using the expression and timezone you provide.",
+  },
+];
