@@ -1,16 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { trackBlogToolCtaClick } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 type BlogToolCtaProps = {
+  blogSlug: string;
   toolLink: string;
   toolName: string;
+  source: "inline" | "footer";
   className?: string;
 };
 
-export function BlogToolCta({ toolLink, toolName, className }: BlogToolCtaProps) {
+export function BlogToolCta({
+  blogSlug,
+  toolLink,
+  toolName,
+  source,
+  className,
+}: BlogToolCtaProps) {
   return (
     <aside
       className={cn(
@@ -27,7 +38,10 @@ export function BlogToolCta({ toolLink, toolName, className }: BlogToolCtaProps)
         required.
       </p>
       <Button asChild className="bg-indigo-600 text-white hover:bg-indigo-700 hover:text-white">
-        <Link href={toolLink}>
+        <Link
+          href={toolLink}
+          onClick={() => trackBlogToolCtaClick(blogSlug, toolName, source)}
+        >
           Open {toolName}
           <ArrowRight className="ml-1 size-4" aria-hidden="true" />
         </Link>

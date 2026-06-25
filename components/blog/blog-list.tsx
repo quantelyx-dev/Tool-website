@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 import { ArrowRight, Clock, Calendar } from "lucide-react";
 
+import { trackBlogListView, trackBlogPostClick } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import type { BlogPost } from "@/lib/blogs/types";
 
@@ -20,6 +22,10 @@ function formatBlogDate(dateString: string): string {
 }
 
 export function BlogList({ posts, className }: BlogListProps) {
+  useEffect(() => {
+    trackBlogListView(posts.length);
+  }, [posts.length]);
+
   return (
     <div className={cn("py-6", className)}>
       <div className="mb-10 border-b border-border pb-6">
@@ -40,6 +46,7 @@ export function BlogList({ posts, className }: BlogListProps) {
                 href={`/blog/${post.slug}`}
                 className="flex flex-1 flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 rounded-lg"
                 aria-label={`Read: ${post.title}`}
+                onClick={() => trackBlogPostClick(post.slug, "list")}
               >
                 <h2 className="mb-2 text-lg font-semibold leading-snug">
                   {post.title}

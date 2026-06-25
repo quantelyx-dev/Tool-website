@@ -5,6 +5,7 @@ import { BookOpen, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { getBlogPostByToolLink } from "@/lib/blogs";
+import { trackBlogPostClick } from "@/lib/analytics";
 import { fadeUpVariants } from "@/lib/motion-variants";
 import { cn } from "@/lib/utils";
 
@@ -49,6 +50,7 @@ export function ToolBlogPromo({ toolLink, className }: ToolBlogPromoProps) {
           <Link
             href={`/blog/${post.slug}`}
             className="inline-flex shrink-0 items-center gap-1 rounded-sm text-sm font-medium text-indigo-600 hover:text-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 dark:text-indigo-400 dark:hover:text-indigo-300"
+            onClick={() => trackBlogPostClick(post.slug, "tool_promo")}
           >
             Read guide
             <ArrowRight className="size-4" aria-hidden="true" />
