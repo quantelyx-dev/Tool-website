@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Mediapartners-Google
+User-agent: Mediapartners-Google
+Allow: /
+
+# Host
+Host: https://yourdomain.com
+
+# Sitemaps
+Sitemap: https://yourdomain.com/sitemap.xml

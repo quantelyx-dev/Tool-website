@@ -24,6 +24,11 @@ export function Navbar() {
             About Us
           </Link>
           <Link
+            href='/blog'
+            className='text-sm font-medium hover:text-indigo-600 transition-colors'>
+            Blog
+          </Link>
+          <Link
             href='/request-a-tool'
             className='text-sm font-medium hover:text-indigo-600 transition-colors'>
             Request a tool

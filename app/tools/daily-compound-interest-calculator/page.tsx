@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { DailyCompoundToolContent } from '@/components/daily-compound-interest/daily-compound-tool-content';
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { compoundInterestFaqs } from '@/lib/tool-faqs';
@@ -39,6 +40,7 @@ export default function DailyCompoundInterestCalculatorPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Daily compound interest calculator' }]} />
         <DailyCompoundToolContent />
+        <ToolBlogPromo toolLink='/tools/daily-compound-interest-calculator' />
         <ToolFaqSection faqs={compoundInterestFaqs} />
       </div>
     </main>

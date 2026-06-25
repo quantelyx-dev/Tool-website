@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { SunMoonRisingToolContent } from '@/components/sun-moon-rising/sun-moon-rising-tool-content';
@@ -39,6 +40,7 @@ export default function SunMoonRisingCalculatorPage() {
       <div className={cn('container mx-auto max-w-5xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Sun, Moon & Rising calculator' }]} />
         <SunMoonRisingToolContent />
+        <ToolBlogPromo toolLink='/tools/sun-moon-rising-calculator' />
         <ToolFaqSection faqs={sunMoonRisingFaqs} />
       </div>
     </main>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { ChildSupportToolContent } from '@/components/indiana-child-support/child-support-tool-content';
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { childSupportFaqs } from '@/lib/tool-faqs';
@@ -39,6 +40,7 @@ export default function ChildSupportCalculatorPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Indiana child support calculator' }]} />
         <ChildSupportToolContent />
+        <ToolBlogPromo toolLink='/tools/indiana-child-support-calculator' />
         <ToolFaqSection faqs={childSupportFaqs} />
       </div>
     </main>
