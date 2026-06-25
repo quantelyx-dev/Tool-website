@@ -3,10 +3,11 @@ import { notFound } from "next/navigation";
 
 import { BlogArticleJsonLd } from "@/components/blog/blog-article-json-ld";
 import { BlogFaqJsonLd } from "@/components/blog/blog-faq-json-ld";
+import { BlogPageAnalytics } from "@/components/blog/blog-page-analytics";
 import {
   BlogPostRenderer,
-  RelatedBlogPosts,
 } from "@/components/blog/blog-post-renderer";
+import { RelatedBlogPosts } from "@/components/blog/blog-related-posts";
 import { PageBreadcrumb } from "@/components/shared/page-breadcrumb";
 import { ToolFaqSection } from "@/components/shared/tool-faq-section";
 import {
@@ -60,6 +61,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <BlogArticleJsonLd post={post} />
       <BlogFaqJsonLd faqs={post.faqs} />
+      <BlogPageAnalytics slug={post.slug} toolName={post.toolName} />
       <main className={cn("flex-1")}>
         <div
           className={cn("container mx-auto max-w-5xl", "px-4 pb-20 sm:px-6")}

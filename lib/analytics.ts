@@ -11,7 +11,11 @@ type GAEventName =
   | 'share_result'
   | 'tool_search'
   | 'tool_reset'
-  | 'outbound_link';
+  | 'outbound_link'
+  | 'blog_view'
+  | 'blog_list_view'
+  | 'blog_post_click'
+  | 'blog_tool_cta_click';
 
 type GAEventParams = Record<string, string | number | boolean>;
 
@@ -49,5 +53,35 @@ export function trackSearch(query: string, resultCount?: number) {
   trackEvent('tool_search', {
     search_term: query,
     ...(resultCount !== undefined ? { result_count: resultCount } : {}),
+  });
+}
+
+export function trackBlogView(blogSlug: string, extraParams?: GAEventParams) {
+  trackEvent('blog_view', { blog_slug: blogSlug, ...extraParams });
+}
+
+export function trackBlogListView(postCount?: number) {
+  trackEvent('blog_list_view', {
+    ...(postCount !== undefined ? { post_count: postCount } : {}),
+  });
+}
+
+export function trackBlogPostClick(
+  blogSlug: string,
+  source: 'list' | 'related' | 'tool_promo',
+  extraParams?: GAEventParams,
+) {
+  trackEvent('blog_post_click', { blog_slug: blogSlug, source, ...extraParams });
+}
+
+export function trackBlogToolCtaClick(
+  blogSlug: string,
+  toolName: string,
+  source: 'inline' | 'footer',
+) {
+  trackEvent('blog_tool_cta_click', {
+    blog_slug: blogSlug,
+    tool_name: toolName,
+    source,
   });
 }
