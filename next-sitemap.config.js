@@ -24,6 +24,7 @@ module.exports = {
     const priorities = {
       "/": 1.0,
       "/about": 0.8,
+      "/blog": 0.85,
       "/contact": 0.7,
       "/request-a-tool": 0.7,
       "/privacy-policy": 0.5,
@@ -33,6 +34,7 @@ module.exports = {
     const changeFreqs = {
       "/": "daily",
       "/about": "monthly",
+      "/blog": "weekly",
       "/contact": "monthly",
       "/request-a-tool": "monthly",
       "/privacy-policy": "yearly",
@@ -40,11 +42,15 @@ module.exports = {
     };
 
     const isToolPage = path.startsWith("/tools/");
+    const isBlogPost = path.startsWith("/blog/");
 
     return {
       loc: path,
-      changefreq: changeFreqs[path] ?? (isToolPage ? "weekly" : "monthly"),
-      priority: priorities[path] ?? (isToolPage ? 0.9 : 0.6),
+      changefreq:
+        changeFreqs[path] ??
+        (isToolPage ? "weekly" : isBlogPost ? "monthly" : "monthly"),
+      priority:
+        priorities[path] ?? (isToolPage ? 0.9 : isBlogPost ? 0.85 : 0.6),
       lastmod: new Date().toISOString(),
     };
   },

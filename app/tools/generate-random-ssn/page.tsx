@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { GenerateRandomSsnToolContent } from '@/components/generate-random-ssn/generate-random-ssn-tool-content';
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { ssnFaqs } from '@/lib/tool-faqs';
@@ -39,6 +40,7 @@ export default function GenerateRandomSsnPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Fake SSN generator' }]} />
         <GenerateRandomSsnToolContent />
+        <ToolBlogPromo toolLink='/tools/generate-random-ssn' />
         <ToolFaqSection faqs={ssnFaqs} />
       </div>
     </main>

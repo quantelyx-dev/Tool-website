@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { GenerateRandomUuidsToolContent } from '@/components/generate-random-uuids/generate-random-uuids-tool-content';
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { uuidFaqs } from '@/lib/tool-faqs';
@@ -39,6 +40,7 @@ export default function GenerateRandomUuidsPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'UUIDv7 generator' }]} />
         <GenerateRandomUuidsToolContent />
+        <ToolBlogPromo toolLink='/tools/generate-random-uuids' />
         <ToolFaqSection faqs={uuidFaqs} />
       </div>
     </main>

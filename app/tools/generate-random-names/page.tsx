@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { GenerateRandomNamesToolContent } from '@/components/generate-random-names/generate-random-names-tool-content';
@@ -39,6 +40,7 @@ export default function GenerateRandomNamesPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Random name generator' }]} />
         <GenerateRandomNamesToolContent />
+        <ToolBlogPromo toolLink='/tools/generate-random-names' />
         <ToolFaqSection faqs={nameFaqs} />
       </div>
     </main>

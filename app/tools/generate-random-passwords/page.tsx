@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { GenerateRandomPasswordsToolContent } from '@/components/generate-random-passwords/generate-random-passwords-tool-content';
+import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { passwordFaqs } from '@/lib/tool-faqs';
@@ -39,6 +40,7 @@ export default function GenerateRandomPasswordsPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Random password generator' }]} />
         <GenerateRandomPasswordsToolContent />
+        <ToolBlogPromo toolLink='/tools/generate-random-passwords' />
         <ToolFaqSection faqs={passwordFaqs} />
       </div>
     </main>
