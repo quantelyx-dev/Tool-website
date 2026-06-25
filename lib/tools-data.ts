@@ -83,6 +83,17 @@ export const TOOL_GROUPS = [
       },
     ],
   },
+  {
+    type: "developer",
+    tools: [
+      {
+        name: "Cron expression generator",
+        description:
+          "Build cron schedules visually with presets or custom fields. Get human-readable explanations and next run times.",
+        link: "/tools/cron-expression-generator",
+      },
+    ],
+  },
 ] as const satisfies readonly ToolGroup[];
 
 export type ToolCategoryType = (typeof TOOL_GROUPS)[number]["type"];
