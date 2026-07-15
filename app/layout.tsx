@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { Geist_Mono, Inter } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -12,11 +12,6 @@ import { siteUrl, siteDomain } from '@/lib/site-config';
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -54,7 +49,6 @@ export default function RootLayout({
       className={cn(
         'h-full',
         'antialiased',
-        geistSans.variable,
         geistMono.variable,
         'font-sans',
         inter.variable,

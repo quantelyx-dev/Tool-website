@@ -2,13 +2,14 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
+import { Card, CardContent } from "@/components/ui/card";
 import { DailyCompoundCalculatorFields } from "@/components/daily-compound-interest/daily-compound-calculator-fields";
 import { DailyCompoundExportCard } from "@/components/daily-compound-interest/daily-compound-export-card";
-import { DailyCompoundGrowthChart } from "@/components/daily-compound-interest/daily-compound-growth-chart";
 import { DailyCompoundResultsCard } from "@/components/daily-compound-interest/daily-compound-results-card";
 import {
   submitDailyCompoundCalculation,
@@ -28,6 +29,31 @@ import {
 } from "@/lib/schemas/daily-compound-schema";
 import { cn } from "@/lib/utils";
 import { useAnalytics } from "@/hooks/use-analytics";
+
+/**
+ * Recharts only loads once a projection exists — keeps the chart engine out
+ * of the initial page bundle for visitors who never run a calculation.
+ */
+const DailyCompoundGrowthChart = dynamic(
+  () =>
+    import("@/components/daily-compound-interest/daily-compound-growth-chart").then(
+      (mod) => mod.DailyCompoundGrowthChart,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Card className="shadow-md ring-1 ring-emerald-500/10 dark:ring-emerald-400/15">
+        <CardContent className="pt-6">
+          <div
+            role="status"
+            aria-label="Loading growth curve"
+            className="h-70 w-full animate-pulse rounded-xl bg-muted/40 sm:h-80"
+          />
+        </CardContent>
+      </Card>
+    ),
+  },
+);
 
 type DailyCompoundCalculatorFormProps = {
   className?: string;
