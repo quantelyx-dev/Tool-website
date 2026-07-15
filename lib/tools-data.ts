@@ -92,6 +92,12 @@ export const TOOL_GROUPS = [
           "Build cron schedules visually with presets or custom fields. Get human-readable explanations and next run times.",
         link: "/tools/cron-expression-generator",
       },
+      {
+        name: "Regex tester",
+        description:
+          "Test and debug regular expressions in real time — enter a pattern, pick flags, and see highlighted matches and capture groups instantly.",
+        link: "/tools/regex-tester",
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];
