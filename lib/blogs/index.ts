@@ -1,4 +1,5 @@
 import { cronExpressionGeneratorPost } from "@/lib/blogs/posts/cron-expression-generator-guide";
+import { regexTesterPost } from "@/lib/blogs/posts/regex-tester-guide";
 import { fakeAddressPost } from "@/lib/blogs/posts/fake-address-generator-guide";
 import { fakeEmailGeneratorPost } from "@/lib/blogs/posts/fake-email-generator-for-testing-guide";
 import { fakePhoneNumberPost } from "@/lib/blogs/posts/fake-phone-number-generator-guide";
@@ -25,6 +26,7 @@ const ALL_BLOG_POSTS: BlogPost[] = [
   uuidV7Post,
   strongPasswordPost,
   cronExpressionGeneratorPost,
+  regexTesterPost,
 ];
 
 export const BLOG_POSTS: BlogPost[] = [...ALL_BLOG_POSTS].sort(

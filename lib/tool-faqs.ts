@@ -277,3 +277,26 @@ export const cronExpressionFaqs = [
     a: "No. All cron expression generation happens entirely in your browser. Your schedule choices are never sent to our servers, logged, or stored. The next-run preview is also computed locally using the expression and timezone you provide.",
   },
 ];
+
+export const regexTesterFaqs = [
+  {
+    q: "What is a regex tester used for?",
+    a: "A regex tester lets you interactively build and debug regular expressions against a sample string without writing any code. You enter a pattern, select flags, and see matches highlighted in real time — making it easy to iterate on patterns for input validation, text extraction, search-and-replace operations, and log parsing.",
+  },
+  {
+    q: "What regex flags does this tester support?",
+    a: "The tester supports all six standard JavaScript regex flags: g (global — find all matches, not just the first), i (case-insensitive), m (multiline — ^ and $ match line boundaries), s (dotAll — dot matches newlines too), u (Unicode mode — treats the pattern as Unicode code points), and y (sticky — match only from the current lastIndex position).",
+  },
+  {
+    q: "How do capture groups work in the results?",
+    a: "Capture groups are defined with parentheses in your pattern. For example, (\\d{4})-(\\d{2})-(\\d{2}) creates three groups. The match details table shows each match's full text plus any captured substrings in separate Group columns — useful for extracting specific parts like year, month, and day from a date string.",
+  },
+  {
+    q: "Why does removing the g flag change the number of matches?",
+    a: "Without the g (global) flag, JavaScript's RegExp stops after the first match. The tester reflects this behavior exactly. Enable g to find every occurrence in your test string. Leave it off if you only need to verify whether a pattern matches at all or want to inspect the first match and its groups in detail.",
+  },
+  {
+    q: "Does this work with lookaheads, lookbehinds, and named groups?",
+    a: "Yes — the tester runs on your browser's native JavaScript regex engine, which fully supports ES2018+ features including positive and negative lookaheads (?=...) and (?!...), positive and negative lookbehinds (?<=...) and (?<!...), and named capture groups (?<name>...). Named groups appear alongside positional groups in the match details table.",
+  },
+];
