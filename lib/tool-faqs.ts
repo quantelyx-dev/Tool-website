@@ -324,6 +324,29 @@ export const base64ToolFaqs = [
   },
 ];
 
+export const jsonToolFaqs = [
+  {
+    q: "Why does this JSON validator show a different error than my browser console?",
+    a: "Browser and Node.js JSON parsers report errors inconsistently — some give a character position, some give a line and column, and some (like a bare \"Unexpected token\") give no location at all, and the exact wording varies between Chrome, Firefox, and Safari. This tool ships its own JSON grammar checker that walks your input character by character, so it always reports a precise line, column, and human-readable reason for the first syntax problem it finds, regardless of which browser you're using — then click \"Go to error\" to jump straight to it in the input box.",
+  },
+  {
+    q: "What's the difference between the Format & validate, Tree view, and JSON → TypeScript tabs?",
+    a: "All three tabs read the same JSON you paste once — there's no need to re-paste it for each view. Format & validate beautifies or minifies it, sorts keys, and shows size/depth/key-count stats. Tree view turns it into a collapsible, color-coded tree so you can explore deeply nested structures and copy the exact JSONPath (like $.users[2].email) to any value. JSON → TypeScript infers and generates ready-to-use TypeScript interfaces from the shape of your data, including nested objects and arrays.",
+  },
+  {
+    q: "Can I generate TypeScript types straight from an API response?",
+    a: "Yes — paste a sample JSON response into the tool and switch to the JSON → TypeScript tab. It infers a named interface for every nested object (reusing one interface for array elements that share the same shape, instead of duplicating it per item), gives you a root type alias when the top-level value is a primitive or array, and quotes any property names that aren't valid TypeScript identifiers. Set a custom root type name before copying or downloading the .ts file.",
+  },
+  {
+    q: "Does sorting keys or changing the indent modify the meaning of my JSON?",
+    a: "No — sorting object keys alphabetically and changing indentation (2 spaces, 4 spaces, tabs, or fully minified) only affects the text layout. JSON object keys are unordered by the spec, so reordering them doesn't change how any JSON parser interprets the data. Minify is useful for shrinking a payload before sending it over the network; sorted keys make it easier to diff two JSON files that came from different sources.",
+  },
+  {
+    q: "Is my JSON data uploaded anywhere?",
+    a: "No — parsing, validation, formatting, the tree view, and TypeScript generation all run entirely in your browser using JavaScript. Nothing you paste is ever sent to our servers or any third party, so it's safe to use with API responses, config files, or payloads containing internal or sensitive data.",
+  },
+];
+
 export const regexTesterFaqs = [
   {
     q: "What is a regex tester used for?",

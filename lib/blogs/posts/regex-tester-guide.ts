@@ -24,6 +24,7 @@ export const regexTesterPost: BlogPost = {
   relatedSlugs: [
     "cron-expression-generator-guide",
     "uuid-v7-generator-guide",
+    "json-formatter-validator-guide",
   ],
   sections: [
     p(
