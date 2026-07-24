@@ -81,6 +81,12 @@ export const TOOL_GROUPS = [
           "Generate random passwords with configurable length and character sets, with zxcvbn-based strength estimates.",
         link: "/tools/generate-random-passwords",
       },
+      {
+        name: "Random IP address generator",
+        description:
+          "Generate fictional IPv4 or IPv6 addresses in single or bulk mode, with quick copy for one result and CSV export for batches.",
+        link: "/tools/generate-random-ip-addresses",
+      },
     ],
   },
   {

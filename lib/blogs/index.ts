@@ -7,6 +7,7 @@ import { fakeSsnPost } from "@/lib/blogs/posts/fake-ssn-generator-for-testing-gu
 import { fakeUsernamesPost } from "@/lib/blogs/posts/fake-usernames-for-testing-guide";
 import { dailyCompoundInterestPost } from "@/lib/blogs/posts/daily-compound-interest-calculator-guide";
 import { indianaChildSupportPost } from "@/lib/blogs/posts/indiana-child-support-calculator-guide";
+import { ipAddressGeneratorPost } from "@/lib/blogs/posts/random-ip-address-generator-guide";
 import { randomNameGeneratorPost } from "@/lib/blogs/posts/random-name-generator-use-cases-guide";
 import { strongPasswordPost } from "@/lib/blogs/posts/strong-password-generator-guide";
 import { sunMoonRisingPost } from "@/lib/blogs/posts/sun-moon-rising-sign-calculator-guide";
@@ -27,6 +28,7 @@ const ALL_BLOG_POSTS: BlogPost[] = [
   strongPasswordPost,
   cronExpressionGeneratorPost,
   regexTesterPost,
+  ipAddressGeneratorPost,
 ];
 
 export const BLOG_POSTS: BlogPost[] = [...ALL_BLOG_POSTS].sort(
