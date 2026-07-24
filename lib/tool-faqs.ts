@@ -278,6 +278,29 @@ export const cronExpressionFaqs = [
   },
 ];
 
+export const ipAddressFaqs = [
+  {
+    q: "Are the generated IP addresses real or in use?",
+    a: "The IP addresses are algorithmically generated to be structurally valid — correct dotted-decimal format for IPv4 or correct hextet format for IPv6 — but they are not checked against real-world allocation registries. Some may coincidentally match addresses that are actually assigned. Never use generated addresses to target, ping, or connect to real hosts; they are intended for UI mockups, test fixtures, and documentation examples only.",
+  },
+  {
+    q: "What is the difference between IPv4 and IPv6?",
+    a: "IPv4 addresses are 32-bit values written as four decimal octets separated by dots (e.g. 192.0.2.1), giving about 4.3 billion possible addresses. IPv6 addresses are 128-bit values written as eight groups of hexadecimal digits separated by colons (e.g. 2001:db8::1), providing a vastly larger address space designed to outlast IPv4 exhaustion. Choose the version that matches what your application, network config, or test schema expects.",
+  },
+  {
+    q: "What can I use randomly generated IP addresses for?",
+    a: "Random IP addresses are useful for seeding test databases, populating log viewers and analytics dashboards with realistic-looking traffic data, testing IP validation and geolocation logic, filling firewall or access-control rule mockups, and building demo environments — all without exposing or depending on real network addresses.",
+  },
+  {
+    q: "How many IP addresses can I generate at once?",
+    a: "You can generate a single address or a bulk batch of 10, 50, 100, or 200 at once. Single results can be copied directly to your clipboard; bulk batches can be exported as a CSV file with one click, ready to import into a spreadsheet, seed script, or test fixture.",
+  },
+  {
+    q: "Can I generate both IPv4 and IPv6 addresses in the same batch?",
+    a: "Each generation run produces addresses of a single version — select IPv4 or IPv6 from the version dropdown before clicking Generate. To get a mixed set, run the generator once per version and combine the exported CSV files, or generate two separate batches.",
+  },
+];
+
 export const regexTesterFaqs = [
   {
     q: "What is a regex tester used for?",

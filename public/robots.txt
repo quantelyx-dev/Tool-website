@@ -8,7 +8,7 @@ User-agent: Mediapartners-Google
 Allow: /
 
 # Host
-Host: https://yourdomain.com
+Host: https://toolcalcs.net
 
 # Sitemaps
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://toolcalcs.net/sitemap.xml
