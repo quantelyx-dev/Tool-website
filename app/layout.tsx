@@ -7,9 +7,11 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { ClarityAnalytics } from '@/components/clarity-analytics';
 import { siteUrl, siteDomain } from '@/lib/site-config';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
+const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? '';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -64,6 +66,7 @@ export default function RootLayout({
           <Footer />
           <Toaster />
         </ThemeProvider>
+        {CLARITY_PROJECT_ID && <ClarityAnalytics projectId={CLARITY_PROJECT_ID} />}
       </body>
       {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
