@@ -104,6 +104,12 @@ export const TOOL_GROUPS = [
           "Test and debug regular expressions in real time — enter a pattern, pick flags, and see highlighted matches and capture groups instantly.",
         link: "/tools/regex-tester",
       },
+      {
+        name: "Base64 encoder & decoder",
+        description:
+          "Encode and decode Base64 live as you type, convert files and images to data URIs with preview, and decode JWTs — all client-side.",
+        link: "/tools/base64-encoder-decoder",
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];

@@ -1,3 +1,4 @@
+import { base64ToolPost } from "@/lib/blogs/posts/base64-encoder-decoder-guide";
 import { cronExpressionGeneratorPost } from "@/lib/blogs/posts/cron-expression-generator-guide";
 import { regexTesterPost } from "@/lib/blogs/posts/regex-tester-guide";
 import { fakeAddressPost } from "@/lib/blogs/posts/fake-address-generator-guide";
@@ -29,6 +30,7 @@ const ALL_BLOG_POSTS: BlogPost[] = [
   cronExpressionGeneratorPost,
   regexTesterPost,
   ipAddressGeneratorPost,
+  base64ToolPost,
 ];
 
 export const BLOG_POSTS: BlogPost[] = [...ALL_BLOG_POSTS].sort(

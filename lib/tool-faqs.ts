@@ -301,6 +301,29 @@ export const ipAddressFaqs = [
   },
 ];
 
+export const base64ToolFaqs = [
+  {
+    q: "Is Base64 encoding the same as encryption?",
+    a: "No — this is one of the most common misconceptions. Base64 is a reversible encoding scheme, not encryption. Anyone can decode a Base64 string back to its original form instantly, with no key or password required — this tool does it entirely in your browser. Never use Base64 to protect sensitive data like passwords or API keys; use real encryption (e.g. AES) for that, and only use Base64 to safely represent binary data as text.",
+  },
+  {
+    q: "What is the difference between standard and URL-safe Base64?",
+    a: "Standard Base64 uses the characters + and / plus = padding, which have special meaning in URLs and file paths. URL-safe Base64 (also called Base64url) replaces + with -, / with _, and typically omits padding, so the result can be used directly inside a URL, filename, or cookie without extra escaping. JWTs always use URL-safe Base64 without padding for this reason — toggle the URL-safe switch in the Text tab to match what your target system expects.",
+  },
+  {
+    q: "Can I convert an image to Base64 for use in CSS or HTML?",
+    a: "Yes — use the File & image tab. Drop in an image and the tool generates a ready-to-use data URI (data:image/png;base64,...) that you can paste directly into a CSS background-image, an <img src> attribute, or an inline SVG, with a live preview so you can confirm it renders correctly before copying. This avoids an extra HTTP request for small icons or inline assets.",
+  },
+  {
+    q: "Does this tool verify JWT signatures?",
+    a: "No — the JWT decoder tab only decodes the header and payload so you can inspect the claims (like exp, iat, and custom fields) during debugging. It cannot and does not verify the signature, because that requires the issuer's secret or public key, which never leaves the server that minted the token. Never trust the contents of a JWT you haven't verified server-side, even though this tool can read them.",
+  },
+  {
+    q: "Is my data uploaded anywhere when I use this tool?",
+    a: "No — every conversion (text, file, and JWT decoding) runs entirely in your browser using JavaScript's built-in encoding APIs. Nothing you type, paste, or drop is ever sent to our servers or any third party, which makes it safe to use with confidential files, internal API payloads, or tokens containing sensitive claims.",
+  },
+];
+
 export const regexTesterFaqs = [
   {
     q: "What is a regex tester used for?",
