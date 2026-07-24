@@ -110,6 +110,12 @@ export const TOOL_GROUPS = [
           "Encode and decode Base64 live as you type, convert files and images to data URIs with preview, and decode JWTs — all client-side.",
         link: "/tools/base64-encoder-decoder",
       },
+      {
+        name: "JSON formatter & validator",
+        description:
+          "Format and validate JSON with exact line/column error locations, explore it as a collapsible tree, or generate TypeScript interfaces instantly.",
+        link: "/tools/json-formatter-validator",
+      },
     ],
   },
 ] as const satisfies readonly ToolGroup[];

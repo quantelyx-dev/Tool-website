@@ -23,7 +23,7 @@ export const base64ToolPost: BlogPost = {
   relatedSlugs: [
     "uuid-v7-generator-guide",
     "regex-tester-guide",
-    "random-ip-address-generator-guide",
+    "json-formatter-validator-guide",
   ],
   sections: [
     p(
