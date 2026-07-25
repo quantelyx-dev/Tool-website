@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist_Mono, Inter } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@/components/google-analytics';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/navbar';
@@ -15,9 +15,13 @@ const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? '';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
+// Only the tool result panels render `font-mono`, so preloading Geist Mono in
+// every document head just competes with Inter for critical-path bandwidth.
+// The @font-face stays registered and swaps in on the pages that use it.
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  preload: false,
 });
 
 export const metadata: Metadata = {
