@@ -15,21 +15,25 @@ export function Navbar() {
         <div className='hidden md:flex items-center gap-8'>
           <Link
             href='/'
+            prefetch={false}
             className='text-sm font-medium hover:text-indigo-600 transition-colors'>
             Home
           </Link>
           <Link
             href='/about'
+            prefetch={false}
             className='text-sm font-medium hover:text-indigo-600 transition-colors'>
             About Us
           </Link>
           <Link
             href='/blog'
+            prefetch={false}
             className='text-sm font-medium hover:text-indigo-600 transition-colors'>
             Blog
           </Link>
           <Link
             href='/request-a-tool'
+            prefetch={false}
             className='text-sm font-medium hover:text-indigo-600 transition-colors'>
             Request a tool
           </Link>
