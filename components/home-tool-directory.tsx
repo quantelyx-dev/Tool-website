@@ -25,12 +25,16 @@ function ToolCardLink({
   const className =
     'block h-full rounded-xl outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background';
 
+  // The directory renders every tool as a link, so viewport prefetching would
+  // pull each route's full RSC payload and JS chunks before any click. Hover /
+  // touch still prefetches, so navigation stays fast without the upfront cost.
   if (href.startsWith('http')) {
     return (
       <Link
         href={href}
         target='_blank'
         rel='noopener noreferrer'
+        prefetch={false}
         className={className}>
         {children}
       </Link>
@@ -38,7 +42,7 @@ function ToolCardLink({
   }
 
   return (
-    <Link href={href} className={className}>
+    <Link href={href} prefetch={false} className={className}>
       {children}
     </Link>
   );

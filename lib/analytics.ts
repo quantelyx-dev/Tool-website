@@ -1,6 +1,29 @@
 'use client';
 
-import { sendGAEvent } from '@next/third-parties/google';
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+// gtag.js is loaded with `lazyOnload` (see components/google-analytics.tsx), so
+// it may not have arrived when an event fires. Creating the dataLayer queue and
+// the gtag() shim on demand means those events are buffered and replayed once
+// the script loads instead of being dropped.
+//
+// gtag's contract is to push the `arguments` object itself — a plain array is
+// not equivalent and GA4 will ignore it — so this must stay a `function`.
+function getGtag(): (...args: unknown[]) => void {
+  window.dataLayer = window.dataLayer ?? [];
+  if (!window.gtag) {
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer!.push(arguments);
+    };
+  }
+  return window.gtag;
+}
 
 // All GA4 custom event names used across the site
 type GAEventName =
@@ -20,8 +43,9 @@ type GAEventName =
 type GAEventParams = Record<string, string | number | boolean>;
 
 export function trackEvent(name: GAEventName, params?: GAEventParams) {
+  if (typeof window === 'undefined') return;
   try {
-    sendGAEvent('event', name, params ?? {});
+    getGtag()('event', name, params ?? {});
   } catch {
     // GA not loaded yet (dev/SSR) — swallow silently
   }
