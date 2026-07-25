@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Toaster } from '@/components/ui/sonner';
 import { ClarityAnalytics } from '@/components/clarity-analytics';
+import { Toaster } from '@/components/lazy-toaster';
 import { siteUrl, siteDomain } from '@/lib/site-config';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';

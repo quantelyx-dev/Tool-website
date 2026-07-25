@@ -1,14 +1,13 @@
+import dynamic from 'next/dynamic';
 import { HomeToolDirectory } from '@/components/home-tool-directory';
 import { SearchBar } from '@/components/search-bar';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { faqs } from '@/lib/home-data';
 import type { Metadata } from 'next';
 import { siteDomain } from '@/lib/site-config';
+
+const FaqSection = dynamic(() =>
+  import('@/components/faq-section').then(mod => mod.FaqSection),
+);
 
 export const metadata: Metadata = {
   title: `${siteDomain} — Free Online Tools & Calculators`,
@@ -58,29 +57,7 @@ export default function Home() {
 
       <HomeToolDirectory />
 
-      {/* FAQs Section */}
-      <section className='py-24 bg-zinc-50 dark:bg-zinc-900/50'>
-        <div className='container mx-auto px-4 sm:px-6 max-w-3xl'>
-          <h2 className='text-3xl font-bold text-center mb-12'>
-            Frequently Asked Questions
-          </h2>
-          <Accordion type='single' collapsible className='w-full space-y-4'>
-            {faqs.map((faq, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className='border rounded-xl bg-white px-6 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800'>
-                <AccordionTrigger className='hover:no-underline font-bold text-left'>
-                  {faq.q}
-                </AccordionTrigger>
-                <AccordionContent className='text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed pb-4'>
-                  {faq.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
+      <FaqSection faqs={faqs} />
     </main>
   );
 }
