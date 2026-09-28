@@ -14,6 +14,9 @@ export const cronExpressionGeneratorPost: BlogPost = {
     "cron schedule syntax",
     "cron expression guide",
     "GitHub Actions cron schedule",
+    "spring cron expression generator",
+    "jenkins cron generator",
+    "java cron generator",
   ],
   toolLink: "/tools/cron-expression-generator",
   toolName: "Cron expression generator",
@@ -91,6 +94,14 @@ export const cronExpressionGeneratorPost: BlogPost = {
     h2("Kubernetes CronJob"),
     p(
       "Kubernetes CronJob resources accept standard 5-field cron in the `schedule` field. The controller evaluates schedules in the controller manager's timezone (typically UTC). Example manifest snippet: `schedule: \"0 9 * * *\"` with `timeZone: \"America/New_York\"` (supported in Kubernetes 1.27+) for explicit timezone control.",
+    ),
+    h3("Spring @Scheduled and Java schedulers"),
+    p(
+      "Spring's @Scheduled(cron = \"...\") annotation and Quartz-based Java schedulers both expect the 6-field format — seconds first. Switch this generator to 6-field mode to get an expression that drops straight into the annotation: @Scheduled(cron = \"0 0 9 * * *\") runs daily at 9:00 AM. One Quartz-specific quirk to watch for: Quartz generally wants either the day-of-month or day-of-week field set to ? rather than * when the other is restricted — check your scheduler's parser if a generated expression is rejected, since not every Java scheduling library follows the same variant of the 6-field spec.",
+    ),
+    h3("Jenkins cron syntax"),
+    p(
+      "Jenkins \"Build periodically\" and \"Poll SCM\" triggers accept standard 5-field cron, so expressions from this generator work as-is. Jenkins adds one extension worth knowing: the H (hash) symbol can replace a fixed number so Jenkins spreads job start times across a range instead of every job firing at the exact same minute — H 9 * * * still runs once in the 9 AM hour, but at a Jenkins-computed offset per job, which avoids overloading a shared build server when many jobs share a schedule.",
     ),
     h2("Timezone pitfalls"),
     p(

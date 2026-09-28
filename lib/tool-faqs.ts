@@ -226,6 +226,14 @@ export const childSupportFaqs = [
     q: 'Is this calculator legally binding or an official Indiana tool?',
     a: "No — this calculator is an independent estimation tool for informational and planning purposes only. It is not affiliated with, endorsed by, or certified by the State of Indiana or any court. Child support orders are determined by a judge and enforced by the Indiana Child Support Bureau. Always consult a licensed Indiana family law attorney for advice specific to your situation.",
   },
+  {
+    q: 'Does this calculator also cover Indiana alimony or spousal support?',
+    a: "No, and importantly, this isn't a gap in the tool — it reflects how Indiana law actually works. Unlike child support, Indiana has no income-shares-style formula for spousal maintenance (Ind. Code 31-15-7-2). Courts award it only in limited circumstances — physical or mental incapacity, caring for a child with a disability, or short-term rehabilitative maintenance while a spouse becomes self-supporting — and the amount is left to judicial discretion rather than a calculable schedule. Any tool claiming to \"calculate\" an Indiana alimony figure is presenting an invented number, not a guideline result.",
+  },
+  {
+    q: 'How is Indiana spousal maintenance decided if there is no formula?',
+    a: "A judge weighs factors specific to the case: the requesting spouse's earning ability and any physical or mental incapacity, the time and training needed to become self-supporting, the standard of living during the marriage, and each spouse's financial resources. Because these are judgment calls rather than inputs into an equation, the only reliable way to estimate a likely outcome is to discuss your specific facts with a licensed Indiana family law attorney.",
+  },
 ];
 
 export const sunMoonRisingFaqs = [
@@ -248,6 +256,14 @@ export const sunMoonRisingFaqs = [
   {
     q: "What if I don't know my exact birth time?",
     a: "If you don't know your exact birth time, you can still find your Sun sign (accurate for anyone born on that date) and your Moon sign (accurate if you were born early or late in the day, since it changes every ~2.5 days). For the Rising sign, try searching your birth certificate, hospital records, or asking a family member. Without a birth time, it's conventional to use solar charts — which set the Rising sign equal to the Sun sign — as a rough approximation.",
+  },
+  {
+    q: 'How do I find my "Big 3" — Sun, Moon, and Rising?',
+    a: 'Enter your birth date, exact birth time, and birth city into the calculator above — it computes all three placements at once using your birth details. Your Sun sign only needs the date, your Moon sign benefits from a rough time of day, and your Rising sign requires an accurate birth time and location since it changes roughly every two hours as the Earth rotates.',
+  },
+  {
+    q: "What's the difference between my Rising sign and my Moon sign?",
+    a: "Your Rising sign (Ascendant) is about outward presentation — it's the mask you wear, the first impression, your instinctive approach to new situations and unfamiliar people. Your Moon sign is about inward experience — your emotional needs, subconscious habits, and what makes you feel safe once someone actually gets to know you. A Rising sign in a bold Fire sign paired with a Moon in a cautious Earth sign, for example, is common and explains why someone can seem more outgoing at first than they feel internally.",
   },
 ];
 
@@ -275,6 +291,14 @@ export const cronExpressionFaqs = [
   {
     q: "Are my schedules sent to a server?",
     a: "No. All cron expression generation happens entirely in your browser. Your schedule choices are never sent to our servers, logged, or stored. The next-run preview is also computed locally using the expression and timezone you provide.",
+  },
+  {
+    q: "Does this work for Spring @Scheduled or Quartz cron expressions?",
+    a: 'Yes — switch to the 6-field format and the generator produces a second-first expression compatible with Spring\'s @Scheduled(cron = "...") annotation and Quartz-style schedulers. Note that Spring/Quartz cron differs from standard 5-field cron in two ways: it adds a leading seconds field, and day-of-month/day-of-week typically require one of the two to be "?" rather than "*" in Quartz specifically — check your framework\'s exact parser if the 6-field expression is rejected.',
+  },
+  {
+    q: "Does the generated expression work with Jenkins cron syntax?",
+    a: 'Yes — Jenkins job scheduling uses standard 5-field cron syntax (minute, hour, day of month, month, day of week), so expressions generated here paste directly into a Jenkins "Build periodically" or "Poll SCM" trigger. Jenkins additionally supports an H symbol (hash) in place of a fixed number to spread load across jobs, e.g. H 9 * * * runs once during the 9 AM hour at a time Jenkins picks per job — this generator outputs standard numeric/wildcard values, which you can manually swap for H if you want Jenkins to load-balance the exact minute.',
   },
 ];
 

@@ -4,14 +4,15 @@ import { ChildSupportToolContent } from '@/components/indiana-child-support/chil
 import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { childSupportFaqs } from '@/lib/tool-faqs';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Indiana Child Support Calculator',
   description:
     "Estimate Indiana child support using the income shares model. Enter both parents' gross incomes and parenting time per child to get a preliminary support figure quickly.",
+  path: '/tools/indiana-child-support-calculator',
   keywords: [
     'Indiana child support calculator',
     'Indiana child support estimator',
@@ -19,19 +20,10 @@ export const metadata: Metadata = {
     'child support calculation Indiana',
     'Indiana child support worksheet',
     'IN child support guidelines',
+    'indiana alimony calculator',
+    'indiana spousal support calculator',
   ],
-  openGraph: {
-    title: `Indiana Child Support Calculator | ${siteDomain}`,
-    description:
-      "Estimate Indiana child support using the income shares model. Enter both parents' gross incomes and parenting time for a quick preliminary figure.",
-    url: '/tools/indiana-child-support-calculator',
-  },
-  twitter: {
-    title: `Indiana Child Support Calculator | ${siteDomain}`,
-    description:
-      "Estimate Indiana child support using the income shares model. Enter gross incomes and parenting time.",
-  },
-};
+});
 
 
 export default function ChildSupportCalculatorPage() {

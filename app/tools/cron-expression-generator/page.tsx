@@ -21,6 +21,10 @@ export const metadata: Metadata = createPageMetadata({
     "cron expression builder",
     "generate cron expression",
     "cron job scheduler",
+    "spring cron expression generator",
+    "jenkins cron generator",
+    "java cron generator",
+    "crontab expression generator",
   ],
 });
 
