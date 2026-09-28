@@ -4,34 +4,27 @@ import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { ToolFaqSection } from '@/components/shared/tool-faq-section';
 import { SunMoonRisingToolContent } from '@/components/sun-moon-rising/sun-moon-rising-tool-content';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { sunMoonRisingFaqs } from '@/lib/tool-faqs';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Sun, Moon & Rising Calculator — Big Three',
   description:
-    "Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your complete astrological big three — free.",
+    'Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your complete astrological big three — free.',
+  path: '/tools/sun-moon-rising-calculator',
   keywords: [
     'sun moon rising calculator',
     'big three astrology calculator',
+    'big 3 calculator',
+    'find your big 3',
     'rising sign calculator',
     'ascendant sign calculator',
     'moon sign calculator',
     'birth chart calculator',
+    'what is my rising sign and moon',
   ],
-  openGraph: {
-    title: `Sun, Moon & Rising Calculator — Big Three | ${siteDomain}`,
-    description:
-      "Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your astrological big three.",
-    url: '/tools/sun-moon-rising-calculator',
-  },
-  twitter: {
-    title: `Sun, Moon & Rising Calculator — Big Three | ${siteDomain}`,
-    description:
-      "Find your Sun sign, Moon sign, and Rising sign. Enter your birth details to reveal your astrological big three.",
-  },
-};
+});
 
 
 export default function SunMoonRisingCalculatorPage() {

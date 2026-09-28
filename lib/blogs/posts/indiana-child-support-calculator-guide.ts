@@ -13,6 +13,9 @@ export const indianaChildSupportPost: BlogPost = {
     "indiana child support 2026",
     "income shares model indiana",
     "indiana parenting time credit",
+    "indiana alimony calculator",
+    "indiana spousal support calculator",
+    "child support worksheet indiana",
   ],
   toolLink: "/tools/indiana-child-support-calculator",
   toolName: "Indiana Child support calculator",
@@ -85,6 +88,18 @@ export const indianaChildSupportPost: BlogPost = {
     h2("What calculators cannot do"),
     p(
       "Judges may deviate from guidelines for high-income cases, special needs expenses, educational costs, or agreed-upon settlements. Calculators do not capture every statutory adjustment, imputation of income for voluntarily unemployed parents, or multi-state jurisdictional issues. Always verify results with a licensed Indiana family law attorney before relying on them in legal proceedings.",
+    ),
+    h2("Indiana alimony and spousal support: why there's no calculator"),
+    p(
+      "People searching for an \"Indiana alimony calculator\" or \"Indiana spousal support calculator\" often expect something like the child support tool above — enter numbers, get a figure. Indiana law doesn't work that way for spousal maintenance. There is no income-shares-style formula in the statute (Ind. Code 31-15-7-2); instead, courts award maintenance only in specific situations and leave the amount to judicial discretion.",
+    ),
+    ul([
+      "Physical or mental incapacity that materially affects the spouse's ability to support themselves",
+      "A spouse caring for a child (of any age) with a physical or mental disability, limiting their ability to work",
+      "Rehabilitative maintenance for up to three years while a spouse completes education or training to become self-supporting",
+    ]),
+    p(
+      "Because a judge weighs case-specific factors — earning capacity, standard of living during the marriage, each spouse's resources — rather than plugging numbers into an equation, any calculator that outputs a dollar figure for Indiana alimony is estimating something the law doesn't formulaically define. If spousal maintenance applies to your situation, that conversation belongs with a licensed Indiana family law attorney, not a calculator.",
     ),
     h2("Indiana Child Support Bureau resources"),
     p(

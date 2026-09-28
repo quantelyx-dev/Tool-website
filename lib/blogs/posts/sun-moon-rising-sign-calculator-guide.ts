@@ -12,8 +12,11 @@ export const sunMoonRisingPost: BlogPost = {
     "sun moon rising calculator",
     "birth chart calculator",
     "big three astrology",
+    "big 3 calculator",
+    "find your big 3",
     "rising sign calculator",
     "ascendant calculator",
+    "what is my rising sign and moon",
   ],
   toolLink: "/tools/sun-moon-rising-calculator",
   toolName: "Sun Moon and Rising Sign calculator",
@@ -84,6 +87,13 @@ export const sunMoonRisingPost: BlogPost = {
     h2("Accuracy considerations"),
     p(
       "Sun and Moon calculations tolerate small time errors for most birth dates. Rising sign demands precision within ~15 minutes for confidence. Historical timezone and daylight saving rules affect older births — quality calculators apply timezone databases automatically when you select birth location.",
+    ),
+    h2("How to find your Big 3"),
+    p(
+      "\"Big 3\" and \"Big Three\" refer to the same thing — your Sun, Moon, and Rising signs together. To find yours, you need your birth date, your exact birth time, and your birth city. The date alone gives you a reliable Sun sign; adding a time of day sharpens your Moon sign, since the Moon can change signs partway through a single day; and the birth time plus location together are what the calculator needs to work out your Rising sign, since the Ascendant shifts roughly every two hours as the sky rotates overhead.",
+    ),
+    p(
+      "If someone asks \"what's my rising sign and moon,\" the short answer is: enter your birth details once, and the calculator returns both alongside your Sun sign — you don't need to look them up separately.",
     ),
     h2("Free Sun Moon Rising calculator"),
     p(
