@@ -1,25 +1,9 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || "https://example.com",
-  generateRobotsTxt: true,
+  generateRobotsTxt: false,
   generateIndexSitemap: false,
   exclude: ["/api/*"],
-  robotsTxtOptions: {
-    policies: [
-      // Allow all crawlers
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/"],
-      },
-      // Allow Google AdSense crawler explicitly
-      {
-        userAgent: "Mediapartners-Google",
-        allow: "/",
-      },
-    ],
-    additionalSitemaps: [],
-  },
   transform: async (config, path) => {
     const priorities = {
       "/": 1.0,
