@@ -1,5 +1,6 @@
 'use client';
 
+import ReactDOM from 'react-dom';
 import Script from 'next/script';
 
 type GoogleAnalyticsProps = {
@@ -7,6 +8,8 @@ type GoogleAnalyticsProps = {
 };
 
 export function GoogleAnalytics({ gaId }: GoogleAnalyticsProps) {
+  ReactDOM.preconnect('https://www.googletagmanager.com');
+
   return (
     <>
       <Script id='ga-init' strategy='afterInteractive'>
