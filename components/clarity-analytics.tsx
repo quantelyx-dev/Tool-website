@@ -51,7 +51,10 @@ export function ClarityAnalytics({ projectId }: ClarityAnalyticsProps) {
   }, []);
 
   return (
-    <Script id='clarity-analytics' strategy='afterInteractive'>
+    // lazyOnload (not afterInteractive) keeps Clarity's bootstrap off the main
+    // thread during the hydration/LCP window on throttled mobile CPUs — session
+    // recording starting a moment later doesn't affect what it captures.
+    <Script id='clarity-analytics' strategy='lazyOnload'>
       {`(function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
