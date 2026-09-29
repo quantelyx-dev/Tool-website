@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import Script from 'next/script';
 
 type ClarityAnalyticsProps = {
@@ -23,6 +24,9 @@ function clarityCommand(...args: unknown[]) {
 // Clarity has no built-in JS-error capture, so unhandled errors/rejections are
 // tagged and used to upgrade (prioritize) the session recording for review.
 export function ClarityAnalytics({ projectId }: ClarityAnalyticsProps) {
+  ReactDOM.preconnect('https://www.clarity.ms');
+  ReactDOM.preconnect('https://scripts.clarity.ms');
+
   useEffect(() => {
     function handleError(event: ErrorEvent) {
       clarityCommand('set', 'js_error', event.message);
