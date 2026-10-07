@@ -3,7 +3,7 @@ module.exports = {
   siteUrl: process.env.SITE_URL || "https://example.com",
   generateRobotsTxt: false,
   generateIndexSitemap: false,
-  exclude: ["/api/*"],
+  exclude: ["/api/*", "/icon.png"],
   transform: async (config, path) => {
     const priorities = {
       "/": 1.0,
