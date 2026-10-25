@@ -22,6 +22,12 @@ export const TOOL_GROUPS = [
           "Capture parental incomes and parenting-time shares per child; worksheet math arrives in a later phase.",
         link: "/tools/indiana-child-support-calculator",
       },
+      {
+        name: "US paycheck calculator",
+        description:
+          "Estimate 2026 take-home pay after federal tax, FICA, state tax, 401(k), and deductions for salary or hourly pay in any state.",
+        link: "/tools/us-paycheck-calculator",
+      },
     ],
   },
   {

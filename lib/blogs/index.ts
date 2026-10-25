@@ -13,6 +13,7 @@ import { jsonToolPost } from "@/lib/blogs/posts/json-formatter-validator-guide";
 import { randomNameGeneratorPost } from "@/lib/blogs/posts/random-name-generator-use-cases-guide";
 import { strongPasswordPost } from "@/lib/blogs/posts/strong-password-generator-guide";
 import { sunMoonRisingPost } from "@/lib/blogs/posts/sun-moon-rising-sign-calculator-guide";
+import { usPaycheckCalculatorPost } from "@/lib/blogs/posts/us-paycheck-calculator-guide";
 import { uuidV7Post } from "@/lib/blogs/posts/uuid-v7-generator-guide";
 import type { BlogPost } from "@/lib/blogs/types";
 
@@ -20,6 +21,7 @@ const ALL_BLOG_POSTS: BlogPost[] = [
   sunMoonRisingPost,
   dailyCompoundInterestPost,
   indianaChildSupportPost,
+  usPaycheckCalculatorPost,
   fakeUsernamesPost,
   fakeEmailGeneratorPost,
   randomNameGeneratorPost,
