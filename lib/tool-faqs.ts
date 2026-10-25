@@ -393,3 +393,26 @@ export const regexTesterFaqs = [
     a: "Yes — the tester runs on your browser's native JavaScript regex engine, which fully supports ES2018+ features including positive and negative lookaheads (?=...) and (?!...), positive and negative lookbehinds (?<=...) and (?<!...), and named capture groups (?<name>...). Named groups appear alongside positional groups in the match details table.",
   },
 ];
+
+export const paycheckCalculatorFaqs = [
+  {
+    q: 'How is my take-home pay calculated?',
+    a: "The calculator starts with your gross pay for the period, subtracts pre-tax deductions such as a traditional 401(k), health insurance, and HSA or FSA contributions, then applies federal income tax, Social Security, Medicare, and your state's income tax. Any post-tax deductions, such as Roth 401(k) contributions, come out last. What remains is your estimated net (take-home) pay.",
+  },
+  {
+    q: 'Which taxes are taken out of a US paycheck?',
+    a: 'Employees typically pay federal income tax, Social Security tax (6.2% on wages up to $184,500 in 2026), and Medicare tax (1.45%, plus an extra 0.9% on wages above $200,000). Most states also withhold state income tax. Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming do not tax wages. Some cities and counties add local income taxes, and a few states charge disability or paid-leave payroll taxes.',
+  },
+  {
+    q: 'Do 401(k) and health insurance deductions lower my taxes?',
+    a: 'Yes. Traditional 401(k) contributions reduce the wages used for federal and most state income tax, though not for Social Security or Medicare. Health insurance premiums, HSA contributions, and FSA contributions taken through your employer reduce income tax and payroll tax. Roth 401(k) contributions are made after tax, so they do not lower your taxes today. Pennsylvania and New Jersey still tax 401(k) contributions at the state level, and the calculator accounts for that.',
+  },
+  {
+    q: 'How accurate is this paycheck calculator?',
+    a: "It is a planning estimate built on 2026 federal brackets, the 2026 standard deduction, current FICA limits, and published state brackets. Your employer's payroll software may differ slightly because of your exact Form W-4 entries, pay-period rounding, local taxes, bonuses taxed at a flat supplemental rate, or state credits not modeled here. Your pay stub is the final word, and a tax professional can give advice specific to your situation.",
+  },
+  {
+    q: 'Can I calculate hourly pay, overtime, and different pay frequencies?',
+    a: 'Yes. Choose Hourly to enter your rate, regular hours, and weekly overtime hours, which are paid at 1.5 times your rate. You can set pay to weekly, every two weeks, twice a month, or monthly, and switch the results between per paycheck, weekly, monthly, and annual views. The results also show your effective tax rate and your take-home pay per hour.',
+  },
+];

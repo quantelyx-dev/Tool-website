@@ -1,0 +1,25 @@
+import type { PaycheckFormValues } from '@/lib/schemas/us-paycheck-schema';
+
+export const PAYCHECK_FORM_DEFAULTS: PaycheckFormValues = {
+  payType: 'salary',
+  annualSalary: '75000',
+  hourlyRate: '',
+  hoursPerWeek: '40',
+  overtimeHoursPerWeek: '',
+  payFrequency: 'biweekly',
+  stateCode: 'TX',
+  filingStatus: 'single',
+  qualifyingChildren: '',
+  otherDependents: '',
+  otherIncome: '',
+  otherDeductions: '',
+  extraWithholding: '',
+  traditional401kPercent: '',
+  roth401kPercent: '',
+  age50Plus: false,
+  healthInsurance: '',
+  hsaFsa: '',
+  otherPreTax: '',
+  otherPostTax: '',
+  otherTaxRatePercent: '',
+};
