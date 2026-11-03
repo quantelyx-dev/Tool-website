@@ -21,6 +21,8 @@ export type BlogPost = {
   updatedAt: string;
   readTimeMinutes: number;
   relatedSlugs: string[];
+  /** Keeps the post reachable by URL but noindex and out of lists, related links, and the sitemap. */
+  hidden?: boolean;
   sections: BlogSection[];
   faqs: BlogFaq[];
 };

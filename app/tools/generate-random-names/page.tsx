@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/tools/generate-random-names' },
   title: 'Random Name Generator — First & Last Names',
   description:
     'Generate realistic first names, last names, or full names in bulk. Ideal for seeding user databases, creating fictional personas, and building demo datasets.',
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     url: '/tools/generate-random-names',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Random Name Generator — First & Last Names | ${siteDomain}`,
     description:
       'Generate realistic first names, last names, or full names in bulk. Free and instant.',

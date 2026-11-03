@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ClarityAnalytics } from '@/components/clarity-analytics';
+import { ConsentManager } from '@/components/consent/consent-manager';
 import { Toaster } from '@/components/lazy-toaster';
 import { siteUrl, siteDomain } from '@/lib/site-config';
 
@@ -70,7 +70,7 @@ export default function RootLayout({
           <Footer />
           <Toaster />
         </ThemeProvider>
-        {CLARITY_PROJECT_ID && <ClarityAnalytics projectId={CLARITY_PROJECT_ID} />}
+        <ConsentManager clarityProjectId={CLARITY_PROJECT_ID} />
       </body>
       {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>

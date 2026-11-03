@@ -28,7 +28,7 @@ export const ABOUT_PILLARS: AboutPillar[] = [
   {
     title: 'Privacy by design',
     description:
-      'Processing stays in your browser whenever possible—your inputs are yours, not training data.',
+      'Most tools process everything in your browser, and the few that need a server or partner say so clearly. Your inputs are never sold or used as training data.',
     icon: ShieldCheckIcon,
   },
   {

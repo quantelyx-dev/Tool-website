@@ -4,3 +4,5 @@
  */
 export { ApiError, postJson } from './post-json';
 export type { PostJsonOptions } from './post-json';
+export { getJson } from './get-json';
+export type { GetJsonOptions } from './get-json';

@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/tools/daily-compound-interest-calculator' },
   title: 'Daily Compound Interest Calculator — Growth',
   description:
     "Calculate your investment's future value with daily compounding. Factor in regular contributions and multiple currencies to see exactly how your money grows.",
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     url: '/tools/daily-compound-interest-calculator',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Daily Compound Interest Calculator — Growth | ${siteDomain}`,
     description:
       "Calculate your investment's future value with daily compounding, contributions, and reinvestment.",

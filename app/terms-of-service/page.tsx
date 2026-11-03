@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/terms-of-service' },
   title: 'Terms of Service',
   description:
     `Read the ${siteDomain} Terms of Service. Understand the guidelines for using our free online tools, calculators, and data generators responsibly and legally.`,
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     url: '/terms-of-service',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Terms of Service | ${siteDomain}`,
     description:
       'Understand the guidelines for using our free online tools, calculators, and data generators responsibly.',

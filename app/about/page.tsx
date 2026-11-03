@@ -5,9 +5,10 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/about' },
   title: 'About Us',
   description:
-    `Learn the story behind ${siteDomain} — a free, privacy-first toolkit for developers and curious minds. No ads, no tracking, no sign-up required.`,
+    `Learn the story behind ${siteDomain} — a free, privacy-first toolkit for developers and curious minds. Free to use, with no sign-up required.`,
   keywords: ['about toolcalcs', 'free online tools', 'developer utilities', 'privacy-first tools'],
   openGraph: {
     title: `About Us | ${siteDomain}`,
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     url: '/about',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `About Us | ${siteDomain}`,
     description:
       `Learn the story behind ${siteDomain} — a free, privacy-first suite of online tools built for developers, designers, and curious minds.`,

@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/tools/generate-random-usernames' },
   title: 'Random Username Generator — Fake Usernames',
   description:
     'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases, populating staging environments, and building demo user lists.',
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     url: '/tools/generate-random-usernames',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Random Username Generator — Fake Usernames | ${siteDomain}`,
     description:
       'Generate hundreds of realistic, unique usernames in seconds. Ideal for test databases and demo user lists.',

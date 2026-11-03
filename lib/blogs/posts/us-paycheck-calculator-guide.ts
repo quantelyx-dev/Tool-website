@@ -4,9 +4,9 @@ import { paycheckCalculatorFaqs } from "@/lib/tool-faqs";
 
 export const usPaycheckCalculatorPost: BlogPost = {
   slug: "us-paycheck-calculator-guide",
-  title: "US Paycheck Calculator Guide: How Take-Home Pay Works (2026)",
+  title: "US Paycheck Calculator Guide (2026)",
   excerpt:
-    "See exactly how gross pay becomes take-home pay in 2026: federal income tax, Social Security, Medicare, state tax, 401(k), and other deductions explained with a free paycheck calculator.",
+    "See how gross pay becomes take-home pay in 2026: federal tax, Social Security, Medicare, state tax, and 401(k) explained with a free paycheck calculator.",
   keywords: [
     "us paycheck calculator",
     "paycheck calculator 2026",
@@ -25,7 +25,6 @@ export const usPaycheckCalculatorPost: BlogPost = {
   relatedSlugs: [
     "daily-compound-interest-calculator-guide",
     "indiana-child-support-calculator-guide",
-    "fake-ssn-generator-for-testing-guide",
   ],
   sections: [
     p(

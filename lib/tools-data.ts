@@ -63,12 +63,12 @@ export const TOOL_GROUPS = [
       //     'Generate plausible credit card numbers per selected issuer, with quick copy for spreadsheets and fixtures.',
       //   link: '/tools/generate-random-credit-cards',
       // },
-      {
-        name: "Random SSN generator",
-        description:
-          "Generate structurally valid fake U.S. Social Security Numbers in single or bulk mode for fixtures and demos.",
-        link: "/tools/generate-random-ssn",
-      },
+      // {
+      //   name: "Random SSN generator",
+      //   description:
+      //     "Generate structurally valid fake U.S. Social Security Numbers in single or bulk mode for fixtures and demos.",
+      //   link: "/tools/generate-random-ssn",
+      // },
       {
         name: "Address Generator - Generate Fictional Addresses",
         description:
@@ -92,6 +92,17 @@ export const TOOL_GROUPS = [
         description:
           "Generate fictional IPv4 or IPv6 addresses in single or bulk mode, with quick copy for one result and CSV export for batches.",
         link: "/tools/generate-random-ip-addresses",
+      },
+    ],
+  },
+  {
+    type: "audio",
+    tools: [
+      {
+        name: "Text to speech generator",
+        description:
+          "Convert text to natural AI speech with your choice of voice, speed, and quality, then play it online and download an MP3.",
+        link: "/tools/text-to-speech-generator",
       },
     ],
   },

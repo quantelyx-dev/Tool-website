@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/request-a-tool' },
   title: 'Request a Tool',
   description:
     "Missing a tool you need? Submit a request and we'll consider it for our roadmap. We build based on real user demand — popular requests ship first.",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     url: '/request-a-tool',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Request a Tool | ${siteDomain}`,
     description:
       "Missing a tool? Submit a request and we'll consider it for our roadmap. Popular requests ship first.",

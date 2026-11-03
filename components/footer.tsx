@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FacebookIcon, TwitterIcon, InstagramIcon } from '@/components/icons';
+import { CookieSettingsButton } from '@/components/consent/cookie-settings-button';
 import { currentCalendarYear } from '@/lib/datetime';
 
 export function Footer() {
@@ -50,6 +51,7 @@ export function Footer() {
               className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
               Terms of Service
             </Link>
+            <CookieSettingsButton className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors' />
           </nav>
 
           {/* Social Icons */}

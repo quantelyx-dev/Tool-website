@@ -10,7 +10,7 @@ export class ApiError extends Error {
   }
 }
 
-async function readJsonBody(res: Response): Promise<unknown> {
+export async function readJsonBody(res: Response): Promise<unknown> {
   const text = await res.text();
   if (!text.trim()) return null;
   try {

@@ -19,6 +19,7 @@ export const fakeSsnPost: BlogPost = {
   publishedAt: "2026-06-05",
   updatedAt: "2026-06-25",
   readTimeMinutes: 12,
+  hidden: true,
   relatedSlugs: [
     "fake-address-generator-guide",
     "fake-phone-number-generator-guide",
