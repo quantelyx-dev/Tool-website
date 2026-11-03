@@ -7,18 +7,18 @@ import { siteDomain } from '@/lib/site-config';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    `Read the ${siteDomain} Privacy Policy. Our tools run in your browser — we never store, sell, or share your data. Your privacy is our default.`,
+    `Read the ${siteDomain} Privacy Policy. Most tools run in your browser, and we never sell your data. See exactly which tools use our servers or partners and why.`,
   keywords: ['privacy policy', 'data privacy', 'toolcalcs privacy', 'no data collection'],
   openGraph: {
     title: `Privacy Policy | ${siteDomain}`,
     description:
-      'All tool calculations run in your browser — we never store, sell, or share the data you enter.',
+      'Most tools run in your browser. A few use our servers or partners to produce results — we never sell your data.',
     url: '/privacy-policy',
   },
   twitter: {
     title: `Privacy Policy | ${siteDomain}`,
     description:
-      'All tool calculations run in your browser — we never store, sell, or share the data you enter.',
+      'Most tools run in your browser. A few use our servers or partners to produce results — we never sell your data.',
   },
 };
 

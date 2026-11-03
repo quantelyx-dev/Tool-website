@@ -416,3 +416,26 @@ export const paycheckCalculatorFaqs = [
     a: 'Yes. Choose Hourly to enter your rate, regular hours, and weekly overtime hours, which are paid at 1.5 times your rate. You can set pay to weekly, every two weeks, twice a month, or monthly, and switch the results between per paycheck, weekly, monthly, and annual views. The results also show your effective tax rate and your take-home pay per hour.',
   },
 ];
+
+export const textToSpeechFaqs = [
+  {
+    q: 'How does the text to speech generator work?',
+    a: 'Pick a quick-start style or paste your own script, choose one of 12 popular AI voices (you can play a short preview of each), and press Generate speech. Your text is turned into natural-sounding speech, usually within a few seconds. You can play the result on the page and download it as an MP3 file.',
+  },
+  {
+    q: 'Is the text to speech generator really free?',
+    a: 'Yes. There is no sign-up or payment. To keep it free for everyone, each visitor can create 6 audio clips per day, and each clip can contain up to 1,000 characters, which is roughly a minute of speech. Your allowance resets every day at midnight UTC.',
+  },
+  {
+    q: 'Why do I need at least 200 characters?',
+    a: 'The AI voice service we use requires a minimum of 200 characters per request, which is roughly two to three sentences or about 14 seconds of speech. If you have less text, add a little context or combine several short lines. The quick-start styles load an example script of the right length.',
+  },
+  {
+    q: 'Can I use it for TikTok, Instagram Reels, and YouTube Shorts?',
+    a: 'Yes. Download the MP3 and import it into CapCut, Premiere, or any video editor as your voiceover track. The script box estimates how long your narration will run and which short-form length it fits (15, 30, 60, or 90 seconds). For commercial or monetized work, review the voice provider\'s terms, and never use generated speech to impersonate a real person or mislead listeners.',
+  },
+  {
+    q: 'Is my text private?',
+    a: 'Your text is sent securely to our AI voice provider so it can create the audio, and the finished audio is streamed back to you. We do not save your text or audio on this site. Your last-used voice and speed are remembered in your own browser only. Because the text leaves your browser, avoid entering passwords, personal data, or confidential information.',
+  },
+];

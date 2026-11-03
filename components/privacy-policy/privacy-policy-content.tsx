@@ -11,6 +11,7 @@ import {
   Globe,
   RefreshCw,
   Mail,
+  Server,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { siteDomain } from "@/lib/site-config";
@@ -56,7 +57,7 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
       <div className="mb-8 border-b border-border pb-4">
         <p className="mb-1 text-[22px] font-medium">Privacy policy</p>
         <p className="m-0 text-[13px] text-muted-foreground">
-          {siteDomain} · Last updated: June 2026
+          {siteDomain} · Last updated: November 2026
         </p>
       </div>
 
@@ -101,19 +102,20 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
 
       <Section icon={Wrench} title="How our tools work">
         <p className="mb-3 text-muted-foreground">
-          All calculations, generations, and exports performed on {siteDomain}
-          happen entirely in your browser. We do not store, transmit, or log any
-          data you enter into our tools including:
+          Most tools on {siteDomain} do their work entirely in your browser.
+          For those tools, we do not store, transmit, or log anything you enter,
+          including:
         </p>
         <ul className="mb-3 list-disc pl-5 text-muted-foreground">
           <li className="mb-[0.4rem]">
             Names, passwords, emails, or other generated data
           </li>
           <li className="mb-[0.4rem]">
-            Financial figures entered into calculators
+            Financial figures entered into calculators such as the US paycheck
+            calculator
           </li>
           <li className="mb-[0.4rem]">
-            Legal or personal information used in calculators
+            Text you paste into the formatters, encoders, and testers
           </li>
         </ul>
         <InfoCard>
@@ -121,6 +123,67 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
           software testing and development purposes. We do not store or share
           any generated data.
         </InfoCard>
+      </Section>
+
+      <Divider />
+
+      <Section icon={Server} title="Tools that use our servers or partners">
+        <p className="mb-3 text-muted-foreground">
+          A few tools cannot work entirely in your browser. For these, what you
+          enter is sent to our servers, and in some cases to a service provider,
+          only to produce your result. We do not keep it after the request is
+          complete.
+        </p>
+        <ul className="mb-3 list-disc pl-5 text-muted-foreground">
+          <li className="mb-[0.4rem]">
+            <strong>Text to speech generator</strong> — the text you enter and
+            your voice settings are sent securely to our server and on to our AI
+            voice provider, which creates the audio. The finished audio is
+            streamed back to you. We do not save your text or the audio on this
+            site, but the provider processes the text under its own terms, so
+            please do not enter passwords, personal data, or confidential
+            information.
+          </li>
+          <li className="mb-[0.4rem]">
+            <strong>Sun, Moon &amp; Rising calculator</strong> — your name, birth
+            date, birth time, and birth city are sent to our server to calculate
+            your chart. The birth city (not your name or birth details) is also
+            sent to the OpenStreetMap Nominatim geocoding service to find its
+            coordinates.
+          </li>
+          <li className="mb-[0.4rem]">
+            <strong>Daily compound interest calculator</strong> — the figures you
+            enter are sent to our server to run the calculation. Currency
+            exchange rates are fetched from a public rates service and do not
+            include anything you entered.
+          </li>
+          <li className="mb-[0.4rem]">
+            <strong>Random name, email, and username generators</strong> — draw
+            from a cached pool of sample identities obtained from a public
+            sample-data service. Nothing you enter is sent.
+          </li>
+          <li className="mb-[0.4rem]">
+            <strong>Contact and Request a tool forms</strong> — what you submit
+            is emailed to us (and a confirmation to you) through our email
+            provider, as described above.
+          </li>
+        </ul>
+      </Section>
+
+      <Divider />
+
+      <Section icon={Shield} title="Abuse prevention">
+        <p className="mb-3 text-muted-foreground">
+          Because the text to speech generator spends paid provider resources,
+          we limit how often it can be used. To enforce the daily limit and block
+          automated abuse, we check your IP address, your browser&apos;s user
+          agent and language settings, and a random identifier stored in a
+          strictly necessary cookie (<code>tts_device</code>, valid for up to one
+          year). These values are combined into one-way hashed counters that
+          expire within about a day, and they are used only for rate limiting and
+          abuse prevention. They are not used for advertising or analytics, and
+          they never include the text you enter.
+        </p>
       </Section>
 
       <Divider />
@@ -208,10 +271,39 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
               policies.google.com/privacy
             </Link>
           </li>
+          <li className="mb-[0.4rem]">
+            Start The Vision (AI voice generation for the text to speech
+            generator) —{" "}
+            <Link
+              href="https://startthevision.com"
+              className={linkCn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              startthevision.com
+            </Link>
+          </li>
+          <li className="mb-[0.4rem]">
+            OpenStreetMap Nominatim (location lookup for the Sun, Moon &amp;
+            Rising calculator) —{" "}
+            <Link
+              href="https://osmfoundation.org/wiki/Privacy_Policy"
+              className={linkCn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              osmfoundation.org/wiki/Privacy_Policy
+            </Link>
+          </li>
+          <li className="mb-[0.4rem]">
+            Resend (email delivery for our forms) and Upstash (caching and rate
+            limiting) act as infrastructure providers for our own services.
+          </li>
         </ul>
         <p className="mb-3 text-muted-foreground">
           We do not sell, trade, or transfer your data to any other third
-          parties.
+          parties. The providers above receive only what is needed to deliver the
+          feature you used.
         </p>
       </Section>
 

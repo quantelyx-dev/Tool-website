@@ -96,6 +96,17 @@ export const TOOL_GROUPS = [
     ],
   },
   {
+    type: "audio",
+    tools: [
+      {
+        name: "Text to speech generator",
+        description:
+          "Convert text to natural AI speech with your choice of voice, speed, and quality, then play it online and download an MP3.",
+        link: "/tools/text-to-speech-generator",
+      },
+    ],
+  },
+  {
     type: "developer",
     tools: [
       {
