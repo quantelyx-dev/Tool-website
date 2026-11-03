@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/contact' },
   title: 'Contact Us',
   description:
     `Have a question, found a bug, or want to share feedback? Reach out to the ${siteDomain} team — we read every message and respond as quickly as we can.`,
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     url: '/contact',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Contact Us | ${siteDomain}`,
     description:
       `Have a question or found a bug? Reach out to the ${siteDomain} team — we read every message.`,

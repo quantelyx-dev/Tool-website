@@ -10,9 +10,10 @@ const FaqSection = dynamic(() =>
 );
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/' },
   title: `${siteDomain} — Free Online Tools & Calculators`,
   description:
-    'Discover free online tools for developers and everyday users. Generate fake data, calculate compound interest, explore astrology, and more — no sign-up, no ads.',
+    'Free online tools for developers and everyday users. Generate fake data, calculate compound interest, explore astrology, and more. No sign-up required.',
   keywords: [
     'free online tools',
     'developer utilities',
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
     url: '/',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `${siteDomain} — Free Online Tools & Calculators`,
     description:
       'Free online tools for developers and everyday users. Generate test data, calculate finances, and more — no sign-up required.',

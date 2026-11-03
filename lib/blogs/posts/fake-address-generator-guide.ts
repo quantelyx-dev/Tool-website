@@ -23,7 +23,6 @@ export const fakeAddressPost: BlogPost = {
   relatedSlugs: [
     "fake-phone-number-generator-guide",
     "fake-email-generator-for-testing-guide",
-    "fake-ssn-generator-for-testing-guide",
   ],
   sections: [
     p(

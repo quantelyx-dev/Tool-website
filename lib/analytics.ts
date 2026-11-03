@@ -14,7 +14,7 @@ declare global {
 //
 // gtag's contract is to push the `arguments` object itself — a plain array is
 // not equivalent and GA4 will ignore it — so this must stay a `function`.
-function getGtag(): (...args: unknown[]) => void {
+export function getGtag(): (...args: unknown[]) => void {
   window.dataLayer = window.dataLayer ?? [];
   if (!window.gtag) {
     window.gtag = function gtag() {

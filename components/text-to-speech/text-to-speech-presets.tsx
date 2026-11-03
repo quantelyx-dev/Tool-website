@@ -21,9 +21,9 @@ export function TextToSpeechPresets({ control, disabled, onApply }: TextToSpeech
 
   return (
     <section aria-labelledby='tts-presets-heading' className='space-y-2'>
-      <h3 id='tts-presets-heading' className='text-sm font-medium leading-none'>
+      <h2 id='tts-presets-heading' className='text-sm font-medium leading-none'>
         Quick start
-      </h3>
+      </h2>
       <ul className='grid grid-cols-2 gap-2 lg:grid-cols-3'>
         {TTS_PRESETS.map(preset => {
           const selected = active?.id === preset.id;

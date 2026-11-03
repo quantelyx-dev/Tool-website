@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/tools/generate-random-addresses' },
   title: 'Fake Address Generator — Mailing Addresses',
   description:
     'Generate realistic fictional mailing addresses in single or bulk mode. Export as CSV to seed test databases, validate shipping forms, and build demo checkouts.',
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     url: '/tools/generate-random-addresses',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Fake Address Generator — Mailing Addresses | ${siteDomain}`,
     description:
       'Generate realistic fictional mailing addresses in bulk. Export as CSV for test databases and shipping forms.',

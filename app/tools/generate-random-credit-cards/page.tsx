@@ -5,6 +5,8 @@ import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
+  // Hidden from the site and search engines (see lib/tools-data.ts).
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
   title: 'Random credit card generator - Tools',
   description:
     'Generate fake credit card numbers by issuer — Visa, Mastercard, Amex, and more — in single or bulk mode. Safe fictional data for testing and demos.',

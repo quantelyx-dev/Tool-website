@@ -55,7 +55,7 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
   return (
     <div className={cn("max-w-2xl py-6 text-[15px] leading-[1.7]", className)}>
       <div className="mb-8 border-b border-border pb-4">
-        <p className="mb-1 text-[22px] font-medium">Privacy policy</p>
+        <h1 className="mb-1 text-[22px] font-medium">Privacy policy</h1>
         <p className="m-0 text-[13px] text-muted-foreground">
           {siteDomain} · Last updated: November 2026
         </p>
@@ -119,7 +119,7 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
           </li>
         </ul>
         <InfoCard>
-          SSN and phone number generators on this site are intended strictly for
+          Test-data generators on this site, such as the phone number generator, are intended strictly for
           software testing and development purposes. We do not store or share
           any generated data.
         </InfoCard>
@@ -201,6 +201,16 @@ export function PrivacyPolicyContent({ className }: { className?: string }) {
           </li>
           <li className="mb-[0.4rem]">Device and browser information</li>
         </ul>
+        <p className="mb-3 text-muted-foreground">
+          We also use Microsoft Clarity (session replay and heatmaps) to find
+          usability problems. When you first visit, a banner asks whether to
+          accept or reject analytics and advertising cookies. Until you accept,
+          Clarity is not loaded and Google tags run with analytics and
+          advertising storage denied. Your choice is remembered in your browser
+          (local storage key <code>tools:consent:v1</code>), and you can change
+          or withdraw it at any time with <strong>Cookie settings</strong> in the
+          footer.
+        </p>
         <p className="mb-3 text-muted-foreground">
           Google Analytics uses cookies — small text files stored on your
           device. You can opt out of Google Analytics by installing the{" "}

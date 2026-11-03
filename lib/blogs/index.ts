@@ -39,17 +39,18 @@ const ALL_BLOG_POSTS: BlogPost[] = [
   jsonToolPost,
 ];
 
-export const BLOG_POSTS: BlogPost[] = [...ALL_BLOG_POSTS].sort(
+/** Posts shown in lists and links (hidden posts stay reachable by URL only). */
+export const BLOG_POSTS: BlogPost[] = ALL_BLOG_POSTS.filter((post) => !post.hidden).sort(
   (a, b) =>
     new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
 );
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((post) => post.slug === slug);
+  return ALL_BLOG_POSTS.find((post) => post.slug === slug);
 }
 
 export function getAllBlogSlugs(): string[] {
-  return BLOG_POSTS.map((post) => post.slug);
+  return ALL_BLOG_POSTS.map((post) => post.slug);
 }
 
 export function getBlogPostByToolLink(toolLink: string): BlogPost | undefined {
@@ -59,5 +60,5 @@ export function getBlogPostByToolLink(toolLink: string): BlogPost | undefined {
 export function getRelatedBlogPosts(post: BlogPost): BlogPost[] {
   return post.relatedSlugs
     .map((slug) => getBlogPostBySlug(slug))
-    .filter((related): related is BlogPost => related !== undefined);
+    .filter((related): related is BlogPost => related !== undefined && !related.hidden);
 }

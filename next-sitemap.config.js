@@ -27,12 +27,38 @@ function readBlogLastModified() {
 
 const blogLastModified = readBlogLastModified();
 
+/** Blog posts marked `hidden: true` are noindex, so they stay out of the sitemap too. */
+function readHiddenBlogPaths() {
+  const hidden = [];
+
+  for (const file of fs.readdirSync(BLOG_POSTS_DIR)) {
+    if (!file.endsWith(".ts")) continue;
+    const source = fs.readFileSync(join(BLOG_POSTS_DIR, file), "utf8");
+    const slug = source.match(/^\s*slug:\s*"([^"]+)"/m)?.[1];
+    if (slug && /^\s*hidden:\s*true/m.test(source)) hidden.push(`/blog/${slug}`);
+  }
+
+  return hidden;
+}
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || "https://example.com",
   generateRobotsTxt: false,
   generateIndexSitemap: false,
-  exclude: ["/api/*", "/icon.png"],
+  exclude: [
+    "/api/*",
+    "/icon.png",
+    "/robots.txt",
+    // Generated social images (opengraph-image routes) are not pages.
+    "/opengraph-image",
+    "/*/opengraph-image",
+    "/*/*/opengraph-image",
+    // Hidden, noindex tools (see lib/tools-data.ts).
+    "/tools/generate-random-ssn",
+    "/tools/generate-random-credit-cards",
+    ...readHiddenBlogPaths(),
+  ],
   transform: async (config, path) => {
     const priorities = {
       "/": 1.0,

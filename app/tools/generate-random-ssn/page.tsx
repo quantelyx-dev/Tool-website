@@ -9,6 +9,9 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  // Hidden from the site and search engines (see lib/tools-data.ts).
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
+  alternates: { canonical: '/tools/generate-random-ssn' },
   title: 'Fake SSN Generator — Random SSN for Testing',
   description:
     'Generate structurally valid fake U.S. Social Security Numbers for testing. All SSNs are fictional, follow IRS formatting rules, and safe for demos.',
@@ -27,6 +30,7 @@ export const metadata: Metadata = {
     url: '/tools/generate-random-ssn',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Fake SSN Generator — Random SSN for Testing | ${siteDomain}`,
     description:
       'Generate structurally valid fake U.S. Social Security Numbers for development and testing.',

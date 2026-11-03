@@ -68,9 +68,9 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
   return (
     <div className={cn("max-w-2xl py-6 text-[15px] leading-[1.7]", className)}>
       <div className="mb-8 border-b border-border pb-4">
-        <p className="mb-1 text-[22px] font-medium">Terms of service</p>
+        <h1 className="mb-1 text-[22px] font-medium">Terms of service</h1>
         <p className="m-0 text-[13px] text-muted-foreground">
-          {siteDomain} · Last updated: June 2026
+          {siteDomain} · Last updated: November 2026
         </p>
       </div>
 
@@ -108,10 +108,20 @@ export function TermsOfServiceContent({ className }: { className?: string }) {
           <li className="mb-[0.4rem]">
             You are solely responsible for how you use the output of our tools
           </li>
+          <li className="mb-[0.4rem]">
+            Daily limits apply to the text to speech generator, and you will not
+            try to bypass them (for example by automating requests, rotating IP
+            addresses, or clearing cookies)
+          </li>
+          <li className="mb-[0.4rem]">
+            You will not use the text to speech generator to impersonate a real
+            person, mislead or harass others, or narrate content you do not have
+            the right to use, and you are responsible for any rights in the text
+            you submit
+          </li>
         </ul>
         <WarningCard>
-          Tools such as SSN generators, phone number generators, and email
-          generators are intended strictly for software testing and development
+          Test-data tools such as the phone number and email generators are intended strictly for software testing and development
           purposes. Any misuse of generated data for fraud, identity theft, or
           illegal activity is strictly prohibited and is the sole responsibility
           of the user.

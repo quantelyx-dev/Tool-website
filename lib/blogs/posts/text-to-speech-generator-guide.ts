@@ -4,9 +4,9 @@ import { textToSpeechFaqs } from "@/lib/tool-faqs";
 
 export const textToSpeechGeneratorPost: BlogPost = {
   slug: "text-to-speech-generator-guide",
-  title: "Text to Speech for TikTok, Reels & Shorts: Free AI Voiceover Guide",
+  title: "Text to Speech for TikTok, Reels & Shorts",
   excerpt:
-    "Create natural AI voiceovers for TikTok, Instagram Reels, and YouTube Shorts. Learn how to pick a voice, time your script, and download a clean MP3 with a free text to speech generator.",
+    "Create natural AI voiceovers for TikTok, Reels, and Shorts. Pick a voice, time your script, and download a clean MP3 with a free text to speech generator.",
   keywords: [
     "text to speech generator",
     "tiktok text to speech",
@@ -21,7 +21,7 @@ export const textToSpeechGeneratorPost: BlogPost = {
   toolName: "Text to speech generator",
   publishedAt: "2026-11-03",
   updatedAt: "2026-11-03",
-  readTimeMinutes: 10,
+  readTimeMinutes: 7,
   relatedSlugs: [
     "random-name-generator-use-cases-guide",
     "base64-encoder-decoder-guide",

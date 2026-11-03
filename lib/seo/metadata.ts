@@ -51,6 +51,8 @@ export type PageMetadataInput = {
   path: string;
   keywords?: string[];
   openGraphType?: "website" | "article";
+  /** Excludes the page from search results (and Google's follow). */
+  noindex?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
 };
@@ -69,11 +71,11 @@ export function createPageMetadata(input: PageMetadataInput): Metadata {
       canonical: canonicalPath,
     },
     robots: {
-      index: true,
-      follow: true,
+      index: !input.noindex,
+      follow: !input.noindex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: !input.noindex,
+        follow: !input.noindex,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,

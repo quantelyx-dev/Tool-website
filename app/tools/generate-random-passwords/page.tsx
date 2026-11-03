@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { siteDomain } from '@/lib/site-config';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/tools/generate-random-passwords' },
   title: 'Random Password Generator — Strong Passwords',
   description:
     'Create strong, random passwords with customizable length and character sets. Every password is zxcvbn-scored so you know how secure it is before use.',
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     url: '/tools/generate-random-passwords',
   },
   twitter: {
+    card: 'summary_large_image',
     title: `Random Password Generator — Strong Passwords | ${siteDomain}`,
     description:
       'Create strong, random passwords with customizable length and character sets. Strength scored with zxcvbn.',
