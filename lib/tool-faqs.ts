@@ -1,15 +1,15 @@
 export const emailFaqs = [
   {
     q: 'What is a random email generator used for?',
-    a: 'A random email generator creates fictional email addresses for use in software development, QA testing, UI mockups, and demo environments. Instead of inventing fake emails manually or reusing real ones, you can generate hundreds of plausible addresses in seconds to populate test databases, seed staging data, or fill form fields during development.',
+    a: 'A random email generator creates fictional email addresses for use in software development, QA testing, UI mockups, and demo environments. Instead of inventing test emails manually or reusing real ones, you can generate hundreds of plausible addresses in seconds to populate test databases, seed staging data, or fill form fields during development.',
   },
   {
-    q: 'Are the generated email addresses real or active?',
-    a: 'No — all generated email addresses are fictional. They follow the standard user@domain.tld format and look realistic, but they are not tied to any real mailboxes. Never attempt to send emails to them. They are strictly intended for non-production testing and demo purposes.',
+    q: "Are the generated email addresses real or active?",
+    a: "No. Every address is placed on example.com, example.net, or example.org, which are reserved for documentation and testing and cannot be registered by anyone. The part before the @ sign comes from made-up sample identities. Mail sent to these addresses reaches nobody, so they are suitable only for test data and demos.",
   },
   {
-    q: 'Can I use these emails to test sign-up or login forms?',
-    a: 'Absolutely. These fake emails are ideal for testing sign-up flows, login screens, and validation logic. Since they follow real email format rules, they will pass front-end format validation while remaining completely fictional — no real user will ever receive unwanted emails from your test runs.',
+    q: "Can I use these emails to test sign-up or login forms?",
+    a: "Yes, for testing forms in your own applications and test environments. The addresses follow normal email format, so they pass typical format validation, but they cannot receive verification messages. Do not use them to create accounts on other people's services. Some systems deliberately reject example domains, which is expected.",
   },
   {
     q: 'How many emails can I generate at once?',
@@ -28,7 +28,7 @@ export const usernameFaqs = [
   },
   {
     q: 'Are the generated usernames unique?',
-    a: 'Usernames are drawn from a large cached identity pool, so within a single batch you will get varied, non-repeating results. Across multiple separate generations there may be occasional overlaps, so if your database enforces unique constraints, run a quick deduplication pass on large bulk sets before importing.',
+    a: "Not guaranteed. Usernames come from a shared pool of up to 1,000 sample identities that our server caches, so repeats across separate requests are expected, and large sets can contain duplicates. If your database enforces a unique constraint, remove duplicates or add your own suffix before you import the data.",
   },
   {
     q: 'Can I use these usernames in a production application?',
@@ -40,7 +40,7 @@ export const usernameFaqs = [
   },
   {
     q: 'Can I filter or customize the style of the usernames?',
-    a: 'The current generator produces natural, human-style usernames sourced from the randomuser.me identity pool. Style customization (such as adding numbers, enforcing length, or choosing a theme like gaming handles) is a frequently requested feature and is on our roadmap.',
+    a: "There are no style options at the moment. Each username is a cleaned-up version of a sample first and last name followed by a three-digit number, such as zoeobrien427. If you need a particular length, symbol, or theme, adjust the copied list in a spreadsheet or in your own script before using it.",
   },
 ];
 
@@ -59,7 +59,7 @@ export const nameFaqs = [
   },
   {
     q: "Are these real people's names?",
-    a: "The names are algorithmically generated combinations drawn from common name datasets. While some may coincidentally match a real person's name, they are not linked to any actual individuals. They are safe to use in demos, fixtures, and UI mockups.",
+    a: "They are first and last names taken from made-up sample profiles supplied by the randomuser.me service. Common names will match some real people by coincidence, but the profiles are not records about any particular person. Use them only as test data, and never present them as real customers, reviewers, or witnesses.",
   },
   {
     q: 'How many names can I generate at once?',
@@ -69,35 +69,35 @@ export const nameFaqs = [
 
 export const phoneNumberFaqs = [
   {
-    q: 'Are the generated phone numbers real or callable?',
-    a: "No — all generated phone numbers are fictional. They are structurally valid (they conform to each country's number length and format rules) but they are not assigned to any real subscriber. Never use them to attempt to contact people. They exist purely for testing, UI mockups, and demo data.",
+    q: "Are the generated phone numbers real or callable?",
+    a: "They are not meant to be called. Every number comes from a range that a telephone regulator keeps for fiction, such as 555-0100 to 555-0199 in North America or Ofcom's drama numbers in the UK. Those ranges are not given to ordinary subscribers. Do not use any generated number to contact people or to verify an account.",
   },
   {
-    q: 'Which countries are supported?',
-    a: 'The generator supports 50+ countries across North America, Europe, Asia, Australia, and more. Select your target country from the dropdown before generating, and the output will be formatted correctly for that country using the libphonenumber library — the same library used by Google.',
+    q: "Which countries are supported?",
+    a: "The United States, Canada, the United Kingdom, and Australia, where Australia covers landlines only. We include a country only when we can verify that its numbering authority reserves numbers for fiction. Other countries are left out because a random number in a normal range could belong to a real person or business.",
   },
   {
-    q: 'Can I use these numbers to test SMS or voice verification flows?',
-    a: "For testing OTP and SMS flows, you should use your SMS provider's test mode or sandbox numbers, not numbers from this generator. These fake numbers are ideal for testing UI form validation and visual layouts, but they won't actually receive SMS messages or voice calls.",
+    q: "Can I use these numbers to test SMS or voice verification flows?",
+    a: "No. These numbers cannot receive SMS messages or voice calls, so one-time codes will never arrive. Use the test numbers or sandbox mode provided by your telephony or authentication provider for verification flows. Use this generator for form layouts, database fixtures, mockups, documentation, and other places where a number only has to be displayed or stored.",
   },
   {
-    q: 'Why do some US numbers use the 555-01XX range?',
-    a: 'Numbers in the NANP 555-01XX range (e.g., 555-0100 through 555-0199) are permanently reserved by the North American Numbering Plan for fictional use in media and testing. Similarly, the UK uses a "drama" range. This generator deliberately uses these reserved ranges where available so there is zero risk of accidentally generating a real, in-service phone number.',
+    q: "Why do some US numbers use the 555-01XX range?",
+    a: "The North American numbering plan keeps 555-0100 through 555-0199 for fictional use in entertainment and advertising. Every US and Canadian number from this generator uses that block with a real area code. Other 555 numbers are not covered by the same reservation, so simply starting a number with 555 does not make it safe to publish.",
   },
   {
-    q: 'How are the phone numbers formatted?',
-    a: "Numbers are formatted according to each country's local standard using the libphonenumber-js library, which is the industry standard for phone number formatting. US numbers display as (XXX) XXX-XXXX, UK numbers as +44 XXXX XXXXXX, and so on — ready to use in your UI without any reformatting.",
+    q: "How are the phone numbers formatted?",
+    a: "Each result is shown three ways. The international form is spaced using the libphonenumber-js formatter. The E.164 form is a plus sign, the country code, and the digits with no spaces, which suits database storage. The national field lists the digits without the country code or leading zero. Some strict validators reject fiction numbers because they are never assigned.",
   },
 ];
 
 export const ssnFaqs = [
   {
-    q: 'Are these Social Security Numbers real?',
-    a: "No — every SSN generated by this tool is completely fictional. They follow the structural rules of real SSNs (three-digit area number, two-digit group number, four-digit serial number) but are algorithmically created and not assigned to any real person by the Social Security Administration.",
+    q: "Are these Social Security Numbers real?",
+    a: "No. The digits are generated at random and follow the XXX-XX-XXXX format while avoiding patterns that are never valid. A random result could still match a number the Social Security Administration has issued to someone, so never treat one as belonging to nobody. Use them only inside isolated software tests, and never for identification.",
   },
   {
-    q: 'Is it legal to generate fake SSNs?',
-    a: "Generating fictional SSNs for legitimate software development, testing, and educational purposes is legal. It is illegal to use fake SSNs to commit fraud, impersonate real individuals, or deceive government agencies or financial institutions. This tool is built strictly for developers who need test data.",
+    q: "Is it legal to generate test SSNs?",
+    a: "Creating made-up numbers to test your own software is a common development practice. Using any Social Security number to commit fraud, impersonate a person, open accounts, or deceive an agency or business is illegal. This tool is only for non-production test data, and you are responsible for following the laws that apply to you.",
   },
   {
     q: 'What makes an SSN "structurally valid"?',
@@ -115,24 +115,24 @@ export const ssnFaqs = [
 
 export const addressFaqs = [
   {
-    q: 'Are the generated addresses real places?',
-    a: "No — all generated addresses are completely fictional. While street names, cities, states, and zip codes are formatted realistically, they are algorithmically constructed and do not correspond to real, deliverable postal addresses. They are designed to look authentic in demos and test environments without putting any real location's data at risk.",
+    q: "Are the generated addresses real places?",
+    a: "Treat them as made up. Streets and cities are generated, and each ZIP code is drawn from the chosen state's range, but nothing is checked against a postal database. A combination could resemble a real property by coincidence. Do not ship anything to them, present them as somebody's address, or use them to register for third-party services.",
   },
   {
-    q: 'Can I use fake addresses to test shipping or checkout flows?',
-    a: "Yes — fake addresses are perfect for testing checkout forms, shipping rate calculators, address validation UIs, and e-commerce flows. They will trigger your form validation logic and help you test edge cases like long street names, apartment numbers, and state abbreviations without needing real customer data.",
+    q: "Can I use random addresses to test shipping or checkout flows?",
+    a: "You can use them to test layout, field lengths, required fields, and data imports. The state and ZIP range agree, but the street and city are invented, so address verification and shipping-rate services are likely to reject them. That helps test error handling. For successful rate or tax calculations, use your provider's sandbox addresses.",
   },
   {
-    q: 'What format are the addresses in?',
-    a: "Addresses follow the standard U.S. mailing format: street number and name, optional apartment/suite, city, state abbreviation, and ZIP code. This format is compatible with most shipping APIs, form validators, and database schemas used in North American applications.",
+    q: "What format are the addresses in?",
+    a: "Each result has a street line, city, two-letter US state abbreviation, a five-digit or nine-digit ZIP code from that state's range, and United States as the country, plus one formatted line combining them. There is no apartment or suite line, so add one yourself if your form needs to test it.",
   },
   {
-    q: 'Can I export the generated addresses as a CSV file?',
-    a: 'Yes — when generating multiple addresses in bulk mode, you can export the entire batch as a CSV file with a single click. The CSV is formatted with column headers, making it easy to import directly into spreadsheets, databases, or data processing scripts.',
+    q: "Can I export the generated addresses as a CSV file?",
+    a: "Yes. In bulk mode you can generate 10, 50, 100, or 200 addresses and download the whole batch as a CSV file with column headings. You can open it in a spreadsheet or load it with a database import or seed script. In single mode, you can copy the one result as JSON instead.",
   },
   {
-    q: 'How are the fictional street names and cities generated?',
-    a: 'Street names, cities, and ZIP codes are drawn from a curated dataset of plausible but fictional U.S. location data. The generator mixes realistic-sounding street names, valid state abbreviations, and formatted ZIP codes to produce addresses that look genuine without being tied to any real property or location.',
+    q: "How are the street names and cities generated?",
+    a: "The Faker library builds them in your browser from its US English data set. Street lines combine a building number with a generated street name, and city names are assembled from name fragments or common patterns. Only the state and ZIP range are linked, and nothing is sent to our servers.",
   },
 ];
 
@@ -143,15 +143,15 @@ export const uuidFaqs = [
   },
   {
     q: 'Are UUIDv7 identifiers safe to use as database primary keys?',
-    a: "Yes — UUIDv7 is one of the best choices for distributed primary keys. It is globally unique (collision probability is astronomically low), time-ordered (reduces B-tree index fragmentation), and human-readable in its time component. It works natively with PostgreSQL's uuid type, MySQL's CHAR(36) or BINARY(16), and most modern ORMs.",
+    a: "Yes, they work well as primary keys, particularly when several services create IDs independently. Values begin with a millisecond timestamp, so new rows tend to land at the end of a B-tree index, which reduces fragmentation compared with random UUIDv4 keys. Keep a unique constraint in place, and remember that anyone who sees an ID can read its creation time.",
   },
   {
     q: 'Are the generated UUIDs truly unique?',
-    a: "UUIDs are 128-bit values with 74 bits of randomness in UUIDv7. The probability of generating two identical UUIDs is vanishingly small — far less than the chance of hardware failure. For all practical purposes, each generated UUID is globally unique and safe to use as a unique identifier without any coordination between systems.",
+    a: "Collisions are extremely unlikely. This generator places a 48-bit millisecond timestamp first, then a counter that starts at a random value and increases for IDs made in the same millisecond, followed by 42 further random bits. No central coordination is needed, but your database should still enforce uniqueness, as it should for any identifier.",
   },
   {
     q: 'What does the format of a UUIDv7 look like?',
-    a: "A UUIDv7 follows the standard UUID format: xxxxxxxx-xxxx-7xxx-yxxx-xxxxxxxxxxxx. The first 12 hex characters encode the Unix timestamp in milliseconds, the '7' indicates the version, and the remaining bits are random. Example: 01944f3a-b2c1-7d4e-a8f0-1234567890ab.",
+    a: "It looks like xxxxxxxx-xxxx-7xxx-yxxx-xxxxxxxxxxxx. The first 12 hexadecimal digits are the Unix time in milliseconds, the 7 marks the version, and y is 8, 9, a, or b to mark the variant. The remaining digits hold a counter and random bits. For example, IDs created at midnight UTC on 1 January 2026 begin 019b76da-a800-7.",
   },
   {
     q: 'Can I generate UUIDs in bulk for seeding data?',
@@ -184,55 +184,55 @@ export const passwordFaqs = [
 
 export const compoundInterestFaqs = [
   {
-    q: 'What is daily compounding and why does it matter?',
-    a: "Daily compounding means your interest is calculated and added to your principal every single day, rather than monthly, quarterly, or annually. Because interest earns interest more frequently, the compounding effect is more powerful. The difference seems small at first but becomes dramatic over years — a $10,000 investment at 6% annual interest grows to $18,167 over 10 years with annual compounding, but $18,220 with daily compounding. The gap widens significantly with higher rates or longer periods.",
+    q: "What is daily compounding and why does it matter?",
+    a: "Daily compounding adds interest to the balance every day, so the next day's interest is calculated on a slightly larger amount. At a 6% nominal rate, $10,000 grows to about $18,220 over 10 years with daily compounding, compared with about $18,194 compounded monthly and $17,908 compounded once a year, before taxes and fees.",
   },
   {
-    q: 'How is daily compounding different from monthly compounding?',
-    a: "With monthly compounding, interest is added to your balance 12 times per year. With daily compounding, it's added 365 times per year. The more frequently interest compounds, the faster your balance grows, because each day's interest base is slightly larger than the day before. For savings accounts and high-yield accounts, daily compounding is the most common and most beneficial compounding frequency.",
+    q: "How is daily compounding different from monthly compounding?",
+    a: "Monthly compounding adds interest 12 times a year, while daily compounding adds it 365 times at one 365th of the nominal rate. With the same nominal rate, daily compounding ends slightly higher. If two accounts quote APY instead, compounding frequency is already included, so compare the APY figures directly and then check fees and conditions.",
   },
   {
-    q: 'Can I factor in regular contributions to the calculator?',
-    a: "Yes — the calculator supports optional periodic contributions (daily, weekly, monthly, or annual deposits). Adding regular contributions dramatically accelerates growth compared to a one-time lump sum. For example, contributing $200 per month in addition to an initial deposit has a far greater long-term impact than a larger upfront sum with no ongoing additions.",
+    q: "Can I factor in regular contributions to the calculator?",
+    a: "Yes. You can add a recurring deposit daily, weekly, every two weeks, monthly, or quarterly. The calculator spaces them every 1, 7, 14, 30, or 90 days, and each deposit starts earning interest the following day. Because a month is treated as 30 days, a 365-day projection with monthly deposits includes 12 of them.",
   },
   {
-    q: 'What does "reinvestment" mean in the context of this calculator?',
-    a: "Reinvestment means that instead of withdrawing the interest earned, you leave it in the account so it can continue to compound. This is the core mechanic of compound interest — it's only powerful when returns are reinvested. The calculator assumes full reinvestment by default, which gives you the maximum growth projection.",
+    q: "What does \"reinvestment\" mean in the context of this calculator?",
+    a: "With reinvestment on, which is the default, each day's interest joins the balance and earns interest itself. With it off, interest is still counted but kept aside, so only your principal and deposits earn. For example, $10,000 at a 5% nominal rate over 365 days earns $512.67 with reinvestment and $500.00 without it.",
   },
   {
-    q: 'What currencies are supported?',
-    a: "The calculator supports multiple currencies including USD, EUR, GBP, JPY, and others. Currency selection affects the display formatting of the result — the underlying math is the same regardless of currency. For cross-currency comparisons, run separate calculations with the same rate and period.",
+    q: "What currencies are supported?",
+    a: "You can pick from a list of major currencies, including US dollars, euros, British pounds, and Japanese yen. The choice mainly controls how amounts are shown; the growth calculation treats the number you enter as an amount in that currency. It does not predict exchange-rate movements, which can change the value of savings held in another currency.",
   },
 ];
 
 export const childSupportFaqs = [
   {
-    q: 'How does Indiana calculate child support?',
-    a: "Indiana uses the Income Shares Model, which bases child support on the combined gross income of both parents and the percentage each parent contributes to that combined income. The model assumes children should receive the same proportion of parental income they would have received if the family remained intact. The calculated amount is then adjusted based on each parent's parenting time.",
+    q: "How does Indiana calculate child support?",
+    a: "Indiana uses the Income Shares Model. Each parent's weekly gross income is reduced by a few allowed adjustments and the results are combined. A schedule gives the basic obligation for that income and number of children. Child care and children's health premiums are added, the total is split by income share, and the paying parent's credits are subtracted.",
   },
   {
-    q: 'What is the Income Shares Model?',
-    a: "The Income Shares Model treats child-rearing as a shared financial responsibility proportional to each parent's income. First, the total support obligation for the child is determined from Indiana's support schedules based on combined weekly income. Then each parent's share is calculated proportionally. The parent who earns more contributes more; the parent who spends more parenting time typically receives net payments from the other.",
+    q: "What is the Income Shares Model?",
+    a: "It is based on the idea that children should receive the same proportion of parental income they would have received if the parents lived together. Indiana's schedule estimates that amount from combined weekly adjusted income. Each parent is responsible for a share that matches their percentage of the combined income, so a parent earning 60% carries 60% of the total.",
   },
   {
-    q: 'What information do I need to use this calculator?',
-    a: "You will need both parents' weekly gross income (before taxes and deductions), the number of children covered by the support order, and each parent's approximate overnight parenting time per year. Additional inputs like childcare costs, health insurance premiums, and other child-related expenses can also factor into the final calculation.",
+    q: "What information do I need to use this calculator?",
+    a: "You need each parent's gross income before taxes, the number of children, and each child's yearly overnights with the paying parent. If they apply, also gather weekly amounts for work-related child care, the children's share of health premiums, support for prior-born children, and maintenance paid, plus the number of later-born or adopted children each parent supports.",
   },
   {
-    q: 'How does parenting time affect child support in Indiana?',
-    a: "Indiana provides a parenting time credit that reduces a parent's support obligation based on the number of overnights they spend with the child. Parents who have the child for more nights per year receive a larger credit, which lowers the net amount they owe. This incentivizes active parenting involvement from both parents.",
+    q: "How does parenting time affect child support in Indiana?",
+    a: "The paying parent receives a parenting time credit starting at 52 overnights a year. The Parenting Time Table gives two factors for each overnight band, which are applied to the basic obligation and the paying parent's income share. More overnights mean a larger credit. With near-equal time, the payment can even run from the other parent.",
   },
   {
-    q: 'Is this calculator legally binding or an official Indiana tool?',
-    a: "No — this calculator is an independent estimation tool for informational and planning purposes only. It is not affiliated with, endorsed by, or certified by the State of Indiana or any court. Child support orders are determined by a judge and enforced by the Indiana Child Support Bureau. Always consult a licensed Indiana family law attorney for advice specific to your situation.",
+    q: "Is this calculator legally binding or an official Indiana tool?",
+    a: "No. It is an independent estimate and is not affiliated with or approved by the State of Indiana or any court. It follows the standard worksheet but leaves out post-secondary education, split custody, Social Security credits, and imputed income. A judge sets the order and may deviate from the guideline amount, so verify it with official sources or an attorney.",
   },
   {
-    q: 'Does this calculator also cover Indiana alimony or spousal support?',
-    a: "No, and importantly, this isn't a gap in the tool — it reflects how Indiana law actually works. Unlike child support, Indiana has no income-shares-style formula for spousal maintenance (Ind. Code 31-15-7-2). Courts award it only in limited circumstances — physical or mental incapacity, caring for a child with a disability, or short-term rehabilitative maintenance while a spouse becomes self-supporting — and the amount is left to judicial discretion rather than a calculable schedule. Any tool claiming to \"calculate\" an Indiana alimony figure is presenting an invented number, not a guideline result.",
+    q: "Does this calculator also cover Indiana alimony or spousal support?",
+    a: "No. Indiana's child support worksheet does not produce a figure for spousal maintenance, and the maintenance statute, Indiana Code 31-15-7-2, sets no schedule or formula. A court may order it only in limited situations, such as incapacity, caring for a child with a disability, or short-term rehabilitative support. A family law attorney can explain how those apply.",
   },
   {
-    q: 'How is Indiana spousal maintenance decided if there is no formula?',
-    a: "A judge weighs factors specific to the case: the requesting spouse's earning ability and any physical or mental incapacity, the time and training needed to become self-supporting, the standard of living during the marriage, and each spouse's financial resources. Because these are judgment calls rather than inputs into an equation, the only reliable way to estimate a likely outcome is to discuss your specific facts with a licensed Indiana family law attorney.",
+    q: "How is Indiana spousal maintenance decided if there is no formula?",
+    a: "The court first decides whether a legal ground for maintenance exists, then looks at the facts of the case. For rehabilitative maintenance, the statute lists factors including each spouse's education at the marriage and now, interrupted education or work, earning capacity, and the time and expense needed to train for suitable work. Outcomes vary, so get advice on your circumstances.",
   },
 ];
 
@@ -290,7 +290,7 @@ export const cronExpressionFaqs = [
   },
   {
     q: "Are my schedules sent to a server?",
-    a: "No. All cron expression generation happens entirely in your browser. Your schedule choices are never sent to our servers, logged, or stored. The next-run preview is also computed locally using the expression and timezone you provide.",
+    a: "No. The expression, its plain-English description, and the next-run preview are all produced in your browser from your choices and the selected time zone. Your schedule is not sent to our servers, logged, or stored. Standard website analytics may still record that the page was used, as described in our privacy policy.",
   },
   {
     q: "Does this work for Spring @Scheduled or Quartz cron expressions?",
@@ -298,30 +298,30 @@ export const cronExpressionFaqs = [
   },
   {
     q: "Does the generated expression work with Jenkins cron syntax?",
-    a: 'Yes — Jenkins job scheduling uses standard 5-field cron syntax (minute, hour, day of month, month, day of week), so expressions generated here paste directly into a Jenkins "Build periodically" or "Poll SCM" trigger. Jenkins additionally supports an H symbol (hash) in place of a fixed number to spread load across jobs, e.g. H 9 * * * runs once during the 9 AM hour at a time Jenkins picks per job — this generator outputs standard numeric/wildcard values, which you can manually swap for H if you want Jenkins to load-balance the exact minute.',
+    a: "Yes. Jenkins uses five fields in the usual order: minute, hour, day of month, month, and day of week, so standard expressions from this tool work in a Build periodically or Poll SCM trigger. Jenkins also supports an H symbol, as in H 9 * * *, to spread jobs across an hour. This builder does not generate H, but you can add it by hand.",
   },
 ];
 
 export const ipAddressFaqs = [
   {
     q: "Are the generated IP addresses real or in use?",
-    a: "The IP addresses are algorithmically generated to be structurally valid — correct dotted-decimal format for IPv4 or correct hextet format for IPv6 — but they are not checked against real-world allocation registries. Some may coincidentally match addresses that are actually assigned. Never use generated addresses to target, ping, or connect to real hosts; they are intended for UI mockups, test fixtures, and documentation examples only.",
+    a: "No public host should use them. IPv4 results come from 192.0.2.0/24, 198.51.100.0/24, and 203.0.113.0/24, and IPv6 results from 2001:db8::/32. Internet standards reserve all of these for documentation, so they are not routed on the public internet. That makes them safe to show in examples, screenshots, test data, and tutorials.",
   },
   {
     q: "What is the difference between IPv4 and IPv6?",
-    a: "IPv4 addresses are 32-bit values written as four decimal octets separated by dots (e.g. 192.0.2.1), giving about 4.3 billion possible addresses. IPv6 addresses are 128-bit values written as eight groups of hexadecimal digits separated by colons (e.g. 2001:db8::1), providing a vastly larger address space designed to outlast IPv4 exhaustion. Choose the version that matches what your application, network config, or test schema expects.",
+    a: "IPv4 addresses are 32-bit values written as four decimal numbers separated by dots, such as 192.0.2.1, giving about 4.3 billion possible addresses. IPv6 addresses are 128-bit values written as eight groups of hexadecimal digits separated by colons, such as 2001:db8::1. IPv6 has a vastly larger address space and was designed to cope with IPv4 running out.",
   },
   {
     q: "What can I use randomly generated IP addresses for?",
-    a: "Random IP addresses are useful for seeding test databases, populating log viewers and analytics dashboards with realistic-looking traffic data, testing IP validation and geolocation logic, filling firewall or access-control rule mockups, and building demo environments — all without exposing or depending on real network addresses.",
+    a: "They suit database fixtures, sample logs, dashboard mockups, documentation, firewall rule examples, and format validation tests. Because the addresses are reserved for documentation, they will not give meaningful geolocation or reputation results, and some software treats them as special. To test those features, mock the lookup response in your own code.",
   },
   {
     q: "How many IP addresses can I generate at once?",
-    a: "You can generate a single address or a bulk batch of 10, 50, 100, or 200 at once. Single results can be copied directly to your clipboard; bulk batches can be exported as a CSV file with one click, ready to import into a spreadsheet, seed script, or test fixture.",
+    a: "You can generate one address, or a bulk batch of 10, 50, 100, or 200. A single result can be copied to the clipboard, and a bulk batch can be downloaded as a CSV file with address and version columns. Addresses are not repeated within a batch, although separate batches can overlap, especially for IPv4.",
   },
   {
     q: "Can I generate both IPv4 and IPv6 addresses in the same batch?",
-    a: "Each generation run produces addresses of a single version — select IPv4 or IPv6 from the version dropdown before clicking Generate. To get a mixed set, run the generator once per version and combine the exported CSV files, or generate two separate batches.",
+    a: "No. Each run produces one version, chosen before you press Generate. If your test needs both, generate an IPv4 batch and an IPv6 batch, download each as CSV, and combine the files. The version column in each export lets you tell the two kinds apart after you merge them.",
   },
 ];
 
@@ -351,7 +351,7 @@ export const base64ToolFaqs = [
 export const jsonToolFaqs = [
   {
     q: "Why does this JSON validator show a different error than my browser console?",
-    a: "Browser and Node.js JSON parsers report errors inconsistently — some give a character position, some give a line and column, and some (like a bare \"Unexpected token\") give no location at all, and the exact wording varies between Chrome, Firefox, and Safari. This tool ships its own JSON grammar checker that walks your input character by character, so it always reports a precise line, column, and human-readable reason for the first syntax problem it finds, regardless of which browser you're using — then click \"Go to error\" to jump straight to it in the input box.",
+    a: "Browsers and Node.js word JSON errors differently, and some messages give only a character position or no location at all. This tool runs its own grammar check when parsing fails, so it reports the line, column, and a readable reason for the first syntax problem. Use Go to error to jump to that spot in the input and fix it.",
   },
   {
     q: "What's the difference between the Format & validate, Tree view, and JSON → TypeScript tabs?",

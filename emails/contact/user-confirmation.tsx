@@ -10,7 +10,7 @@ import {
   Text,
 } from '@react-email/components';
 import type { ContactEmailProps } from '@/lib/types';
-import { siteDomain } from '@/lib/site-config';
+import { BRAND_NAME } from '@/lib/site-config';
 
 const main = {
   backgroundColor: '#f4f4f5',
@@ -105,7 +105,7 @@ export function UserContactConfirmationEmail({
               textAlign: 'center' as const,
               marginTop: '24px',
             }}>
-            {siteDomain} — your utilities suite
+            {BRAND_NAME} — your utilities suite
           </Text>
         </Container>
       </Body>

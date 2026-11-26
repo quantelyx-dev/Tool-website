@@ -1,7 +1,10 @@
+import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 
+import { BlogAuthorBox } from "@/components/blog/blog-author-box";
 import { BlogToolCta } from "@/components/blog/blog-tool-cta";
 import type { BlogPost, BlogSection } from "@/lib/blogs/types";
+import { AUTHOR } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 type BlogPostRendererProps = {
@@ -13,6 +16,7 @@ function formatBlogDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
     year: "numeric",
   });
 }
@@ -100,6 +104,12 @@ export function BlogPostRenderer({ post, className }: BlogPostRendererProps) {
           {post.excerpt}
         </p>
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+          <span>
+            By{" "}
+            <Link href={AUTHOR.path} prefetch={false} className="underline underline-offset-2">
+              {AUTHOR.name}
+            </Link>
+          </span>
           <span className="inline-flex items-center gap-1.5">
             <Calendar className="size-4" aria-hidden="true" />
             <time dateTime={post.publishedAt}>
@@ -134,6 +144,7 @@ export function BlogPostRenderer({ post, className }: BlogPostRendererProps) {
         source="footer"
         className="max-w-3xl"
       />
+      <BlogAuthorBox />
     </article>
   );
 }

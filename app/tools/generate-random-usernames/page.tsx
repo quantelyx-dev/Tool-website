@@ -1,39 +1,25 @@
 import type { Metadata } from 'next';
 
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { GenerateRandomUsernamesToolContent } from '@/components/generate-random-usernames/generate-random-usernames-tool-content';
 import { usernameFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/tools/generate-random-usernames' },
-  title: 'Random Username Generator — Fake Usernames',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Random Test Username Generator',
   description:
-    'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases, populating staging environments, and building demo user lists.',
+    'Generate up to 1,000 readable test usernames for database seeds, staging environments, and interface mockups. Copy the whole batch at once.',
+  path: '/tools/generate-random-usernames',
   keywords: [
     'random username generator',
-    'fake username generator',
+    'test username generator',
     'bulk username creator',
-    'username ideas',
     'test usernames',
     'dummy usernames',
   ],
-  openGraph: {
-    title: `Random Username Generator — Fake Usernames | ${siteDomain}`,
-    description:
-      'Generate hundreds of realistic, unique usernames in seconds. Ideal for seeding test databases and building demo user lists.',
-    url: '/tools/generate-random-usernames',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Random Username Generator — Fake Usernames | ${siteDomain}`,
-    description:
-      'Generate hundreds of realistic, unique usernames in seconds. Ideal for test databases and demo user lists.',
-  },
-};
+});
 
 
 export default function GenerateRandomUsernamesPage() {
@@ -42,8 +28,7 @@ export default function GenerateRandomUsernamesPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Random username generator' }]} />
         <GenerateRandomUsernamesToolContent />
-        <ToolBlogPromo toolLink='/tools/generate-random-usernames' />
-        <ToolFaqSection faqs={usernameFaqs} />
+        <ToolPageDetails toolLink='/tools/generate-random-usernames' faqs={usernameFaqs} />
       </div>
     </main>
   );

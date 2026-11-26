@@ -205,8 +205,8 @@ export function GenerateRandomIpAddressesToolContent({
               'mx-auto mt-5 max-w-2xl px-1 text-pretty text-base leading-relaxed text-muted-foreground',
               'sm:mt-6 sm:px-0 sm:text-lg',
             )}>
-            Generate fictional IPv4 or IPv6 addresses in single or bulk mode
-            for fixtures and demos.
+            Generate IPv4 or IPv6 test addresses from documentation ranges, in
+            single or bulk mode.
           </p>
         </motion.header>
 

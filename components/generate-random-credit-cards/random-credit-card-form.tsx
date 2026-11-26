@@ -107,7 +107,7 @@ export function RandomCreditCardForm({
                   Card generator
                 </CardTitle>
                 <CardDescription className={cn('text-sm leading-relaxed')}>
-                  Choose issuer and generation mode before creating fake card
+                  Choose issuer and generation mode before creating test card
                   data.
                 </CardDescription>
               </div>

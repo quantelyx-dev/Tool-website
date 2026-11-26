@@ -1,39 +1,26 @@
 import type { Metadata } from 'next';
 
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { GenerateRandomEmailsToolContent } from '@/components/generate-random-emails/generate-random-emails-tool-content';
 import { emailFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/tools/generate-random-emails' },
-  title: 'Random Email Generator — Fake Bulk Emails',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Random Test Email Generator',
   description:
-    'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases, staging environments, and UI mockups — free, no sign-up required.',
+    'Generate up to 1,000 test email addresses on reserved example.com, example.net, and example.org domains for forms, fixtures, and demos.',
+  path: '/tools/generate-random-emails',
   keywords: [
     'random email generator',
-    'fake email generator',
+    'test email generator',
     'bulk email generator',
     'test email addresses',
     'dummy email generator',
-    'fake emails for testing',
+    'example.com email list',
   ],
-  openGraph: {
-    title: `Random Email Generator — Fake Bulk Emails | ${siteDomain}`,
-    description:
-      'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases, staging environments, and UI mockups.',
-    url: '/tools/generate-random-emails',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Random Email Generator — Fake Bulk Emails | ${siteDomain}`,
-    description:
-      'Generate up to 1,000 realistic fake email addresses instantly. Perfect for test databases and UI mockups.',
-  },
-};
+});
 
 
 export default function GenerateRandomEmailsPage() {
@@ -42,8 +29,7 @@ export default function GenerateRandomEmailsPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Random email generator' }]} />
         <GenerateRandomEmailsToolContent />
-        <ToolBlogPromo toolLink='/tools/generate-random-emails' />
-        <ToolFaqSection faqs={emailFaqs} />
+        <ToolPageDetails toolLink='/tools/generate-random-emails' faqs={emailFaqs} />
       </div>
     </main>
   );

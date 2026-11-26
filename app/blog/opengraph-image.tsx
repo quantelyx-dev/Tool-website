@@ -1,6 +1,6 @@
 import { createOgImage, OG_CONTENT_TYPE, OG_SIZE } from '@/lib/seo/og-image';
 
-export const alt = 'Guides and tutorials for our free online tools';
+export const alt = 'toolcalcs.net guides to calculators, generators, and developer tools';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

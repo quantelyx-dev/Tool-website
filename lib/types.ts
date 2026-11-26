@@ -18,6 +18,8 @@ export type ToolEntry = {
   name: string;
   description: string;
   link: string;
+  /** Last content or behaviour change (YYYY-MM-DD); used as the sitemap lastmod. */
+  updatedAt: string;
 };
 
 export type ToolGroup = {

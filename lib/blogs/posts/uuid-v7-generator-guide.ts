@@ -4,7 +4,7 @@ import { uuidFaqs } from "@/lib/tool-faqs";
 
 export const uuidV7Post: BlogPost = {
   slug: "uuid-v7-generator-guide",
-  title: "UUID v7 Generator Guide: Sortable IDs for Developers",
+  title: "UUIDv7 Guide: Sortable IDs",
   excerpt:
     "Understand UUID v7 vs v4, why time-ordered IDs improve database performance, and how to generate bulk UUIDv7 values for seeds and fixtures.",
   keywords: [
@@ -18,7 +18,7 @@ export const uuidV7Post: BlogPost = {
   toolLink: "/tools/generate-random-uuids",
   toolName: "Random UUIDv7 generator",
   publishedAt: "2026-06-07",
-  updatedAt: "2026-06-25",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 13,
   relatedSlugs: [
     "fake-usernames-for-testing-guide",
@@ -49,7 +49,7 @@ export const uuidV7Post: BlogPost = {
     toolCta(),
     h2("Why database engineers prefer UUID v7"),
     p(
-      "On tables with millions of rows — orders, events, audit logs, messages — random UUID primary keys inflate index size and slow writes. Benchmarks commonly show 20-40% write throughput improvements when switching from v4 to v7 on SSD-backed PostgreSQL with default B-tree indexes. Read patterns that scan recent rows by ID also benefit because newest records cluster at the index tail.",
+      "On large, busy tables such as orders, events, and audit logs, random primary keys scatter inserts across the index. Time-ordered keys concentrate them near the end, which generally means fewer page splits and better cache use. The size of the benefit depends on your database, hardware, and workload, so measure it on your own data.",
     ),
     h3("Distributed systems without ID coordination"),
     p(
@@ -57,15 +57,15 @@ export const uuidV7Post: BlogPost = {
     ),
     h2("UUID v7 format breakdown"),
     p(
-      "Example: 01944f3a-b2c1-7d4e-a8f0-1234567890ab. The leading hex digits encode timestamp; the '7' in the third group indicates version; variant bits appear in the fourth group; trailing bits are random. Validators check version and variant fields — generators must set these correctly for interoperability with strict parsers.",
+      "Example: 019b76da-a800-7d4e-a8f0-1234567890ab. The first 12 hex digits encode the timestamp, the 7 in the third group marks the version, and the fourth group begins with the variant bits. The remaining bits are random, or partly a counter that keeps values from the same millisecond in order, which RFC 9562 permits.",
     ),
     h2("When to use UUID v7"),
     ol([
       "Primary keys on high-insert tables (events, notifications, analytics rows)",
-      "Public-facing opaque IDs where enumeration attacks matter",
+      "Public identifiers that should be hard to enumerate, if revealing creation time is acceptable",
       "Distributed services without shared ID sequence",
       "API resource identifiers needing time-sortable pagination cursors",
-      "Replacing UUID v4 in greenfield projects targeting PostgreSQL 17+ native support",
+      "New projects that would otherwise use UUID v4 primary keys",
     ]),
     callout(
       "UUID v7 reveals creation time at millisecond precision — acceptable for most apps but avoid if ID timestamps must remain secret from clients.",

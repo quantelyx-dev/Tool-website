@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { BlogArticleJsonLd } from "@/components/blog/blog-article-json-ld";
-import { BlogFaqJsonLd } from "@/components/blog/blog-faq-json-ld";
 import { BlogPageAnalytics } from "@/components/blog/blog-page-analytics";
 import {
   BlogPostRenderer,
@@ -61,7 +60,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <BlogArticleJsonLd post={post} />
-      <BlogFaqJsonLd faqs={post.faqs} />
       <BlogPageAnalytics slug={post.slug} toolName={post.toolName} />
       <main className={cn("flex-1")}>
         <div

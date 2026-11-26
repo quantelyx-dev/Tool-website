@@ -205,7 +205,7 @@ export function GenerateRandomSsnToolContent({
               "sm:text-4xl lg:text-[2.25rem]",
             )}
           >
-            Random SSN generator
+            Random test SSN generator
           </h1>
           <p
             className={cn(
@@ -213,7 +213,7 @@ export function GenerateRandomSsnToolContent({
               "sm:mt-6 sm:px-0 sm:text-lg",
             )}
           >
-            Generate structurally valid fake Social Security Number samples for
+            Generate structurally formatted test Social Security Number samples for
             test data and demos.
           </p>
         </motion.header>

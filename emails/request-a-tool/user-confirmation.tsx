@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/site-config";
 import {
   Body,
   Container,
@@ -104,7 +105,7 @@ export function UserRequestConfirmationEmail({
               textAlign: 'center' as const,
               marginTop: '24px',
             }}>
-            Tools — your utilities suite
+            {BRAND_NAME} — free online tools
           </Text>
         </Container>
       </Body>

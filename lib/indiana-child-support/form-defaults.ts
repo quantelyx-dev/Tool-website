@@ -1,23 +1,31 @@
-import type { ChildSupportFormValues } from '@/lib/schemas/indiana-child-support-schema';
+import type {
+  ChildSupportFormValues,
+  ChildSupportParentValues,
+} from '@/lib/schemas/indiana-child-support-schema';
 
-export const CHILD_TIME_PRESETS = [
-  0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
-  100,
-] as const;
+/** About 98 overnights: alternate weekends plus holiday and summer time. */
+const DEFAULT_PAYOR_OVERNIGHTS = 98;
 
 export function defaultChildRow(): ChildSupportFormValues['children'][number] {
+  return { payorOvernights: DEFAULT_PAYOR_OVERNIGHTS };
+}
+
+function defaultParent(grossIncome: number): ChildSupportParentValues {
   return {
-    parentOneManual: false,
-    parentOneTime: 50,
-    parentTwoManual: false,
-    parentTwoTime: 50,
+    incomeInterval: 'weekly',
+    grossIncome,
+    subsequentChildren: 0,
+    priorBornOrderedSupport: 0,
+    priorBornSupportWithoutOrder: 0,
+    maintenancePaid: 0,
+    childCare: 0,
+    healthInsurance: 0,
   };
 }
 
 export const CHILD_SUPPORT_FORM_DEFAULTS: ChildSupportFormValues = {
-  parentOneIncomeInterval: 'monthly',
-  parentOneNetIncome: 5000,
-  parentTwoIncomeInterval: 'monthly',
-  parentTwoNetIncome: 5000,
+  parentOne: defaultParent(1_000),
+  parentTwo: defaultParent(800),
+  payor: 'parentOne',
   children: [defaultChildRow()],
 };

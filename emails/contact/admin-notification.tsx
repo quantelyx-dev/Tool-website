@@ -10,7 +10,7 @@ import {
   Text,
 } from '@react-email/components';
 import type { ContactEmailProps } from '@/lib/types';
-import { siteDomain } from '@/lib/site-config';
+import { BRAND_NAME } from '@/lib/site-config';
 
 const main = {
   backgroundColor: '#f4f4f5',
@@ -100,7 +100,7 @@ export function AdminContactNotificationEmail({
               textAlign: 'center' as const,
               marginTop: '24px',
             }}>
-            This message was submitted via the {siteDomain} contact form.
+            This message was submitted via the {BRAND_NAME} contact form.
           </Text>
         </Container>
       </Body>

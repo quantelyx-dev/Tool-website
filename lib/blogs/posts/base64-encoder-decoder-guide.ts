@@ -4,7 +4,7 @@ import { base64ToolFaqs } from "@/lib/tool-faqs";
 
 export const base64ToolPost: BlogPost = {
   slug: "base64-encoder-decoder-guide",
-  title: "Base64 Encoding Explained: Text, Files, Data URIs, and JWTs",
+  title: "Base64 Encoding: Text, Files, and JWT",
   excerpt:
     "What Base64 actually is (and isn't), when to use URL-safe encoding, how to turn images into data URIs, and how JWT tokens use Base64 under the hood.",
   keywords: [
@@ -18,7 +18,7 @@ export const base64ToolPost: BlogPost = {
   toolLink: "/tools/base64-encoder-decoder",
   toolName: "Base64 encoder & decoder",
   publishedAt: "2026-07-24",
-  updatedAt: "2026-07-24",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 11,
   relatedSlugs: [
     "uuid-v7-generator-guide",

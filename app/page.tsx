@@ -1,36 +1,31 @@
-import dynamic from 'next/dynamic';
+import { FaqSection } from '@/components/faq-section';
 import { HomeToolDirectory } from '@/components/home-tool-directory';
 import { SearchBar } from '@/components/search-bar';
 import { faqs } from '@/lib/home-data';
 import type { Metadata } from 'next';
-import { siteDomain } from '@/lib/site-config';
-
-const FaqSection = dynamic(() =>
-  import('@/components/faq-section').then(mod => mod.FaqSection),
-);
+import { BRAND_NAME } from '@/lib/site-config';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  title: `${siteDomain} — Free Online Tools & Calculators`,
+  title: `${BRAND_NAME} — Free Online Tools & Calculators`,
   description:
-    'Free online tools for developers and everyday users. Generate fake data, calculate compound interest, explore astrology, and more. No sign-up required.',
+    'Free online tools for developers and everyday users. Generate test data, calculate compound interest, explore astrology, and more. No sign-up required.',
   keywords: [
     'free online tools',
     'developer utilities',
     'test data generator',
     'online calculators',
-    'fake data generator',
     'toolcalcs',
   ],
   openGraph: {
-    title: `${siteDomain} — Free Online Tools & Calculators`,
+    title: `${BRAND_NAME} — Free Online Tools & Calculators`,
     description:
       'Free online tools for developers and everyday users. Generate test data, calculate finances, and more — no sign-up required.',
     url: '/',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteDomain} — Free Online Tools & Calculators`,
+    title: `${BRAND_NAME} — Free Online Tools & Calculators`,
     description:
       'Free online tools for developers and everyday users. Generate test data, calculate finances, and more — no sign-up required.',
   },

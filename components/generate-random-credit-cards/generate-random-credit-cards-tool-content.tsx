@@ -203,7 +203,7 @@ export function GenerateRandomCreditCardsToolContent({
               "sm:text-4xl lg:text-[2.25rem]",
             )}
           >
-            Random credit card generator
+            Random test card number generator
           </h1>
           <p
             className={cn(
@@ -211,7 +211,7 @@ export function GenerateRandomCreditCardsToolContent({
               "sm:mt-6 sm:px-0 sm:text-lg",
             )}
           >
-            Generate fake card details by issuer in single or bulk mode.
+            Generate test card details by issuer in single or bulk mode.
           </p>
         </motion.header>
 

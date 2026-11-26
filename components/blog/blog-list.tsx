@@ -34,7 +34,7 @@ export function BlogList({ posts, className }: BlogListProps) {
         </h1>
         <p className="max-w-2xl text-muted-foreground">
           In-depth guides, tutorials, and tips for every tool on our site —
-          written to help you work smarter and rank nothing but knowledge.
+          written to help you understand each tool and use it well.
         </p>
       </div>
 

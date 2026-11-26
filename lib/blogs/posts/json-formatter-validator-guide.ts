@@ -4,9 +4,9 @@ import { jsonToolFaqs } from "@/lib/tool-faqs";
 
 export const jsonToolPost: BlogPost = {
   slug: "json-formatter-validator-guide",
-  title: "JSON Formatter & Validator: Fix Errors Fast, Explore Trees, Generate TypeScript",
+  title: "JSON Formatter Guide: Fix JSON Errors",
   excerpt:
-    "Why generic 'Unexpected token' errors waste your time, how to read a precise line/column JSON error, and how to go from a raw API response to TypeScript interfaces in seconds.",
+    "Why 'Unexpected token' errors waste time, how to read a line and column JSON error, and how to turn an API response into TypeScript interfaces.",
   keywords: [
     "json formatter",
     "json validator online",
@@ -18,7 +18,7 @@ export const jsonToolPost: BlogPost = {
   toolLink: "/tools/json-formatter-validator",
   toolName: "JSON formatter & validator",
   publishedAt: "2026-07-24",
-  updatedAt: "2026-07-24",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 9,
   relatedSlugs: [
     "base64-encoder-decoder-guide",

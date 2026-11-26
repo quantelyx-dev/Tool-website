@@ -4,9 +4,9 @@ import { regexTesterFaqs } from "@/lib/tool-faqs";
 
 export const regexTesterPost: BlogPost = {
   slug: "regex-tester-guide",
-  title: "Regex Tester Guide: Test, Debug, and Master Regular Expressions",
+  title: "Regex Tester Guide: Test and Debug",
   excerpt:
-    "Learn how to test regular expressions effectively — from syntax basics and flag options to common patterns and debugging techniques, with real-time feedback in your browser.",
+    "How to test regular expressions well: syntax basics, flags, common patterns, and debugging techniques with real-time match highlighting.",
   keywords: [
     "regex tester",
     "regular expression guide",
@@ -19,7 +19,7 @@ export const regexTesterPost: BlogPost = {
   toolLink: "/tools/regex-tester",
   toolName: "Regex tester",
   publishedAt: "2026-07-15",
-  updatedAt: "2026-07-15",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 11,
   relatedSlugs: [
     "cron-expression-generator-guide",

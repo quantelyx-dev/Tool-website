@@ -8,7 +8,7 @@ import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ConsentManager } from '@/components/consent/consent-manager';
 import { Toaster } from '@/components/lazy-toaster';
-import { siteUrl, siteDomain } from '@/lib/site-config';
+import { siteUrl, BRAND_NAME } from '@/lib/site-config';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
 const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID ?? '';
@@ -27,14 +27,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteDomain} — Free Online Tools & Calculators`,
-    template: `%s | ${siteDomain}`,
+    default: `${BRAND_NAME} — Free Online Tools & Calculators`,
+    template: `%s | ${BRAND_NAME}`,
   },
   description:
     'Free online tools and calculators for developers and everyday tasks. Generate test data, calculate finances, and explore astrology — fast, private, no sign-up.',
   keywords: ['online tools', 'free calculators', 'developer tools', 'test data generator', 'toolcalcs'],
   openGraph: {
-    siteName: siteDomain,
+    siteName: BRAND_NAME,
     type: 'website',
     locale: 'en_US',
   },

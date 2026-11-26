@@ -12,6 +12,8 @@ import {
   GenerateRandomEmailsResultCard,
   type RandomEmailsCopyState,
 } from "@/components/generate-random-emails/generate-random-emails-result-card";
+import { GenerateRandomEmailsHeader } from "@/components/generate-random-emails/generate-random-emails-header";
+import { GenerateRandomEmailsLoading } from "@/components/generate-random-emails/generate-random-emails-loading";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,20 +22,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type {
-  GenerateRandomEmailsErrorBody,
-  GenerateRandomEmailsSuccessBody,
-} from "@/lib/generate-random-emails/api-response";
 import {
   fadeUpVariants,
   staggerContainerVariants,
 } from "@/lib/motion-variants";
-import {
-  calculatorLoadingMotionProps,
-  calculatorSwapMotionProps,
-} from "@/lib/sun-moon-rising/calculator-motion";
+import { calculatorSwapMotionProps } from "@/lib/sun-moon-rising/calculator-motion";
 import { cn } from "@/lib/utils";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useRandomEmails } from "@/hooks/use-random-emails";
 
 const COPY_FEEDBACK_MS = 2000;
 
@@ -48,9 +44,7 @@ export function GenerateRandomEmailsToolContent({
   const { onUse, onResult, onCopy, onReset } = useAnalytics("random-emails");
   const panelRef = useRef<HTMLDivElement>(null);
   const [limit, setLimit] = useState<string>(EMAIL_DEFAULT_LIMIT);
-  const [emails, setEmails] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { emails, error, loading, fetchEmails, clearEmails } = useRandomEmails();
   const [copyState, setCopyState] = useState<RandomEmailsCopyState>("idle");
   const copyResetRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -69,66 +63,24 @@ export function GenerateRandomEmailsToolContent({
     onReset();
     clearCopyFeedbackTimer();
     setCopyState("idle");
-    setEmails([]);
-    setError(null);
+    clearEmails();
     setLimit(EMAIL_DEFAULT_LIMIT);
-    setLoading(false);
     requestAnimationFrame(() => {
       panelRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     });
-  }, [clearCopyFeedbackTimer, onReset]);
+  }, [clearCopyFeedbackTimer, clearEmails, onReset]);
 
   const generate = useCallback(async () => {
     const n = Number.parseInt(limit, 10);
     onUse({ count: n });
     clearCopyFeedbackTimer();
     setCopyState("idle");
-    setError(null);
-    setLoading(true);
-    setEmails([]);
-
-    try {
-      const res = await fetch(
-        `/api/generate-random-emails?limit=${encodeURIComponent(String(n))}`,
-        { method: "GET", cache: "no-store" },
-      );
-      const body: unknown = await res.json().catch(() => null);
-
-      if (!res.ok || !body || typeof body !== "object") {
-        const msg =
-          body &&
-          typeof body === "object" &&
-          "error" in body &&
-          typeof (body as GenerateRandomEmailsErrorBody).error === "string"
-            ? (body as GenerateRandomEmailsErrorBody).error
-            : `Request failed (${res.status}).`;
-        setError(msg);
-        return;
-      }
-
-      const data = body as
-        | GenerateRandomEmailsSuccessBody
-        | GenerateRandomEmailsErrorBody;
-      if (!("ok" in data) || data.ok !== true || !Array.isArray(data.emails)) {
-        const msg =
-          typeof (data as GenerateRandomEmailsErrorBody).error === "string"
-            ? (data as GenerateRandomEmailsErrorBody).error
-            : "Unexpected response from the server.";
-        setError(msg);
-        return;
-      }
-
-      setEmails(data.emails);
-      onResult({ count: data.emails.length });
-    } catch {
-      setError("Something went wrong. Check your connection and try again.");
-    } finally {
-      setLoading(false);
-    }
-  }, [limit, clearCopyFeedbackTimer, onUse, onResult]);
+    const generated = await fetchEmails(n);
+    if (generated) onResult({ count: generated.length });
+  }, [limit, clearCopyFeedbackTimer, fetchEmails, onUse, onResult]);
 
   const copyCommaSeparated = useCallback(async () => {
     if (emails.length === 0) return;
@@ -159,49 +111,7 @@ export function GenerateRandomEmailsToolContent({
         animate="visible"
         variants={staggerContainerVariants(reducedMotion, 0.1)}
       >
-        <motion.header
-          className="relative mx-auto max-w-3xl px-3 pt-2 text-center sm:px-4 sm:pt-4"
-          variants={fadeUpVariants(reducedMotion)}
-        >
-          <div
-            aria-hidden
-            className={cn(
-              "pointer-events-none absolute inset-0 -z-10 mx-auto max-w-xl overflow-hidden rounded-3xl",
-              "bg-[radial-gradient(ellipse_72%_56%_at_50%_-30%,rgba(20,184,166,0.14),transparent)]",
-              "dark:bg-[radial-gradient(ellipse_72%_56%_at_50%_-30%,rgba(45,212,191,0.13),transparent)]",
-            )}
-          />
-          <p
-            className={cn(
-              "mb-3 text-xs font-semibold uppercase tracking-[0.2em]",
-              "text-teal-700 dark:text-teal-400 sm:text-sm",
-            )}
-          >
-            Data utilities
-          </p>
-          <h1
-            className={cn(
-              "font-heading text-balance text-3xl font-semibold tracking-tight text-foreground",
-              "sm:text-4xl lg:text-[2.25rem]",
-            )}
-          >
-            Random email generator
-          </h1>
-          <p
-            className={cn(
-              "mx-auto mt-5 max-w-2xl px-1 text-pretty text-base leading-relaxed text-muted-foreground",
-              "sm:mt-6 sm:px-0 sm:text-lg",
-            )}
-          >
-            Produce{" "}
-            <span className="font-medium text-foreground">
-              plausible email addresses
-            </span>{" "}
-            for mock users, staging data, and UI tests. Results are sourced from
-            randomuser.me and cached briefly on the server so repeated runs stay
-            responsive until the pool expires.
-          </p>
-        </motion.header>
+        <GenerateRandomEmailsHeader reducedMotion={reducedMotion} />
 
         <motion.div
           ref={panelRef}
@@ -288,25 +198,7 @@ export function GenerateRandomEmailsToolContent({
             <div className="relative min-h-32 sm:min-h-30">
               <AnimatePresence mode="wait">
                 {loading ? (
-                  <motion.div
-                    key="loading"
-                    {...calculatorLoadingMotionProps(reducedMotion)}
-                    className={cn(
-                      calculatorLoadingMotionProps(reducedMotion).className,
-                      "mx-auto flex w-full max-w-xl flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/25 px-6 py-12 sm:px-10 sm:py-14",
-                    )}
-                  >
-                    <Loader2
-                      className="size-10 shrink-0 animate-spin text-primary"
-                      aria-hidden
-                    />
-                    <p className="mt-4 text-center text-sm font-medium text-foreground">
-                      Fetching emails…
-                    </p>
-                    <p className="mt-2 max-w-sm text-center text-xs leading-relaxed text-muted-foreground">
-                      First load after idle cache can take a few seconds.
-                    </p>
-                  </motion.div>
+                  <GenerateRandomEmailsLoading key="loading" reducedMotion={reducedMotion} />
                 ) : null}
 
                 {!loading && emails.length > 0 ? (

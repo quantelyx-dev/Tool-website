@@ -1,6 +1,6 @@
 import { createOgImage, OG_CONTENT_TYPE, OG_SIZE } from '@/lib/seo/og-image';
 
-export const alt = 'Contact Us';
+export const alt = 'Contact toolcalcs.net by email or form';
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

@@ -1,6 +1,6 @@
 import { createToolOgImage, OG_CONTENT_TYPE } from '@/lib/seo/og-image';
 
-export const alt = 'Generate Random Emails - free online tool';
+export const alt = 'Random test email generator using example domains';
 export const size = { width: 1200, height: 630 };
 export const contentType = OG_CONTENT_TYPE;
 

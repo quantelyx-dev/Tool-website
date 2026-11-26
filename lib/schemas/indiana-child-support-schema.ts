@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+import {
+  MAX_CHILDREN,
+  MAX_PAYOR_OVERNIGHTS,
+} from "@/lib/indiana-child-support/guideline-constants";
+
 export const INCOME_INTERVAL_VALUES = [
   "weekly",
   "bi-weekly",
@@ -10,51 +15,63 @@ export const INCOME_INTERVAL_VALUES = [
 
 export type IncomeInterval = (typeof INCOME_INTERVAL_VALUES)[number];
 
-const shareTolerance = 0.015;
+export const PARENT_IDS = ["parentOne", "parentTwo"] as const;
 
-const childRowSchema = z
+const weeklyAmount = (label: string) =>
+  z
+    .number({ message: `Enter ${label}, or 0.` })
+    .min(0, { message: "Cannot be negative." });
+
+const parentSchema = z.object({
+  incomeInterval: z.enum(INCOME_INTERVAL_VALUES, {
+    message: "Choose an income interval.",
+  }),
+  grossIncome: weeklyAmount("gross income"),
+  subsequentChildren: z
+    .number({ message: "Enter a number of children, or 0." })
+    .int({ message: "Use a whole number." })
+    .min(0, { message: "Cannot be negative." })
+    .max(MAX_CHILDREN, { message: `Cannot exceed ${MAX_CHILDREN}.` }),
+  priorBornOrderedSupport: weeklyAmount("the weekly amount"),
+  priorBornSupportWithoutOrder: weeklyAmount("the weekly amount"),
+  maintenancePaid: weeklyAmount("the weekly amount"),
+  childCare: weeklyAmount("the weekly amount"),
+  healthInsurance: weeklyAmount("the weekly amount"),
+});
+
+const childRowSchema = z.object({
+  payorOvernights: z
+    .number({ message: "Enter annual overnights." })
+    .int({ message: "Use a whole number of overnights." })
+    .min(0, { message: "Cannot be negative." })
+    .max(MAX_PAYOR_OVERNIGHTS, {
+      message: `The paying parent has at most ${MAX_PAYOR_OVERNIGHTS}. If they have more, choose the other parent as payer.`,
+    }),
+});
+
+export const childSupportCalculatorFormSchema = z
   .object({
-    parentOneManual: z.boolean(),
-    parentOneTime: z
-      .number({ message: "Enter parenting time for Parent One." })
-      .min(0, { message: "Cannot be negative." })
-      .max(100, { message: "Cannot exceed 100%." }),
-    parentTwoManual: z.boolean(),
-    parentTwoTime: z
-      .number({ message: "Enter parenting time for Parent Two." })
-      .min(0, { message: "Cannot be negative." })
-      .max(100, { message: "Cannot exceed 100%." }),
+    parentOne: parentSchema,
+    parentTwo: parentSchema,
+    payor: z.enum(PARENT_IDS, { message: "Choose the paying parent." }),
+    children: z
+      .array(childRowSchema)
+      .min(1, { message: "Add at least one child." })
+      .max(MAX_CHILDREN, {
+        message: `The schedule covers up to ${MAX_CHILDREN} children.`,
+      }),
   })
-  .superRefine((row, ctx) => {
-    const sum = row.parentOneTime + row.parentTwoTime;
-    if (Math.abs(sum - 100) > shareTolerance) {
+  .superRefine((values, ctx) => {
+    if (values.parentOne.grossIncome + values.parentTwo.grossIncome <= 0) {
       ctx.addIssue({
         code: "custom",
-        message: "Parent time shares must add up to 100%.",
-        path: ["parentTwoTime"],
+        message: "Enter income for at least one parent.",
+        path: ["parentTwo", "grossIncome"],
       });
     }
   });
 
-export const childSupportCalculatorFormSchema = z.object({
-  parentOneIncomeInterval: z.enum(INCOME_INTERVAL_VALUES, {
-    message: "Choose an income interval for Parent One.",
-  }),
-  parentOneNetIncome: z
-    .number({ message: "Enter net income for Parent One." })
-    .positive({ message: "Net income must be greater than zero." }),
-  parentTwoIncomeInterval: z.enum(INCOME_INTERVAL_VALUES, {
-    message: "Choose an income interval for Parent Two.",
-  }),
-  parentTwoNetIncome: z
-    .number({ message: "Enter net income for Parent Two." })
-    .positive({ message: "Net income must be greater than zero." }),
-  children: z
-    .array(childRowSchema)
-    .min(1, { message: "Add at least one child." }),
-});
-
 export type ChildSupportFormValues = z.infer<
   typeof childSupportCalculatorFormSchema
 >;
-export type ChildSupportChildRowValues = z.infer<typeof childRowSchema>;
+export type ChildSupportParentValues = z.infer<typeof parentSchema>;

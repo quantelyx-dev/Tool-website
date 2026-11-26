@@ -6,6 +6,9 @@ export const CONSENT_STORAGE_KEY = 'tools:consent:v1';
 
 export type ConsentChoice = 'granted' | 'denied';
 
+/** Asks the banner to show itself and take focus. */
+export const CONSENT_OPEN_EVENT = 'tools:consent-open';
+
 const CHANGE_EVENT = 'tools:consent-change';
 
 /** The saved choice, or null when the visitor has not decided (or storage is unavailable). */

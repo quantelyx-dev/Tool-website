@@ -1,51 +1,38 @@
 import type { Metadata } from 'next';
 
 import { GenerateRandomSsnToolContent } from '@/components/generate-random-ssn/generate-random-ssn-tool-content';
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { ssnFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
+import { ToolDisclaimer } from '@/components/shared/tool-disclaimer';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  // Hidden from the site and search engines (see lib/tools-data.ts).
-  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
-  alternates: { canonical: '/tools/generate-random-ssn' },
-  title: 'Fake SSN Generator — Random SSN for Testing',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Random Test SSN Generator',
   description:
-    'Generate structurally valid fake U.S. Social Security Numbers for testing. All SSNs are fictional, follow IRS formatting rules, and safe for demos.',
+    'Generate structurally formatted test Social Security numbers for software testing only.',
+  path: '/tools/generate-random-ssn',
   keywords: [
-    'fake SSN generator',
+    'test SSN generator',
     'random SSN generator',
-    'fake social security number',
+    'test social security number',
     'SSN for testing',
     'dummy SSN generator',
-    'test social security number',
   ],
-  openGraph: {
-    title: `Fake SSN Generator — Random SSN for Testing | ${siteDomain}`,
-    description:
-      'Generate structurally valid fake U.S. Social Security Numbers for development and testing. Fictional, safe for non-production use.',
-    url: '/tools/generate-random-ssn',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Fake SSN Generator — Random SSN for Testing | ${siteDomain}`,
-    description:
-      'Generate structurally valid fake U.S. Social Security Numbers for development and testing.',
-  },
-};
+  // Hidden from the site and search engines (see lib/tools-data.ts).
+  noindex: true,
+});
 
 
 export default function GenerateRandomSsnPage() {
   return (
     <main className={cn('flex-1')}>
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
-        <PageBreadcrumb items={[{ label: 'Fake SSN generator' }]} />
+        <PageBreadcrumb items={[{ label: 'Random test SSN generator' }]} />
         <GenerateRandomSsnToolContent />
-        <ToolBlogPromo toolLink='/tools/generate-random-ssn' />
-        <ToolFaqSection faqs={ssnFaqs} />
+        <ToolDisclaimer toolLink='/tools/generate-random-ssn' variant='test-data' />
+        <ToolPageDetails toolLink='/tools/generate-random-ssn' faqs={ssnFaqs} />
       </div>
     </main>
   );

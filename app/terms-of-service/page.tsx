@@ -1,28 +1,16 @@
 import type { Metadata } from 'next';
 import { TermsOfServiceContent } from '@/components/terms-of-service/terms-of-service-content';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/terms-of-service' },
+export const metadata: Metadata = createPageMetadata({
   title: 'Terms of Service',
   description:
-    `Read the ${siteDomain} Terms of Service. Understand the guidelines for using our free online tools, calculators, and data generators responsibly and legally.`,
+    'The rules for using toolcalcs.net: age eligibility, acceptable use of tools and test data, text to speech limits, cookies, and liability.',
+  path: '/terms-of-service',
   keywords: ['terms of service', 'terms and conditions', 'toolcalcs terms', 'usage policy'],
-  openGraph: {
-    title: `Terms of Service | ${siteDomain}`,
-    description:
-      'Understand the guidelines for using our free online tools, calculators, and data generators responsibly.',
-    url: '/terms-of-service',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Terms of Service | ${siteDomain}`,
-    description:
-      'Understand the guidelines for using our free online tools, calculators, and data generators responsibly.',
-  },
-};
+});
 
 export default function TermsOfServicePage() {
   return (

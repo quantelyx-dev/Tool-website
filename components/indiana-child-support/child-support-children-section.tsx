@@ -1,68 +1,74 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 
-import { ChildSupportChildRow } from '@/components/indiana-child-support/child-support-child-row';
+import { ChildSupportNumberField } from '@/components/indiana-child-support/child-support-number-field';
+import { ChildSupportPayorField } from '@/components/indiana-child-support/child-support-payor-field';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { defaultChildRow } from '@/lib/indiana-child-support/form-defaults';
+import { MAX_CHILDREN } from '@/lib/indiana-child-support/guideline-constants';
 import type { ChildSupportFormValues } from '@/lib/schemas/indiana-child-support-schema';
 import type {
   Control,
   FieldArrayWithId,
   UseFieldArrayAppend,
   UseFieldArrayRemove,
-  UseFormGetValues,
 } from 'react-hook-form';
-
-type ParentingSide = 'parentOne' | 'parentTwo';
 
 type ChildSupportChildrenSectionProps = {
   control: Control<ChildSupportFormValues>;
   fields: FieldArrayWithId<ChildSupportFormValues, 'children', 'id'>[];
-  watchedChildren: ChildSupportFormValues['children'] | undefined;
   append: UseFieldArrayAppend<ChildSupportFormValues, 'children'>;
   remove: UseFieldArrayRemove;
-  onSetSharePair: (
-    index: number,
-    primary: ParentingSide,
-    value: number,
-  ) => void;
-  getValues: UseFormGetValues<ChildSupportFormValues>;
 };
 
 export function ChildSupportChildrenSection({
   control,
   fields,
-  watchedChildren,
   append,
   remove,
-  onSetSharePair,
-  getValues,
 }: ChildSupportChildrenSectionProps) {
-  const canRemoveChild = fields.length > 1;
-
   return (
-    <section className='space-y-6'>
-      <Card className='border-primary/20 bg-primary/5 shadow-xs dark:border-primary/30 dark:bg-primary/10'>
-        <CardHeader className='pb-2'>
-          <CardTitle className='text-base font-semibold'>Children</CardTitle>
-          <CardDescription className='text-sm leading-relaxed text-muted-foreground'>
-            List every child included in this support calculation. For each
-            child, capture how parenting time is split between parents using
-            either preset percentages or your own numbers. Shares should
-            reflect overnights (or the schedule your guidelines use). Parent
-            Two&apos;s share stays paired with Parent One so the two always add
-            up to 100%.
-          </CardDescription>
-        </CardHeader>
-      </Card>
+    <section className='space-y-5'>
+      <div>
+        <h2 className='text-lg font-semibold tracking-tight text-foreground'>
+          Children and parenting time
+        </h2>
+        <p className='mt-1 text-sm text-muted-foreground'>
+          For each child in this order, enter the nights per year spent with the
+          paying parent. The credit starts at 52 overnights. About 96 to 100 is
+          typical under the Indiana Parenting Time Guidelines without extra
+          weeknight overnights.
+        </p>
+      </div>
+
+      <ChildSupportPayorField control={control} />
+
+      <ul className='grid gap-4 sm:grid-cols-2'>
+        {fields.map((field, index) => (
+          <li key={field.id} className='flex items-start gap-2'>
+            <div className='min-w-0 flex-1'>
+              <ChildSupportNumberField
+                control={control}
+                name={`children.${index}.payorOvernights`}
+                label={`Child ${index + 1}: annual overnights`}
+                step='1'
+              />
+            </div>
+            {fields.length > 1 ? (
+              <Button
+                type='button'
+                variant='ghost'
+                size='icon'
+                className='mt-6'
+                onClick={() => remove(index)}
+                aria-label={`Remove child ${index + 1}`}>
+                <Trash2 className='size-4' aria-hidden />
+              </Button>
+            ) : null}
+          </li>
+        ))}
+      </ul>
 
       <div className='flex flex-wrap items-center gap-3'>
         <Button
@@ -70,38 +76,14 @@ export function ChildSupportChildrenSection({
           variant='outline'
           size='sm'
           className='gap-1.5'
+          disabled={fields.length >= MAX_CHILDREN}
           onClick={() => append(defaultChildRow())}>
-          <Plus className='size-4' />
+          <Plus className='size-4' aria-hidden />
           Add child
         </Button>
-        <p className='text-xs text-muted-foreground'>
+        <p className='text-xs text-muted-foreground' aria-live='polite'>
           {fields.length} {fields.length === 1 ? 'child' : 'children'}
         </p>
-      </div>
-
-      <div className='flex flex-col gap-8'>
-        <AnimatePresence initial={false} mode='popLayout'>
-          {fields.map((field, index) => (
-            <motion.div
-              key={field.id}
-              layout
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.18 }}
-              className='space-y-4'>
-              <ChildSupportChildRow
-                index={index}
-                control={control}
-                watchedEntry={watchedChildren?.[index]}
-                canRemove={canRemoveChild}
-                onRemove={() => remove(index)}
-                onSetSharePair={onSetSharePair}
-                getValues={getValues}
-              />
-            </motion.div>
-          ))}
-        </AnimatePresence>
       </div>
     </section>
   );

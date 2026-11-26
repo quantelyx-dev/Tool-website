@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { siteDomain } from "@/lib/site-config";
+import { BRAND_NAME } from "@/lib/site-config";
 
 /** Google & Bing recommended max visible title length (pixels ≈ 60 chars). */
 export const SEO_TITLE_MAX = 60;
@@ -11,7 +11,7 @@ export const SEO_DESCRIPTION_MAX = 160;
 /** Google Article headline limit in structured data. */
 export const SEO_ARTICLE_HEADLINE_MAX = 110;
 
-const TITLE_SUFFIX = () => ` | ${siteDomain}`;
+const TITLE_SUFFIX = () => ` | ${BRAND_NAME}`;
 
 export function truncateForSeo(text: string, max: number): string {
   const normalized = text.replace(/\s+/g, " ").trim();
@@ -29,7 +29,7 @@ export function truncateForSeo(text: string, max: number): string {
   return `${slice.trimEnd()}…`;
 }
 
-/** Title segment before the root layout `| siteDomain` template suffix. */
+/** Title segment before the root layout `| BRAND_NAME` template suffix. */
 export function buildDocumentTitle(pageTitle: string): string {
   const maxSegment = SEO_TITLE_MAX - TITLE_SUFFIX().length;
   return truncateForSeo(pageTitle, maxSegment);
@@ -85,7 +85,7 @@ export function createPageMetadata(input: PageMetadataInput): Metadata {
       title: fullTitle,
       description,
       url: canonicalPath,
-      siteName: siteDomain,
+      siteName: BRAND_NAME,
       locale: "en_US",
       type: input.openGraphType ?? "website",
       ...(input.publishedTime ? { publishedTime: input.publishedTime } : {}),

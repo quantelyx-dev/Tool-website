@@ -1,17 +1,16 @@
 import type { Metadata } from 'next';
 
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { SunMoonRisingToolContent } from '@/components/sun-moon-rising/sun-moon-rising-tool-content';
 import { createPageMetadata } from '@/lib/seo/metadata';
 import { sunMoonRisingFaqs } from '@/lib/tool-faqs';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Sun, Moon & Rising Calculator — Big Three',
+  title: 'Sun, Moon & Rising Sign Calculator',
   description:
-    'Find your Sun sign, Moon sign, and Rising sign instantly. Enter your birth date, time, and location to reveal your complete astrological big three — free.',
+    'Find your Sun, Moon, and Rising signs from your birth date, time, and city, using astronomical calculations in the tropical zodiac.',
   path: '/tools/sun-moon-rising-calculator',
   keywords: [
     'sun moon rising calculator',
@@ -33,8 +32,7 @@ export default function SunMoonRisingCalculatorPage() {
       <div className={cn('container mx-auto max-w-5xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Sun, Moon & Rising calculator' }]} />
         <SunMoonRisingToolContent />
-        <ToolBlogPromo toolLink='/tools/sun-moon-rising-calculator' />
-        <ToolFaqSection faqs={sunMoonRisingFaqs} />
+        <ToolPageDetails toolLink='/tools/sun-moon-rising-calculator' faqs={sunMoonRisingFaqs} />
       </div>
     </main>
   );

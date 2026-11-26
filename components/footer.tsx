@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { FacebookIcon, TwitterIcon, InstagramIcon } from '@/components/icons';
+import { FooterSocialLinks } from '@/components/footer-social-links';
 import { CookieSettingsButton } from '@/components/consent/cookie-settings-button';
 import { currentCalendarYear } from '@/lib/datetime';
+import { BRAND_NAME } from '@/lib/site-config';
 
 export function Footer() {
   return (
@@ -15,7 +15,7 @@ export function Footer() {
               <div className='h-6 w-6 rounded bg-indigo-600 flex items-center justify-center'>
                 <span className='text-white font-bold text-sm'>T</span>
               </div>
-              <span className='text-lg font-bold tracking-tight'>Tools</span>
+              <span className='text-lg font-bold tracking-tight'>{BRAND_NAME}</span>
             </Link>
           </div>
 
@@ -51,41 +51,21 @@ export function Footer() {
               className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
               Terms of Service
             </Link>
+            <Link
+              href='/disclaimer'
+              prefetch={false}
+              className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors'>
+              Disclaimer
+            </Link>
             <CookieSettingsButton className='text-sm font-medium text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 transition-colors' />
           </nav>
 
-          {/* Social Icons */}
-          <div className='flex items-center gap-2'>
-            <Button variant='ghost' size='icon' asChild>
-              <Link
-                href='#'
-                aria-label='Facebook'
-                className='text-zinc-500 hover:text-indigo-600 transition-colors'>
-                <FacebookIcon className='size-5' />
-              </Link>
-            </Button>
-            <Button variant='ghost' size='icon' asChild>
-              <Link
-                href='#'
-                aria-label='Twitter'
-                className='text-zinc-500 hover:text-indigo-600 transition-colors'>
-                <TwitterIcon className='size-5' />
-              </Link>
-            </Button>
-            <Button variant='ghost' size='icon' asChild>
-              <Link
-                href='#'
-                aria-label='Instagram'
-                className='text-zinc-500 hover:text-indigo-600 transition-colors'>
-                <InstagramIcon className='size-5' />
-              </Link>
-            </Button>
-          </div>
+          <FooterSocialLinks />
         </div>
 
         {/* Copyright Section */}
         <p className='text-center pb-5 text-xs text-zinc-500 dark:text-zinc-400 font-medium'>
-          © {currentCalendarYear()} Tools Inc. All rights reserved.
+          © {currentCalendarYear()} {BRAND_NAME}. All rights reserved.
         </p>
       </div>
     </footer>

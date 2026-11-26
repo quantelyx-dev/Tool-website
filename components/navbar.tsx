@@ -1,3 +1,4 @@
+import { BRAND_NAME } from '@/lib/site-config';
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 
@@ -9,7 +10,7 @@ export function Navbar() {
           <div className='h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center'>
             <span className='text-white font-bold text-xl'>T</span>
           </div>
-          <span className='text-xl font-bold tracking-tight'>Tools</span>
+          <span className='text-xl font-bold tracking-tight'>{BRAND_NAME}</span>
         </div>
 
         <div className='hidden md:flex items-center gap-8'>
