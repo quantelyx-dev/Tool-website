@@ -19,11 +19,9 @@ export function AboutContent({ className }: { className?: string }) {
 
       <h2 className={HEADING_CLASS}>Who runs this site</h2>
       <p className={TEXT_CLASS}>
-        {OWNER.name
-          ? `${OWNER.name} runs ${BRAND_NAME} from ${OWNER.location}.`
-          : `${BRAND_NAME} is an independent website run from ${OWNER.location}.`}
+        {OWNER.name} runs {BRAND_NAME} from {OWNER.location}.
       </p>
-      {OWNER.bio ? <p className={TEXT_CLASS}>{OWNER.bio}</p> : null}
+      <p className={TEXT_CLASS}>{OWNER.bio}</p>
 
       <h2 className={HEADING_CLASS}>Why it exists</h2>
       <p className={TEXT_CLASS}>
