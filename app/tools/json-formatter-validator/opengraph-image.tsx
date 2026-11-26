@@ -1,6 +1,6 @@
 import { createToolOgImage, OG_CONTENT_TYPE } from '@/lib/seo/og-image';
 
-export const alt = 'Json Formatter Validator - free online tool';
+export const alt = 'JSON formatter, validator, and TypeScript generator';
 export const size = { width: 1200, height: 630 };
 export const contentType = OG_CONTENT_TYPE;
 

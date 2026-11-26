@@ -1,30 +1,29 @@
 import type { Metadata } from "next";
 
 import { CronExpressionGeneratorToolContent } from "@/components/cron-expression-generator/cron-expression-generator-tool-content";
-import { ToolBlogPromo } from "@/components/blog/tool-blog-promo";
 import { PageBreadcrumb } from "@/components/shared/page-breadcrumb";
-import { ToolFaqSection } from "@/components/shared/tool-faq-section";
+import { ToolPageDetails } from "@/components/shared/tool-page-details";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { cronExpressionFaqs } from "@/lib/tool-faqs";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Cron Expression Generator — Build & Validate Schedules",
+  title: 'Cron Expression Generator',
   description:
-    "Build cron expressions visually with presets or custom fields. Generate 5-field or 6-field schedules, get human-readable explanations, and preview the next five run times.",
-  path: "/tools/cron-expression-generator",
+    'Build 5-field or 6-field cron schedules with presets or custom fields, read them in plain English, and preview the next five run times.',
+  path: '/tools/cron-expression-generator',
   keywords: [
-    "cron expression generator",
-    "cron builder",
-    "crontab generator",
-    "cron schedule maker",
-    "cron expression builder",
-    "generate cron expression",
-    "cron job scheduler",
-    "spring cron expression generator",
-    "jenkins cron generator",
-    "java cron generator",
-    "crontab expression generator",
+    'cron expression generator',
+    'cron builder',
+    'crontab generator',
+    'cron schedule maker',
+    'cron expression builder',
+    'generate cron expression',
+    'cron job scheduler',
+    'spring cron expression generator',
+    'jenkins cron generator',
+    'java cron generator',
+    'crontab expression generator',
   ],
 });
 
@@ -34,8 +33,7 @@ export default function CronExpressionGeneratorPage() {
       <div className={cn("container mx-auto max-w-6xl px-4 pb-20 sm:px-6")}>
         <PageBreadcrumb items={[{ label: "Cron expression generator" }]} />
         <CronExpressionGeneratorToolContent />
-        <ToolBlogPromo toolLink="/tools/cron-expression-generator" />
-        <ToolFaqSection faqs={cronExpressionFaqs} />
+        <ToolPageDetails toolLink="/tools/cron-expression-generator" faqs={cronExpressionFaqs} />
       </div>
     </main>
   );

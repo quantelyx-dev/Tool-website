@@ -35,7 +35,8 @@ Every tool we ship must be paired with an SEO-optimized blog post and correct se
 3. The blog post's `toolLink` must exactly match the tool page's route so `ToolBlogPromo` (rendered on the tool page) can find and link to it, and set `relatedSlugs` to 2-3 topically related posts for internal linking.
 4. Add a FAQ array for the tool in `lib/tool-faqs.ts` (5 Q&As, matching the tone/depth of existing entries) and reuse the exact same array for both the tool page's `<ToolFaqSection faqs={...}>` and the blog post's `faqs` field — this keeps the FAQ accordion and the FAQPage JSON-LD on the blog post in sync.
 5. Register every new tool in the `TOOL_GROUPS` array in `lib/tools-data.ts` (name, description, link) so it appears in site search, navigation, and category filters — an unregistered tool page is effectively orphaned even if the route works.
-6. Do not add JSON-LD to tool pages themselves — structured data (`BlogPosting`, `FAQPage`) lives only on `/blog/[slug]` via `components/blog/blog-article-json-ld.tsx` and `components/blog/blog-faq-json-ld.tsx`. Tool pages get the visual FAQ accordion only.
+6. Every page with an FAQ gets `FAQPage` JSON-LD automatically from `components/shared/faq-list.tsx` (used by `ToolFaqSection` and the home `FaqSection`), generated from the same array as the visible answers — never add it by hand. FAQs use native `<details>` so answers stay in the server HTML. `BlogPosting` JSON-LD lives only on `/blog/[slug]`.
+8. Every tool needs a 300–600 word entry in `lib/tool-content/` (rendered by `ToolPageDetails`) and an `updatedAt` date in `TOOL_GROUPS` (used as the sitemap `lastmod`). Bump it when the tool or its content changes.
 7. No manual sitemap registration is needed — `next-sitemap` auto-discovers new `/tools/*` and `/blog/*` routes at build time from `next-sitemap.config.js`.
 
 ## Backend Coding rules

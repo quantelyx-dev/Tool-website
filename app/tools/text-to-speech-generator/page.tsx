@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { TextToSpeechToolContent } from '@/components/text-to-speech/text-to-speech-tool-content';
 import { createPageMetadata } from '@/lib/seo/metadata';
 import { textToSpeechFaqs } from '@/lib/tool-faqs';
@@ -37,8 +36,7 @@ export default function TextToSpeechGeneratorPage() {
       <div className={cn('container mx-auto max-w-5xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Text to speech generator' }]} />
         <TextToSpeechToolContent />
-        <ToolBlogPromo toolLink='/tools/text-to-speech-generator' />
-        <ToolFaqSection faqs={textToSpeechFaqs} />
+        <ToolPageDetails toolLink='/tools/text-to-speech-generator' faqs={textToSpeechFaqs} />
       </div>
     </main>
   );

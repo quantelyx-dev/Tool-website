@@ -198,7 +198,7 @@ export function GenerateRandomAddressesToolContent({
               "sm:text-4xl lg:text-[2.25rem]",
             )}
           >
-            Address Generator - Generate Fictional Addresses
+            Random test address generator
           </h1>
           <p
             className={cn(
@@ -206,8 +206,8 @@ export function GenerateRandomAddressesToolContent({
               "sm:mt-6 sm:px-0 sm:text-lg",
             )}
           >
-            Create realistic-looking fictional mailing addresses in single or
-            bulk mode for test data, fixtures, and demos.
+            Create made-up mailing addresses in single or bulk mode for test data,
+            fixtures, and demos.
           </p>
         </motion.header>
 

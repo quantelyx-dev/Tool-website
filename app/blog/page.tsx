@@ -7,9 +7,9 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Blog — Guides & Tutorials for Every Tool",
+  title: "Blog: Guides for Our Tools",
   description:
-    "In-depth guides and tutorials for our free online tools — fake email generators, compound interest calculators, UUID v7, and more.",
+    "Guides to our calculators, test data generators, and developer tools, including paycheck math, compound interest, cron syntax, and UUIDv7.",
   path: "/blog",
   keywords: [
     "tools blog",

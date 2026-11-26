@@ -1,7 +1,6 @@
 'use client';
 
-import { CONSENT_BANNER_ID } from '@/components/consent/consent-banner';
-import { resetConsent } from '@/lib/consent';
+import { CONSENT_OPEN_EVENT, resetConsent } from '@/lib/consent';
 import { cn } from '@/lib/utils';
 
 type CookieSettingsButtonProps = {
@@ -10,11 +9,12 @@ type CookieSettingsButtonProps = {
 
 /** Lets visitors withdraw or change their cookie choice at any time. */
 export function CookieSettingsButton({ className }: CookieSettingsButtonProps) {
+  // After AdSense approval, when Google's certified consent message replaces the
+  // custom banner, replace the two calls below with:
+  //   window.googlefc?.callbackQueue.push(() => window.googlefc.showRevocationMessage());
   function handleClick() {
     resetConsent();
-    requestAnimationFrame(() => {
-      document.getElementById(CONSENT_BANNER_ID)?.focus();
-    });
+    window.dispatchEvent(new Event(CONSENT_OPEN_EVENT));
   }
 
   return (

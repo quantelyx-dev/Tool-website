@@ -50,15 +50,16 @@ export function ChildSupportToolContent({
               'font-heading text-balance text-3xl font-semibold tracking-tight text-foreground',
               'sm:text-4xl lg:text-[2.25rem]',
             )}>
-            Child support calculator
+            Indiana child support calculator
           </h1>
           <p
             className={cn(
               'mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground',
               'sm:text-lg',
             )}>
-            Enter income and parenting-time splits for each child. This phase
-            collects inputs only—results and guideline logic will plug in next.
+            Work through Indiana&apos;s Child Support Obligation Worksheet:
+            weekly gross income, the guideline schedule, each parent&apos;s
+            percentage share, and the parenting time credit.
           </p>
         </motion.header>
 

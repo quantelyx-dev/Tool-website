@@ -25,7 +25,39 @@ function readBlogLastModified() {
   return lastModified;
 }
 
+/**
+ * Maps each tool route to the `updatedAt` in its `TOOL_GROUPS` entry. Commented-out
+ * (hidden) entries never match, because their lines start with `//`.
+ */
+function readToolLastModified() {
+  const source = fs.readFileSync(join(__dirname, "lib", "tools-data.ts"), "utf8");
+  const entries = source.matchAll(
+    /^\s*link:\s*"([^"]+)",\n\s*updatedAt:\s*"(\d{4}-\d{2}-\d{2})"/gm,
+  );
+  return Object.fromEntries([...entries].map((match) => [match[1], match[2]]));
+}
+
+/** Last content change for the core pages. Update the date when you edit one. */
+const CORE_PAGE_LAST_MODIFIED = {
+  "/": "2026-11-26",
+  "/about": "2026-11-26",
+  "/blog": "2026-11-26",
+  "/contact": "2026-11-26",
+  "/disclaimer": "2026-11-26",
+  "/privacy-policy": "2026-11-26",
+  "/request-a-tool": "2026-11-26",
+  "/terms-of-service": "2026-11-26",
+};
+
+/** Used only when a page has no recorded date. */
+const buildDate = new Date().toISOString().slice(0, 10);
+
 const blogLastModified = readBlogLastModified();
+const lastModified = {
+  ...CORE_PAGE_LAST_MODIFIED,
+  ...readToolLastModified(),
+  ...blogLastModified,
+};
 
 /** Blog posts marked `hidden: true` are noindex, so they stay out of the sitemap too. */
 function readHiddenBlogPaths() {
@@ -50,10 +82,13 @@ module.exports = {
     "/api/*",
     "/icon.png",
     "/robots.txt",
+    "/ads.txt",
     // Generated social images (opengraph-image routes) are not pages.
     "/opengraph-image",
     "/*/opengraph-image",
     "/*/*/opengraph-image",
+    "/**/opengraph-image/**",
+    "/**/opengraph-image-*",
     // Hidden, noindex tools (see lib/tools-data.ts).
     "/tools/generate-random-ssn",
     "/tools/generate-random-credit-cards",
@@ -68,6 +103,7 @@ module.exports = {
       "/request-a-tool": 0.7,
       "/privacy-policy": 0.5,
       "/terms-of-service": 0.5,
+      "/disclaimer": 0.5,
     };
 
     const changeFreqs = {
@@ -78,6 +114,7 @@ module.exports = {
       "/request-a-tool": "monthly",
       "/privacy-policy": "yearly",
       "/terms-of-service": "yearly",
+      "/disclaimer": "yearly",
     };
 
     const isToolPage = path.startsWith("/tools/");
@@ -90,10 +127,9 @@ module.exports = {
         (isToolPage ? "weekly" : isBlogPost ? "monthly" : "monthly"),
       priority:
         priorities[path] ?? (isToolPage ? 0.9 : isBlogPost ? 0.85 : 0.6),
-      // Only blog posts have a known content date. Everything else omits lastmod,
-      // because a build-time timestamp would mark every page as changed on each
-      // deploy and Google ignores inaccurate lastmod values.
-      lastmod: blogLastModified[path],
+      // Real content dates where recorded. Google ignores lastmod values that
+      // change on every deploy, so the build date is only the fallback.
+      lastmod: lastModified[path] ?? buildDate,
     };
   },
 };

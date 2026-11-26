@@ -1,4 +1,5 @@
-import { siteDomain, siteUrl } from "@/lib/site-config";
+import { JsonLd } from "@/lib/seo/json-ld";
+import { AUTHOR, BRAND_NAME, siteUrl } from "@/lib/site-config";
 import type { BlogPost } from "@/lib/blogs/types";
 import {
   buildSeoDescription,
@@ -15,18 +16,19 @@ export function BlogArticleJsonLd({ post }: BlogArticleJsonLdProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    image: `${siteUrl}/icon.png`,
     headline: truncateForSeo(post.title, SEO_ARTICLE_HEADLINE_MAX),
     description: buildSeoDescription(post.excerpt),
     datePublished: toIsoDate(post.publishedAt),
     dateModified: toIsoDate(post.updatedAt),
     author: {
-      "@type": "Organization",
-      name: siteDomain,
-      url: siteUrl,
+      "@type": AUTHOR.type,
+      name: AUTHOR.name,
+      url: `${siteUrl}${AUTHOR.path}`,
     },
     publisher: {
       "@type": "Organization",
-      name: siteDomain,
+      name: BRAND_NAME,
       url: siteUrl,
       logo: {
         "@type": "ImageObject",
@@ -43,10 +45,5 @@ export function BlogArticleJsonLd({ post }: BlogArticleJsonLdProps) {
     isAccessibleForFree: true,
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <JsonLd data={jsonLd} />;
 }

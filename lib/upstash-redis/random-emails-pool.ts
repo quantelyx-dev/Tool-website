@@ -1,3 +1,4 @@
+import { toReservedEmail } from '@/lib/generate-random-emails/reserved-domain';
 import {
   parseUsernameLimitParam,
   RandomUserFetchError,
@@ -22,6 +23,6 @@ export async function takeRandomEmailsFromPool(limit: number): Promise<{
   poolSizeAfter: number;
 }> {
   const { entries, poolSizeAfter } = await takeRandomUsernamesFromPool(limit);
-  const emails = entries.map(entry => entry.email);
+  const emails = entries.map(entry => toReservedEmail(entry.email));
   return { emails, poolSizeAfter };
 }

@@ -4,7 +4,7 @@ import { sunMoonRisingFaqs } from "@/lib/tool-faqs";
 
 export const sunMoonRisingPost: BlogPost = {
   slug: "sun-moon-rising-sign-calculator-guide",
-  title: "Sun Moon Rising Sign Calculator: Big Three Guide",
+  title: "Sun, Moon & Rising Signs: Big Three",
   excerpt:
     "Find your Sun, Moon, and Rising signs with birth date, time, and place. Learn what the Big Three mean and why birth time matters for your Ascendant.",
   keywords: [
@@ -21,7 +21,7 @@ export const sunMoonRisingPost: BlogPost = {
   toolLink: "/tools/sun-moon-rising-calculator",
   toolName: "Sun Moon and Rising Sign calculator",
   publishedAt: "2026-06-11",
-  updatedAt: "2026-06-25",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 14,
   relatedSlugs: [
     "daily-compound-interest-calculator-guide",

@@ -1,18 +1,17 @@
 import type { Metadata } from 'next';
 
 import { GenerateRandomPasswordsToolContent } from '@/components/generate-random-passwords/generate-random-passwords-tool-content';
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { passwordFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/tools/generate-random-passwords' },
-  title: 'Random Password Generator — Strong Passwords',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Random Password Generator',
   description:
-    'Create strong, random passwords with customizable length and character sets. Every password is zxcvbn-scored so you know how secure it is before use.',
+    'Create random passwords in your browser with a custom length and character sets, each with a zxcvbn strength estimate.',
+  path: '/tools/generate-random-passwords',
   keywords: [
     'random password generator',
     'strong password generator',
@@ -21,19 +20,7 @@ export const metadata: Metadata = {
     'bulk password generator',
     'free password generator',
   ],
-  openGraph: {
-    title: `Random Password Generator — Strong Passwords | ${siteDomain}`,
-    description:
-      'Create strong, random passwords with customizable length and character sets. Every password is scored with zxcvbn strength analysis.',
-    url: '/tools/generate-random-passwords',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Random Password Generator — Strong Passwords | ${siteDomain}`,
-    description:
-      'Create strong, random passwords with customizable length and character sets. Strength scored with zxcvbn.',
-  },
-};
+});
 
 
 export default function GenerateRandomPasswordsPage() {
@@ -42,8 +29,7 @@ export default function GenerateRandomPasswordsPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Random password generator' }]} />
         <GenerateRandomPasswordsToolContent />
-        <ToolBlogPromo toolLink='/tools/generate-random-passwords' />
-        <ToolFaqSection faqs={passwordFaqs} />
+        <ToolPageDetails toolLink='/tools/generate-random-passwords' faqs={passwordFaqs} />
       </div>
     </main>
   );

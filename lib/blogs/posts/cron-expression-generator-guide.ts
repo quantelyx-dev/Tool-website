@@ -4,7 +4,7 @@ import { cronExpressionFaqs } from "@/lib/tool-faqs";
 
 export const cronExpressionGeneratorPost: BlogPost = {
   slug: "cron-expression-generator-guide",
-  title: "Cron Expression Generator Guide: Build Schedules Without Memorizing Syntax",
+  title: "Cron Expression Guide: Build Schedules",
   excerpt:
     "Learn cron field syntax, 5-field vs 6-field formats, common presets, and how to use generated expressions in crontab, GitHub Actions, and Kubernetes.",
   keywords: [
@@ -21,7 +21,7 @@ export const cronExpressionGeneratorPost: BlogPost = {
   toolLink: "/tools/cron-expression-generator",
   toolName: "Cron expression generator",
   publishedAt: "2026-06-26",
-  updatedAt: "2026-06-26",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 12,
   relatedSlugs: [
     "uuid-v7-generator-guide",

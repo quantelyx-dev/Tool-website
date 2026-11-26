@@ -4,7 +4,7 @@ import { passwordFaqs } from "@/lib/tool-faqs";
 
 export const strongPasswordPost: BlogPost = {
   slug: "strong-password-generator-guide",
-  title: "Strong Password Generator: Security Best Practices",
+  title: "Strong Password Generator Guide",
   excerpt:
     "Create secure random passwords with length and charset controls. zxcvbn strength scoring, bulk generation for test accounts, and password hygiene tips.",
   keywords: [
@@ -18,7 +18,7 @@ export const strongPasswordPost: BlogPost = {
   toolLink: "/tools/generate-random-passwords",
   toolName: "Random password generator",
   publishedAt: "2026-06-08",
-  updatedAt: "2026-06-25",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 12,
   relatedSlugs: [
     "fake-usernames-for-testing-guide",

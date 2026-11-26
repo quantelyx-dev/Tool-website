@@ -53,7 +53,7 @@ export function RequestToolContent({ className }: RequestToolContentProps) {
               'sm:text-lg',
             )}>
             Treat this like a focused contact form: describe a utility you wish
-            existed in Tools, and our team will consider it for the roadmap.
+            existed, and we will consider building it.
           </p>
         </motion.div>
       </motion.section>

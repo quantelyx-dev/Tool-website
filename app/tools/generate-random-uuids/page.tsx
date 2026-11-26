@@ -1,39 +1,25 @@
 import type { Metadata } from 'next';
 
 import { GenerateRandomUuidsToolContent } from '@/components/generate-random-uuids/generate-random-uuids-tool-content';
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { uuidFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/tools/generate-random-uuids' },
-  title: 'UUIDv7 Generator — Sortable UUIDs Online',
+export const metadata: Metadata = createPageMetadata({
+  title: 'UUIDv7 Generator: Sortable UUIDs',
   description:
-    'Generate time-ordered UUIDv7 identifiers in bulk. Chronologically sortable and globally unique — a better choice than UUIDv4 for database primary keys.',
+    'Generate time-ordered UUIDv7 identifiers one at a time or in batches of up to 200, with copy and CSV export.',
+  path: '/tools/generate-random-uuids',
   keywords: [
     'UUIDv7 generator',
     'UUID generator online',
     'generate UUIDv7',
     'sortable UUID generator',
-    'random UUID generator',
     'bulk UUID generator',
   ],
-  openGraph: {
-    title: `UUIDv7 Generator — Sortable UUIDs Online | ${siteDomain}`,
-    description:
-      'Generate time-ordered UUIDv7 identifiers in bulk. Chronologically sortable, globally unique, and better than UUIDv4 for database keys.',
-    url: '/tools/generate-random-uuids',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `UUIDv7 Generator — Sortable UUIDs Online | ${siteDomain}`,
-    description:
-      'Generate time-ordered UUIDv7 identifiers. Sortable, unique, and better than UUIDv4 for database primary keys.',
-  },
-};
+});
 
 
 export default function GenerateRandomUuidsPage() {
@@ -42,8 +28,7 @@ export default function GenerateRandomUuidsPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'UUIDv7 generator' }]} />
         <GenerateRandomUuidsToolContent />
-        <ToolBlogPromo toolLink='/tools/generate-random-uuids' />
-        <ToolFaqSection faqs={uuidFaqs} />
+        <ToolPageDetails toolLink='/tools/generate-random-uuids' faqs={uuidFaqs} />
       </div>
     </main>
   );

@@ -1,18 +1,17 @@
 import type { Metadata } from 'next';
 
 import { DailyCompoundToolContent } from '@/components/daily-compound-interest/daily-compound-tool-content';
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { compoundInterestFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/tools/daily-compound-interest-calculator' },
-  title: 'Daily Compound Interest Calculator — Growth',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Daily Compound Interest Calculator',
   description:
-    "Calculate your investment's future value with daily compounding. Factor in regular contributions and multiple currencies to see exactly how your money grows.",
+    'Project a balance with daily compounding, APR or APY rates, regular deposits, and optional reinvestment, then export the results.',
+  path: '/tools/daily-compound-interest-calculator',
   keywords: [
     'daily compound interest calculator',
     'compound interest calculator',
@@ -21,19 +20,7 @@ export const metadata: Metadata = {
     'future value calculator',
     'savings calculator',
   ],
-  openGraph: {
-    title: `Daily Compound Interest Calculator — Growth | ${siteDomain}`,
-    description:
-      "Calculate your investment's future value with daily compounding. Factor in contributions and reinvestment to see how your money grows.",
-    url: '/tools/daily-compound-interest-calculator',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Daily Compound Interest Calculator — Growth | ${siteDomain}`,
-    description:
-      "Calculate your investment's future value with daily compounding, contributions, and reinvestment.",
-  },
-};
+});
 
 
 export default function DailyCompoundInterestCalculatorPage() {
@@ -42,8 +29,7 @@ export default function DailyCompoundInterestCalculatorPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Daily compound interest calculator' }]} />
         <DailyCompoundToolContent />
-        <ToolBlogPromo toolLink='/tools/daily-compound-interest-calculator' />
-        <ToolFaqSection faqs={compoundInterestFaqs} />
+        <ToolPageDetails toolLink='/tools/daily-compound-interest-calculator' faqs={compoundInterestFaqs} />
       </div>
     </main>
   );

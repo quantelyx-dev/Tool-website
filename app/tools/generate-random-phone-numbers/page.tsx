@@ -1,39 +1,25 @@
 import type { Metadata } from 'next';
 
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { GenerateRandomPhoneNumbersToolContent } from '@/components/generate-random-phone-numbers/generate-random-phone-numbers-tool-content';
 import { phoneNumberFaqs } from '@/lib/tool-faqs';
+import { createPageMetadata } from '@/lib/seo/metadata';
 import { cn } from '@/lib/utils';
-import { siteDomain } from '@/lib/site-config';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/tools/generate-random-phone-numbers' },
-  title: 'Random Phone Number Generator by Country',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Random Test Phone Number Generator',
   description:
-    'Generate fake phone numbers for 50+ countries. Uses libphonenumber to produce structurally valid numbers safe for UI testing, form validation, and demos.',
+    'Generate test phone numbers only from ranges reserved for fiction in the US, Canada, the UK, and Australia, in international and E.164 formats.',
+  path: '/tools/generate-random-phone-numbers',
   keywords: [
     'random phone number generator',
-    'fake phone number generator',
-    'fake phone numbers for testing',
-    'dummy phone number generator',
-    'phone number by country',
+    'test phone number generator',
+    '555 phone number generator',
+    'reserved phone numbers',
     'test phone numbers',
   ],
-  openGraph: {
-    title: `Random Phone Number Generator by Country | ${siteDomain}`,
-    description:
-      'Generate properly formatted fake phone numbers for 50+ countries. Structurally valid numbers safe for UI testing and demo data.',
-    url: '/tools/generate-random-phone-numbers',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Random Phone Number Generator by Country | ${siteDomain}`,
-    description:
-      'Generate properly formatted fake phone numbers for 50+ countries. Safe for testing and demos.',
-  },
-};
+});
 
 
 export default function GenerateRandomPhoneNumbersPage() {
@@ -42,8 +28,7 @@ export default function GenerateRandomPhoneNumbersPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'Random phone number generator' }]} />
         <GenerateRandomPhoneNumbersToolContent />
-        <ToolBlogPromo toolLink='/tools/generate-random-phone-numbers' />
-        <ToolFaqSection faqs={phoneNumberFaqs} />
+        <ToolPageDetails toolLink='/tools/generate-random-phone-numbers' faqs={phoneNumberFaqs} />
       </div>
     </main>
   );

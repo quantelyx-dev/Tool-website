@@ -1,4 +1,4 @@
-import { CHILD_TIME_PRESETS } from '@/lib/indiana-child-support/form-defaults';
+import type { IndianaParentId } from '@/lib/indiana-child-support/types';
 import type { IncomeInterval } from '@/lib/schemas/indiana-child-support-schema';
 
 export function formatIncomeIntervalLabel(value: IncomeInterval): string {
@@ -18,25 +18,7 @@ export function formatIncomeIntervalLabel(value: IncomeInterval): string {
   }
 }
 
-export function roundShare(n: number): number {
-  return Math.round(n * 100) / 100;
-}
-
-export function nearestPreset(value: number): number {
-  if (!Number.isFinite(value)) return 50;
-  return CHILD_TIME_PRESETS.reduce((best, p) =>
-    Math.abs(p - value) < Math.abs(best - value) ? p : best,
-  );
-}
-
-export function sortedSharesForSelect(current: number): number[] {
-  if (!Number.isFinite(current)) {
-    return [...CHILD_TIME_PRESETS];
-  }
-  const rounded = roundShare(current);
-  const inList = CHILD_TIME_PRESETS.some(p => Math.abs(p - rounded) < 0.000_01);
-  const merged = inList
-    ? [...CHILD_TIME_PRESETS]
-    : [...CHILD_TIME_PRESETS, rounded].sort((a, b) => a - b);
-  return merged;
-}
+export const PARENT_LABELS: Record<IndianaParentId, string> = {
+  parentOne: 'Parent One',
+  parentTwo: 'Parent Two',
+};

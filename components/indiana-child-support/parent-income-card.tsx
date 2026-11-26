@@ -1,9 +1,10 @@
 'use client';
 
+import { ChildSupportNumberField } from '@/components/indiana-child-support/child-support-number-field';
+import { ParentAdjustmentFields } from '@/components/indiana-child-support/parent-adjustment-fields';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -14,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -22,7 +22,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { formatIncomeIntervalLabel } from '@/lib/indiana-child-support/form-helpers';
+import {
+  formatIncomeIntervalLabel,
+  PARENT_LABELS,
+} from '@/lib/indiana-child-support/form-helpers';
+import type { IndianaParentId } from '@/lib/indiana-child-support/types';
 import {
   INCOME_INTERVAL_VALUES,
   type ChildSupportFormValues,
@@ -31,44 +35,21 @@ import type { Control } from 'react-hook-form';
 
 type ParentIncomeCardProps = {
   control: Control<ChildSupportFormValues>;
-  title: string;
-  description: string;
-  netIncomeInvalid: boolean;
-} & (
-  | {
-      parent: 'parentOne';
-    }
-  | {
-      parent: 'parentTwo';
-    }
-);
+  parent: IndianaParentId;
+};
 
-export function ParentIncomeCard({
-  control,
-  title,
-  description,
-  parent,
-  netIncomeInvalid,
-}: ParentIncomeCardProps) {
-  const incomeIntervalName =
-    parent === 'parentOne'
-      ? ('parentOneIncomeInterval' as const)
-      : ('parentTwoIncomeInterval' as const);
-  const netIncomeName =
-    parent === 'parentOne'
-      ? ('parentOneNetIncome' as const)
-      : ('parentTwoNetIncome' as const);
-
+export function ParentIncomeCard({ control, parent }: ParentIncomeCardProps) {
   return (
-    <Card className='justify-between border-border/80 shadow-xs'>
+    <Card className='border-border/80 shadow-xs'>
       <CardHeader className='pb-4'>
-        <CardTitle className='text-base font-semibold'>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle className='text-base font-semibold'>
+          {PARENT_LABELS[parent]}
+        </CardTitle>
       </CardHeader>
       <CardContent className='space-y-4'>
         <FormField
           control={control}
-          name={incomeIntervalName}
+          name={`${parent}.incomeInterval`}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Income interval</FormLabel>
@@ -90,31 +71,13 @@ export function ParentIncomeCard({
             </FormItem>
           )}
         />
-
-        <FormField
+        <ChildSupportNumberField
           control={control}
-          name={netIncomeName}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Net income</FormLabel>
-              <FormControl>
-                <Input
-                  type='number'
-                  inputMode='decimal'
-                  min={0}
-                  step='0.01'
-                  value={Number.isFinite(field.value) ? field.value : ''}
-                  onChange={e => field.onChange(e.target.valueAsNumber)}
-                  onBlur={field.onBlur}
-                  name={field.name}
-                  ref={field.ref}
-                  aria-invalid={netIncomeInvalid}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          name={`${parent}.grossIncome`}
+          label='Gross income ($)'
+          hint='Before taxes and deductions, for the interval above.'
         />
+        <ParentAdjustmentFields control={control} parent={parent} />
       </CardContent>
     </Card>
   );

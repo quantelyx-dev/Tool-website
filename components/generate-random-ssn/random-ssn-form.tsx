@@ -89,7 +89,7 @@ export function RandomSsnForm({
                   SSN generator
                 </CardTitle>
                 <CardDescription className={cn('text-sm leading-relaxed')}>
-                  Choose generation mode and create random fake SSN data.
+                  Choose generation mode and create random test SSN data.
                 </CardDescription>
               </div>
             </div>

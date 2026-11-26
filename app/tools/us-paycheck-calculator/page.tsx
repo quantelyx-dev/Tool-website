@@ -1,17 +1,16 @@
 import type { Metadata } from 'next';
 
-import { ToolBlogPromo } from '@/components/blog/tool-blog-promo';
 import { PageBreadcrumb } from '@/components/shared/page-breadcrumb';
-import { ToolFaqSection } from '@/components/shared/tool-faq-section';
+import { ToolPageDetails } from '@/components/shared/tool-page-details';
 import { PaycheckToolContent } from '@/components/us-paycheck/paycheck-tool-content';
 import { createPageMetadata } from '@/lib/seo/metadata';
 import { paycheckCalculatorFaqs } from '@/lib/tool-faqs';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'US Paycheck Calculator',
+  title: 'US Paycheck Calculator (2026)',
   description:
-    'Free 2026 paycheck calculator. Estimate take-home pay after federal tax, Social Security, Medicare, state tax, 401(k), and deductions for any US state.',
+    'Estimate 2026 take-home pay after federal tax, Social Security, Medicare, state tax, 401(k), and deductions for salary or hourly work in any US state.',
   path: '/tools/us-paycheck-calculator',
   keywords: [
     'US paycheck calculator',
@@ -32,8 +31,7 @@ export default function UsPaycheckCalculatorPage() {
       <div className={cn('container mx-auto max-w-6xl px-4 pb-20 sm:px-6')}>
         <PageBreadcrumb items={[{ label: 'US paycheck calculator' }]} />
         <PaycheckToolContent />
-        <ToolBlogPromo toolLink='/tools/us-paycheck-calculator' />
-        <ToolFaqSection faqs={paycheckCalculatorFaqs} />
+        <ToolPageDetails toolLink='/tools/us-paycheck-calculator' faqs={paycheckCalculatorFaqs} />
       </div>
     </main>
   );

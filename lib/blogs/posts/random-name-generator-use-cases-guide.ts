@@ -4,21 +4,20 @@ import { nameFaqs } from "@/lib/tool-faqs";
 
 export const randomNameGeneratorPost: BlogPost = {
   slug: "random-name-generator-use-cases-guide",
-  title: "Random Name Generator: Test Data & Creative Uses",
+  title: "Random Name Generator: Uses and Tips",
   excerpt:
-    "Generate fake names for test databases, UX prototypes, and fiction writing. First name, last name, or full name — bulk export tips and best practices.",
+    "Generate random names for test databases, UX prototypes, and fiction drafts. First, last, or full names, with bulk copy tips and best practices.",
   keywords: [
     "random name generator",
-    "fake name generator",
-    "fake names for testing",
     "test name generator",
+    "test names for testing",
     "bulk name generator",
     "random first name generator",
   ],
   toolLink: "/tools/generate-random-names",
   toolName: "Random name generator",
   publishedAt: "2026-06-03",
-  updatedAt: "2026-06-25",
+  updatedAt: "2026-11-26",
   readTimeMinutes: 11,
   relatedSlugs: [
     "fake-email-generator-for-testing-guide",
@@ -52,11 +51,11 @@ export const randomNameGeneratorPost: BlogPost = {
     p(
       "Identity pools drawn from multiple nationalities produce naturally diverse name sets. Inclusive test data helps catch UI bugs — truncated diacritics, sorting by surname vs given name, and RTL layout issues — before they affect real users. Homogeneous placeholder names hide these problems until localization testing begins too late in the release cycle.",
     ),
-    h2("Best practices for fake names in development"),
+    h2("Best practices for test names in development"),
     ol([
       "Never assume generated names are unique — deduplicate before bulk INSERT if required",
       "Mark synthetic records in your schema for GDPR-safe cleanup",
-      "Pair names with fake emails and phone numbers for end-to-end persona consistency",
+      "Pair names with test emails and phone numbers for end-to-end persona consistency",
       "Test sorting and search with both short and long names generated in the same batch",
       "Avoid presenting generated names to external audiences as real individuals",
     ]),
@@ -78,7 +77,7 @@ export const randomNameGeneratorPost: BlogPost = {
     ),
     h2("Combining names with other test generators"),
     p(
-      "Complete personas need more than a display name. Chain the random name generator with fake email, username, and address tools: equal batch sizes, zip in your seed file, assign stable IDs. Coherent bundles make debugging and demo narration effortless.",
+      "Complete personas need more than a display name. Chain the random name generator with test email, username, and address tools: equal batch sizes, zip in your seed file, assign stable IDs. Coherent bundles make debugging and demo narration effortless.",
     ),
     h2("Validation and edge cases to test"),
     p(

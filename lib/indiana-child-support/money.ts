@@ -9,3 +9,12 @@ export function assertFiniteNonNegative(value: number, name: string): void {
     throw new RangeError(`${name} must be a finite non-negative number.`);
   }
 }
+
+const usdFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
+export function formatUsd(amount: number): string {
+  return usdFormatter.format(amount);
+}

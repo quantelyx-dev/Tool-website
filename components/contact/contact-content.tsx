@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { ContactForm } from '@/components/contact/contact-form';
+import { CONTACT_EMAIL } from '@/lib/site-config';
 import { cn } from '@/lib/utils';
 import {
   fadeUpVariants,
@@ -54,6 +55,15 @@ export function ContactContent({ className }: ContactContentProps) {
             )}>
             Have a question, found a bug, or just want to say hello? We read
             every message and will get back to you as soon as we can.
+          </p>
+          <p className={cn('mt-4 text-base text-foreground')}>
+            Email us at{' '}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className={cn('font-medium underline underline-offset-2')}>
+              {CONTACT_EMAIL}
+            </a>{' '}
+            or use the form below.
           </p>
         </motion.div>
       </motion.section>

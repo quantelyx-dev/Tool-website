@@ -1,8 +1,7 @@
 import { ImageResponse } from 'next/og';
 
-import { siteDomain } from '@/lib/site-config';
-import { TOOL_GROUPS } from '@/lib/tools-data';
-import type { ToolEntry } from '@/lib/types';
+import { BRAND_NAME } from '@/lib/site-config';
+import { findToolByLink } from '@/lib/tools-data';
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_CONTENT_TYPE = 'image/png';
@@ -58,7 +57,7 @@ export function createOgImage({ eyebrow, title, subtitle }: OgImageInput): Image
             }}>
             T
           </div>
-          <div style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.5 }}>{siteDomain}</div>
+          <div style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.5 }}>{BRAND_NAME}</div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
@@ -121,8 +120,7 @@ function titleCaseFromSlug(slug: string): string {
 
 /** Card for a tool page, using the name and description from the tool registry. */
 export function createToolOgImage(toolLink: string): ImageResponse {
-  const tools: ToolEntry[] = TOOL_GROUPS.flatMap(group => [...group.tools]);
-  const tool = tools.find(entry => entry.link === toolLink);
+  const tool = findToolByLink(toolLink);
   const slug = toolLink.split('/').pop() ?? '';
 
   return createOgImage({
